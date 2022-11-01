@@ -68,7 +68,7 @@ const App = () => {
   return (
     <div>
       <Nav />
-      <div className='min-h-[100vh] pt-[133.383px] px-64'>
+      <div className='min-h-[100vh] pt-[133.383px] px-48'>
         {/* header */}
         <header className='py-8'>
           {/* title */}
@@ -112,7 +112,7 @@ const App = () => {
                     <CiUser className='inline' /> {item.people} orang{" "}
                     <BsDot className='inline' /> Rp {item.price}
                   </p>
-                  <ul className='flex gap-2 mt-5'>
+                  <ul className='flex flex-wrap gap-2 mt-5'>
                     {item.features.map((feature) => (
                       <li className='px-3 py-1 bg-[#EDEEF2] rounded-xl'>
                         {feature}
@@ -135,7 +135,7 @@ const App = () => {
           {/* title */}
           <h2 className='text-2xl'>Fasilitas Kos Mohe</h2>
           {/* content */}
-          <div className='grid grid-cols-2 mt-6 gap-x-16'>
+          <div className='flex flex-wrap gap-8 mt-6'>
             {fasilitas.map((item) => (
               <div className='flex gap-5'>
                 <img
