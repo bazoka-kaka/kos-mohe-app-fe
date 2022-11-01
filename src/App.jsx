@@ -35,6 +35,36 @@ const App = () => {
       features: ["1 Orang", "Kamar mandi dalam"],
     },
   ]);
+  const [fasilitas, setFasilitas] = useState([
+    {
+      title: "Kamar Tidur",
+      img: "/imgs/fasilitas/kamar.png",
+      description: "Ukuran kamar 3x3 meter Termasuk listrik",
+      features: [
+        "Kasur",
+        "Bantal",
+        "Ventilasi",
+        "Jendela",
+        "Lemari Baju",
+        "Kursi",
+        "Meja",
+        "Cleaning Service",
+      ],
+    },
+    {
+      title: "Kamar Mandi",
+      img: "/imgs/fasilitas/shower.png",
+      description: "",
+      features: [
+        "K. Mandi Dalam",
+        "K. Mandi Luar",
+        "Kloset Duduk",
+        "Kloset Jongkok",
+        "Ember dan Gayung",
+        "Shower",
+      ],
+    },
+  ]);
   return (
     <div>
       <Nav />
@@ -96,6 +126,46 @@ const App = () => {
           {/* learn more button */}
           <a
             href='/kamar'
+            className='inline-block px-10 py-3 mt-8 text-lg font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
+          >
+            Learn More
+          </a>
+        </section>
+        <section id='fasilitas' className='pt-8 pb-16'>
+          {/* title */}
+          <h2 className='text-2xl'>Fasilitas Kos Mohe</h2>
+          {/* content */}
+          <div className='grid grid-cols-2 mt-6 gap-x-16'>
+            {fasilitas.map((item) => (
+              <div className='flex gap-5'>
+                <img
+                  className='rounded-2xl'
+                  src={`${item.img}`}
+                  alt={`${item.title}`}
+                />
+                <div>
+                  <h3 className='text-2xl font-semibold'>{item.title}</h3>
+                  <p>{item.description}</p>
+                  {item.title == "Kamar Tidur" ? (
+                    <ul className='grid grid-cols-2 grid-rows-4 ml-5 list-disc'>
+                      {item.features.map((feature) => (
+                        <li>{feature}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <ul className='ml-5 list-disc'>
+                      {item.features.map((feature) => (
+                        <li>{feature}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* learn more button */}
+          <a
+            href='/fasilitas'
             className='inline-block px-10 py-3 mt-8 text-lg font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
           >
             Learn More
