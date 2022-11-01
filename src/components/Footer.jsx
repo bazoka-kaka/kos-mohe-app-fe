@@ -2,13 +2,13 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className='flex justify-between px-48 py-16 bg-primary'>
+    <footer className='flex justify-between px-48 py-12 bg-primary'>
       <div className='flex items-center'>
-        <img src='/logo-footer.png' className='w-36' alt='' />
+        <img src='/logo-footer.png' className='w-28' alt='' />
       </div>
       <div className='flex gap-10'>
         {/* quick links */}
-        <div className='text-xl tracking-wide'>
+        <div className='tracking-wide'>
           <p className='font-bold'>Quick Links</p>
           <ul className='text-white'>
             <li>
@@ -26,7 +26,7 @@ const Footer = () => {
           </ul>
         </div>
         {/* authentication */}
-        <div className='text-xl tracking-wide'>
+        <div className='tracking-wide'>
           <p className='font-bold'>Authentication</p>
           <ul className='text-white'>
             <li>

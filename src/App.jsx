@@ -5,6 +5,7 @@ import { CiUser } from "react-icons/ci";
 import { BsDot } from "react-icons/bs";
 
 const App = () => {
+  // eslint-disable-next-line
   const [kamar, setKamar] = useState([
     {
       title: "Kamar Double Deluxe",
@@ -35,6 +36,7 @@ const App = () => {
       features: ["1 Orang", "Kamar mandi dalam"],
     },
   ]);
+  // eslint-disable-next-line
   const [fasilitas, setFasilitas] = useState([
     {
       title: "Kamar Tidur",
@@ -68,35 +70,35 @@ const App = () => {
   return (
     <div>
       <Nav />
-      <div className='min-h-[100vh] pt-[133.383px] px-48'>
+      <div className='min-h-[100vh] pt-[85.0667px] px-48'>
         {/* header */}
-        <header className='py-8'>
+        <header className='py-6'>
           {/* title */}
-          <h1 className='text-4xl font-semibold'>Selamat Datang di Kos Mohe</h1>
+          <h1 className='text-3xl'>Selamat Datang di Kos Mohe</h1>
           {/* diskon */}
-          <div className='flex gap-10 mt-10'>
+          <div className='flex gap-8 mt-6'>
             <div className='w-1/2 p-5 bg-[#F3F4FF] rounded-2xl'>
-              <h2 className='text-2xl'>Kamar Deluxe</h2>
-              <h3 className='mt-2 text-5xl font-semibold text-primary'>
+              <h2 className='text-xl'>Kamar Deluxe</h2>
+              <h3 className='mt-2 text-4xl font-semibold text-primary'>
                 20% OFF
               </h3>
-              <p className='mt-10 text-[#83859C]'>1 - 30 Januari 2023</p>
+              <p className='mt-8 text-sm text-[#83859C]'>1 - 30 Januari 2023</p>
             </div>
             <div className='w-1/2 p-5 bg-[#FFF3ED] rounded-2xl'>
-              <h2 className='text-2xl'>Kamar Reguler</h2>
-              <h3 className='mt-2 text-5xl font-semibold text-[#FD6D22]'>
+              <h2 className='text-xl'>Kamar Reguler</h2>
+              <h3 className='mt-2 text-4xl font-semibold text-[#FD6D22]'>
                 10% OFF
               </h3>
-              <p className='mt-10 text-[#83859C]'>1 - 15 Januari 2023</p>
+              <p className='mt-8 text-sm text-[#83859C]'>1 - 15 Januari 2023</p>
             </div>
           </div>
         </header>
         {/* kamar kos */}
-        <section id='kamar' className='py-8'>
+        <section id='kamar' className='py-6'>
           {/* title */}
-          <h2 className='text-2xl'>Kamar Kos Mohe</h2>
+          <h2 className='text-xl'>Kamar Kos Mohe</h2>
           {/* content */}
-          <div className='grid grid-cols-3 mt-6 gap-x-5 gap-y-8'>
+          <div className='grid grid-cols-3 mt-4 gap-x-4 gap-y-6'>
             {kamar.map((item) => (
               <div className='border-[1px] rounded-2xl'>
                 <div>
@@ -106,13 +108,13 @@ const App = () => {
                     className='rounded-t-2xl'
                   />
                 </div>
-                <div className='p-5'>
-                  <h3 className='text-xl font-semibold'>{item.title}</h3>
-                  <p>
+                <div className='p-4'>
+                  <h3 className='text-lg font-semibold'>{item.title}</h3>
+                  <p className='text-sm'>
                     <CiUser className='inline' /> {item.people} orang{" "}
                     <BsDot className='inline' /> Rp {item.price}
                   </p>
-                  <ul className='flex flex-wrap gap-2 mt-5'>
+                  <ul className='flex flex-wrap gap-2 mt-5 text-sm'>
                     {item.features.map((feature) => (
                       <li className='px-3 py-1 bg-[#EDEEF2] rounded-xl'>
                         {feature}
@@ -126,34 +128,34 @@ const App = () => {
           {/* learn more button */}
           <a
             href='/kamar'
-            className='inline-block px-10 py-3 mt-8 text-lg font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
+            className='inline-block px-8 py-2 mt-8 font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
           >
             Learn More
           </a>
         </section>
         <section id='fasilitas' className='pt-8 pb-16'>
           {/* title */}
-          <h2 className='text-2xl'>Fasilitas Kos Mohe</h2>
+          <h2 className='text-xl'>Fasilitas Kos Mohe</h2>
           {/* content */}
           <div className='flex flex-wrap gap-8 mt-6'>
             {fasilitas.map((item) => (
-              <div className='flex gap-5'>
+              <div className='flex gap-4'>
                 <img
-                  className='rounded-2xl'
+                  className='w-64 rounded-2xl'
                   src={`${item.img}`}
                   alt={`${item.title}`}
                 />
                 <div>
-                  <h3 className='text-2xl font-semibold'>{item.title}</h3>
-                  <p>{item.description}</p>
-                  {item.title == "Kamar Tidur" ? (
-                    <ul className='grid grid-cols-2 grid-rows-4 ml-5 list-disc'>
+                  <h3 className='text-lg font-semibold'>{item.title}</h3>
+                  <p className='text-sm'>{item.description}</p>
+                  {item.title === "Kamar Tidur" ? (
+                    <ul className='grid grid-cols-2 grid-rows-4 ml-5 text-sm list-disc'>
                       {item.features.map((feature) => (
                         <li>{feature}</li>
                       ))}
                     </ul>
                   ) : (
-                    <ul className='ml-5 list-disc'>
+                    <ul className='ml-5 text-sm list-disc'>
                       {item.features.map((feature) => (
                         <li>{feature}</li>
                       ))}
@@ -166,7 +168,7 @@ const App = () => {
           {/* learn more button */}
           <a
             href='/fasilitas'
-            className='inline-block px-10 py-3 mt-8 text-lg font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
+            className='inline-block px-8 py-2 mt-8 font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
           >
             Learn More
           </a>
