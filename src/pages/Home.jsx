@@ -1,76 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { CiUser } from "react-icons/ci";
 import { BsDot } from "react-icons/bs";
 import Footer from "../components/Footer";
 import Nav from "../components/Nav";
 
-const Home = () => {
-  // eslint-disable-next-line
-  const [kamar, setKamar] = useState([
-    {
-      title: "Kamar Double Deluxe",
-      img: "/imgs/kamar/double.png",
-      featured: true,
-      people: 2,
-      price: 1200000,
-      features: ["2 Orang", "AC", "Kamar mandi dalam"],
-    },
-    {
-      title: "Kamar Deluxe",
-      img: "/imgs/kamar/deluxe.png",
-      featured: true,
-      people: 1,
-      price: 900000,
-      features: ["1 Orang", "AC", "Kamar mandi dalam"],
-    },
-    {
-      title: "Kamar Double Reguler",
-      img: "/imgs/kamar/double.png",
-      featured: false,
-      people: 2,
-      price: 1000000,
-      features: ["2 Orang", "Kamar mandi dalam"],
-    },
-    {
-      title: "Kamar Reguler",
-      img: "/imgs/kamar/reguler.png",
-      featured: false,
-      people: 1,
-      price: 700000,
-      features: ["1 Orang", "Kamar mandi dalam"],
-    },
-  ]);
-  // eslint-disable-next-line
-  const [fasilitas, setFasilitas] = useState([
-    {
-      title: "Kamar Tidur",
-      img: "/imgs/fasilitas/kamar.png",
-      description: "Ukuran kamar 3x3 meter Termasuk listrik",
-      features: [
-        "Kasur",
-        "Bantal",
-        "Ventilasi",
-        "Jendela",
-        "Lemari Baju",
-        "Kursi",
-        "Meja",
-        "Cleaning Service",
-      ],
-    },
-    {
-      title: "Kamar Mandi",
-      img: "/imgs/fasilitas/shower.png",
-      description: "",
-      features: [
-        "K. Mandi Dalam",
-        "K. Mandi Luar",
-        "Kloset Duduk",
-        "Kloset Jongkok",
-        "Ember dan Gayung",
-        "Shower",
-      ],
-    },
-  ]);
+const Home = ({ kamar, fasilitas }) => {
   return (
     <>
       <Nav />
@@ -103,39 +37,43 @@ const Home = () => {
           <h2 className='text-xl'>Kamar Kos Mohe</h2>
           {/* content */}
           <div className='grid grid-cols-3 mt-4 gap-x-4 gap-y-6'>
-            {kamar.map((item) => (
-              <a
-                href='/kamar'
-                className='duration-75 border-[1px] transform rounded-2xl hover:scale-[101%]'
-              >
-                <div className='relative'>
-                  <img
-                    src={`${item.img}`}
-                    alt={`${item.title}`}
-                    className='rounded-t-2xl'
-                  />
-                  {item.featured && (
-                    <div className='absolute top-[1px] right-[1px] px-2 py-1 text-sm text-white bg-primary rounded-bl-2xl rounded-tr-2xl'>
-                      Featured
+            {kamar.map((item, i) => {
+              if (i < 3) {
+                return (
+                  <a
+                    href={item.url}
+                    className='duration-75 border-[1px] transform rounded-2xl hover:scale-[101%]'
+                  >
+                    <div className='relative'>
+                      <img
+                        src={`${item.img}`}
+                        alt={`${item.title}`}
+                        className='rounded-t-2xl'
+                      />
+                      {item.featured && (
+                        <div className='absolute top-[1px] right-[1px] px-2 py-1 text-sm text-white bg-primary rounded-bl-2xl rounded-tr-2xl'>
+                          Featured
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-                <div className='p-4'>
-                  <h3 className='text-lg font-semibold'>{item.title}</h3>
-                  <p className='text-sm'>
-                    <CiUser className='inline' /> {item.people} orang{" "}
-                    <BsDot className='inline' /> Rp {item.price}
-                  </p>
-                  <ul className='flex flex-wrap gap-2 mt-5 text-sm'>
-                    {item.features.map((feature) => (
-                      <li className='px-3 py-1 bg-[#EDEEF2] rounded-xl'>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </a>
-            ))}
+                    <div className='p-4'>
+                      <h3 className='text-lg font-semibold'>{item.title}</h3>
+                      <p className='text-sm'>
+                        <CiUser className='inline' /> {item.people} orang{" "}
+                        <BsDot className='inline' /> Rp {item.price}
+                      </p>
+                      <ul className='flex flex-wrap gap-2 mt-5 text-sm'>
+                        {item.features.map((feature) => (
+                          <li className='px-3 py-1 bg-[#EDEEF2] rounded-xl'>
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </a>
+                );
+              }
+            })}
           </div>
           {/* learn more button */}
           <a
