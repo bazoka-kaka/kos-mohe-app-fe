@@ -1,6 +1,6 @@
 import React from "react";
 
-const Nav = ({ page }) => {
+const Nav = () => {
   return (
     <nav className='fixed z-10 flex justify-between w-full px-48 py-4 bg-white border-b-2'>
       {/* first part */}
@@ -33,7 +33,12 @@ const Nav = ({ page }) => {
           <li>
             <a
               className={`hover:text-slate-700 ${
-                window.location.pathname === "/kamar" && "font-semibold"
+                (window.location.pathname === "/kamar" ||
+                  window.location.pathname === "/kamar/double-deluxe" ||
+                  window.location.pathname === "/kamar/double-reguler" ||
+                  window.location.pathname === "/kamar/reguler" ||
+                  window.location.pathname === "/kamar/deluxe") &&
+                "font-semibold"
               }`}
               href='/kamar'
             >
