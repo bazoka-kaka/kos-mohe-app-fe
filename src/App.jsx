@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
+import NotFound from "./pages/404";
 import Fitur from "./pages/Fitur";
 import Home from "./pages/Home";
 import Kamar from "./pages/Kamar";
@@ -217,6 +218,7 @@ const App = () => {
           }
         />
         <Route path='/fitur' element={<Fitur fasilitas={fasilitas} />} />
+        <Route path='/*' element={<NotFound />} />
         {/* </Route> */}
       </Routes>
     </BrowserRouter>
