@@ -1,6 +1,6 @@
 import React from "react";
 
-const Nav = () => {
+const Nav = ({ page }) => {
   return (
     <nav className='fixed z-10 flex justify-between w-full px-48 py-6 bg-white border-b-2'>
       {/* first part */}
@@ -21,25 +21,33 @@ const Nav = () => {
         {/* first ul */}
         <div className='flex gap-8'>
           <li>
-            <a className='font-semibold' href='/'>
+            <a className='hover:text-slate-700' href='/'>
               Home
             </a>
           </li>
           <li>
-            <a href='/kamar'>Kamar</a>
+            <a className='hover:text-slate-700' href='/kamar'>
+              Kamar
+            </a>
           </li>
           <li>
-            <a href='/fitur'>Fitur</a>
+            <a className='hover:text-slate-700' href='/fitur'>
+              Fitur
+            </a>
           </li>
         </div>
         <hr className='w-0.5 h-full bg-slate-200' />
         {/* second ul */}
         <div className='flex gap-8'>
           <li>
-            <a href='/login'>Login</a>
+            <a className='hover:text-slate-700' href='/login'>
+              Login
+            </a>
           </li>
           <li>
-            <a href='/register'>Register</a>
+            <a className='hover:text-slate-700' href='/register'>
+              Register
+            </a>
           </li>
         </div>
       </ul>
