@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
+import Fitur from "./pages/Fitur";
 import Home from "./pages/Home";
 import Kamar from "./pages/Kamar";
 import KamarDetail from "./pages/KamarDetail";
@@ -74,6 +75,33 @@ const App = () => {
         "Ember dan Gayung",
         "Shower",
       ],
+    },
+    {
+      title: "Dapur",
+      img: "/imgs/fasilitas/dapur.png",
+      description:
+        "Tersedia dapur bersama yang dapat digunakan para penyewa kos untuk memasak",
+      features: [],
+    },
+    {
+      title: "Ruang Jemur",
+      img: "/imgs/fasilitas/jemuran.png",
+      description:
+        "Jemuran dapat digunakan untuk menjemur pakaian penyewa kos.",
+      features: [],
+    },
+    {
+      title: "Ruang Santai, Ruang Tamu & Parkir",
+      img: "/imgs/fasilitas/luar.png",
+      description:
+        "Ruang santai dan ruang tamu yang nyaman. Tersedia juga tempat parkir sepeda dan mobil",
+      features: [],
+    },
+    {
+      title: "Fasilitas Umum Lainnya",
+      img: "/imgs/fasilitas/lain.png",
+      description: "",
+      features: ["WIFI", "CCTV", "Menjual Galon dan LPG"],
     },
   ]);
   const [details, setDetails] = useState({
@@ -188,6 +216,7 @@ const App = () => {
             />
           }
         />
+        <Route path='/fitur' element={<Fitur fasilitas={fasilitas} />} />
         {/* </Route> */}
       </Routes>
     </BrowserRouter>
