@@ -2,7 +2,7 @@ import React from "react";
 
 const Nav = ({ page }) => {
   return (
-    <nav className='fixed z-10 flex justify-between w-full px-48 py-6 bg-white border-b-2'>
+    <nav className='fixed z-10 flex justify-between w-full px-48 py-4 bg-white border-b-2'>
       {/* first part */}
       <div className='flex gap-12'>
         <div>
@@ -21,17 +21,32 @@ const Nav = ({ page }) => {
         {/* first ul */}
         <div className='flex gap-8'>
           <li>
-            <a className='hover:text-slate-700' href='/'>
+            <a
+              className={`hover:text-slate-700 ${
+                window.location.pathname === "/" && "font-semibold"
+              }`}
+              href='/'
+            >
               Home
             </a>
           </li>
           <li>
-            <a className='hover:text-slate-700' href='/kamar'>
+            <a
+              className={`hover:text-slate-700 ${
+                window.location.pathname === "/kamar" && "font-semibold"
+              }`}
+              href='/kamar'
+            >
               Kamar
             </a>
           </li>
           <li>
-            <a className='hover:text-slate-700' href='/fitur'>
+            <a
+              className={`hover:text-slate-700 ${
+                window.location.pathname === "/fitur" && "font-semibold"
+              }`}
+              href='/fitur'
+            >
               Fitur
             </a>
           </li>
@@ -40,12 +55,22 @@ const Nav = ({ page }) => {
         {/* second ul */}
         <div className='flex gap-8'>
           <li>
-            <a className='hover:text-slate-700' href='/login'>
+            <a
+              className={`hover:text-slate-700 ${
+                window.location.pathname === "/login" && "font-semibold"
+              }`}
+              href='/login'
+            >
               Login
             </a>
           </li>
           <li>
-            <a className='hover:text-slate-700' href='/register'>
+            <a
+              className={`hover:text-slate-700 ${
+                window.location.pathname === "/register" && "font-semibold"
+              }`}
+              href='/register'
+            >
               Register
             </a>
           </li>
