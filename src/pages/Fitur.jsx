@@ -1,8 +1,10 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Nav from "../components/Nav";
+import { useNavigate } from "react-router-dom";
 
 const Fitur = ({ fasilitas }) => {
+  const navigate = useNavigate();
   return (
     <>
       <Nav />
@@ -42,6 +44,12 @@ const Fitur = ({ fasilitas }) => {
               </div>
             ))}
           </div>
+          <button
+            onClick={() => navigate(-1)}
+            className='inline-block px-12 py-2 text-sm font-semibold text-white transition-colors duration-150 bg-black hover:bg-slate-800 rounded-2xl'
+          >
+            Kembali
+          </button>
         </section>
       </div>
       <Footer />
