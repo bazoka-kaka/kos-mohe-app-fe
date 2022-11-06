@@ -89,7 +89,44 @@ const Register = () => {
           </p>
         </div>
         {/* right */}
-        <div className='w-3/5 bg-primary-light'></div>
+        <div className='flex items-center justify-center w-3/5 bg-primary-light'>
+          <div className='flex flex-col items-center'>
+            {/* image card */}
+            <a
+              href='/kamar/deluxe'
+              className='p-4 transition duration-200 bg-white rounded-lg shadow-2xl hover:-translate-y-1 w-80'
+            >
+              {/* image */}
+              <img
+                className='rounded-lg'
+                src='/imgs/kamar/deluxe.png'
+                alt='Kamar Deluxe'
+              />
+              {/* text */}
+              <div className='mt-2'>
+                {/* title */}
+                <h2 className='font-semibold'>Deluxe Room</h2>
+                {/* description */}
+                <p className='text-xs text-slate-600'>
+                  Kamar yang dilengkapi dengan Air Conditioner, berkapasitas 1
+                  orang , dekat dengan jendela.
+                </p>
+                {/* price */}
+                <p className='mt-2 text-xl font-bold'>Rp 850.000</p>
+              </div>
+            </a>
+            {/* text explanation */}
+            <div className='w-2/3 mt-12 text-center'>
+              <h1 className='text-3xl font-semibold text-white'>
+                Kos Berkualitas
+              </h1>
+              <p className='mt-3 text-sm text-slate-200'>
+                Semua kamar di Kos Mohe bersih, berkualitas dan memiliki harga
+                yang pas sesuai dengan kebutuhan penyewa.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
       <Footer />
     </>
