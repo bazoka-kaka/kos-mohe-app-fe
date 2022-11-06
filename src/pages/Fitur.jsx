@@ -44,12 +44,6 @@ const Fitur = ({ fasilitas }) => {
               </div>
             ))}
           </div>
-          <button
-            onClick={() => navigate(-1)}
-            className='inline-block px-12 py-2 text-sm font-semibold text-white transition-colors duration-150 bg-black hover:bg-slate-800 rounded-2xl'
-          >
-            Kembali
-          </button>
         </section>
       </div>
       <Footer />
