@@ -1,6 +1,6 @@
 import React from "react";
-import Footer from "../components/Footer";
-import Nav from "../components/Nav";
+import Footer from "../../components/Footer";
+import Nav from "../../components/Nav";
 import { CiUser } from "react-icons/ci";
 import { BsDot } from "react-icons/bs";
 

@@ -1,6 +1,6 @@
 import React from "react";
-import Footer from "../components/Footer";
-import Nav from "../components/Nav";
+import Footer from "../../components/Footer";
+import Nav from "../../components/Nav";
 import { FaUserAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 

@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import NotFound from "./pages/404";
-import Fitur from "./pages/Fitur";
 import Home from "./pages/Home";
-import Kamar from "./pages/Kamar";
-import KamarDetail from "./pages/KamarDetail";
+
+import Fitur from "./pages/Client/Fitur";
+import Kamar from "./pages/Client/Kamar";
+import KamarDetail from "./pages/Client/KamarDetail";
 
 const App = () => {
   // eslint-disable-next-line
