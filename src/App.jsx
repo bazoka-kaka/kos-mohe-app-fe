@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import NotFound from "./pages/404";
 import Home from "./pages/Home";
+import Register from "./pages/Auth/Register";
 
 import Fitur from "./pages/Client/Fitur";
 import Kamar from "./pages/Client/Kamar";
@@ -169,6 +170,7 @@ const App = () => {
       <Routes>
         {/* <Route path='/' element={<Layout />}> */}
         <Route index element={<Home kamar={kamar} fasilitas={fasilitas} />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/kamar' element={<Kamar kamar={kamar} />} />
         <Route
           path='/kamar/double-deluxe'
