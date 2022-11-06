@@ -8,6 +8,7 @@ import Register from "./pages/Auth/Register";
 import Fitur from "./pages/Client/Fitur";
 import Kamar from "./pages/Client/Kamar";
 import KamarDetail from "./pages/Client/KamarDetail";
+import Login from "./pages/Auth/Login";
 
 const App = () => {
   // eslint-disable-next-line
@@ -171,6 +172,7 @@ const App = () => {
         {/* <Route path='/' element={<Layout />}> */}
         <Route index element={<Home kamar={kamar} fasilitas={fasilitas} />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/kamar' element={<Kamar kamar={kamar} />} />
         <Route
           path='/kamar/double-deluxe'
