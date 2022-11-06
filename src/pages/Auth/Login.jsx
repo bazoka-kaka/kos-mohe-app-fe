@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import Nav from "../../components/Nav";
 import Footer from "../../components/Footer";
-import { AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
   const [showPwd, setShowPwd] = useState(false);
-  const toggleShowPwd = () => setShowPwd(!showPwd);
   return (
     <>
       <Nav />
@@ -46,10 +45,17 @@ const Login = () => {
                   placeholder='min. 8 karakter'
                 />
                 <div className='absolute text-2xl text-gray-300 -translate-y-1/2 right-4 top-1/2'>
-                  <AiOutlineEye
-                    className='cursor-pointer'
-                    onClick={toggleShowPwd}
-                  />
+                  {showPwd ? (
+                    <AiOutlineEyeInvisible
+                      className='cursor-pointer'
+                      onClick={() => setShowPwd(false)}
+                    />
+                  ) : (
+                    <AiOutlineEye
+                      className='cursor-pointer'
+                      onClick={() => setShowPwd(true)}
+                    />
+                  )}
                 </div>
               </div>
             </div>
