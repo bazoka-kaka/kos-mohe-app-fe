@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Nav from "../../components/Nav";
 import Footer from "../../components/Footer";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Register = () => {
+  const [showPwd, setShowPwd] = useState(false);
+  const [showRetypePwd, setShowRetypePwd] = useState(false);
   return (
     <>
       <Nav />
@@ -12,11 +15,11 @@ const Register = () => {
           {/* header */}
           <header>
             <h1 className='text-6xl font-semibold text-slate-700'>Register</h1>
-            <p className='mt-4 text-lg text-slate-500'>Buat akun baru</p>
+            <p className='mt-3 text-lg text-slate-500'>Buat akun baru</p>
           </header>
           {/* form */}
           <form
-            className='flex flex-col gap-4 mt-2'
+            className='flex flex-col gap-4 mt-5'
             action='/handle/register'
             method='post'
           >
@@ -42,23 +45,53 @@ const Register = () => {
             </div>
             <div className='flex flex-col gap-2'>
               <label htmlFor='#password'>Password</label>
-              <input
-                className='p-2 border-2 border-gray-200 rounded-md'
-                type='password'
-                id='password'
-                name='password'
-                placeholder='min. 8 karakter'
-              />
+              <div className='relative'>
+                <input
+                  className='w-full p-2 border-2 border-gray-200 rounded-md'
+                  type={showPwd ? "text" : "password"}
+                  id='password'
+                  name='password'
+                  placeholder='min. 8 karakter'
+                />
+                <div className='absolute text-2xl text-gray-300 -translate-y-1/2 right-4 top-1/2'>
+                  {showPwd ? (
+                    <AiOutlineEyeInvisible
+                      className='cursor-pointer'
+                      onClick={() => setShowPwd(false)}
+                    />
+                  ) : (
+                    <AiOutlineEye
+                      className='cursor-pointer'
+                      onClick={() => setShowPwd(true)}
+                    />
+                  )}
+                </div>
+              </div>
             </div>
             <div className='flex flex-col gap-2'>
               <label htmlFor='#retype-password'>Ketik Ulang Password</label>
-              <input
-                className='p-2 border-2 border-gray-200 rounded-md'
-                type='password'
-                id='retype-password'
-                name='retype-password'
-                placeholder='min. 8 karakter'
-              />
+              <div className='relative'>
+                <input
+                  className='w-full p-2 border-2 border-gray-200 rounded-md'
+                  type={showRetypePwd ? "text" : "password"}
+                  id='retype-password'
+                  name='retype-password'
+                  placeholder='min. 8 karakter'
+                />
+                <div className='absolute text-2xl text-gray-300 -translate-y-1/2 right-4 top-1/2'>
+                  {showRetypePwd ? (
+                    <AiOutlineEyeInvisible
+                      className='cursor-pointer'
+                      onClick={() => setShowRetypePwd(false)}
+                    />
+                  ) : (
+                    <AiOutlineEye
+                      className='cursor-pointer'
+                      onClick={() => setShowRetypePwd(true)}
+                    />
+                  )}
+                </div>
+              </div>
             </div>
 
             <div className='flex gap-2'>
