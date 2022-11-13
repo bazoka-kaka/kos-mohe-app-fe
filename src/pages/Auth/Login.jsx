@@ -1,4 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
+import AuthContext from "../../context/AuthProvider";
+
 import Nav from "../../components/Nav";
 import Footer from "../../components/Footer";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -11,10 +13,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../../api/axios";
 
 const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const LOGIN_URL = "/auth";
 
 const Login = () => {
+  const { setAuth } = useContext(AuthContext);
   // hide password
   const [showPwd, setShowPwd] = useState(false);
 
@@ -27,8 +29,6 @@ const Login = () => {
   const [emailFocus, setEmailFocus] = useState(false);
 
   const [pwd, setPwd] = useState("");
-  const [validPwd, setValidPwd] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
@@ -42,19 +42,13 @@ const Login = () => {
   }, [email]);
 
   useEffect(() => {
-    setValidPwd(PWD_REGEX.test(pwd));
-  }, [pwd]);
-
-  useEffect(() => {
     setErrMsg("");
   }, [email, pwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if button enabled with JS hack
     const v1 = EMAIL_REGEX.test(email);
-    const v2 = PWD_REGEX.test(pwd);
-    if (!v1 || !v2) {
+    if (!v1) {
       setErrMsg("Invalid Entry");
       return;
     }
@@ -68,18 +62,23 @@ const Login = () => {
         }
       );
       console.log(response?.data);
-      console.log(response?.accessToken);
-      console.log(JSON.stringify(response));
+      //console.log(JSON.stringify(response));
+      const accessToken = response?.data?.accessToken;
+      const roles = response?.data?.roles;
+      const fullname = response?.data?.fullname;
+      setAuth({ email, fullname, pwd, roles, accessToken });
       setSuccess(true);
-      //clear state and controlled inputs
-      //need value attrib on inputs for this
       setEmail("");
       setPwd("");
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Missing Username or Password");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
       } else {
-        setErrMsg("Authentication Failed");
+        setErrMsg("Login Failed");
       }
       errRef.current.focus();
     }
@@ -168,20 +167,7 @@ const Login = () => {
                 </p>
               </div>
               <div className='flex flex-col gap-2'>
-                <label htmlFor='#password'>
-                  Password{" "}
-                  {validPwd || !pwd ? (
-                    <FontAwesomeIcon
-                      icon={faCircleCheck}
-                      className={`text-green-400 ${!pwd ? "hidden" : "inline"}`}
-                    />
-                  ) : (
-                    <FontAwesomeIcon
-                      icon={faCircleXmark}
-                      className='text-red-400'
-                    />
-                  )}
-                </label>
+                <label htmlFor='#password'>Password</label>
                 <div className='relative'>
                   <input
                     className='w-full p-2 border-2 border-gray-200 rounded-md'
@@ -192,10 +178,10 @@ const Login = () => {
                     onChange={(e) => setPwd(e.target.value)}
                     value={pwd}
                     required
-                    aria-invalid={validPwd ? "false" : "true"}
+                    // aria-invalid={validPwd ? "false" : "true"}
                     aria-describedby='uidnote'
-                    onFocus={() => setPwdFocus(true)}
-                    onBlur={() => setPwdFocus(false)}
+                    // onFocus={() => setPwdFocus(true)}
+                    // onBlur={() => setPwdFocus(false)}
                   />
                   <div className='absolute text-2xl text-gray-300 -translate-y-1/2 right-4 top-1/2'>
                     {showPwd ? (
@@ -211,24 +197,6 @@ const Login = () => {
                     )}
                   </div>
                 </div>
-                <p
-                  id='uidnote'
-                  className={`${
-                    pwdFocus && pwd && !validPwd ? "block" : "hidden"
-                  } bg-black text-white p-2 rounded-md`}
-                >
-                  <FontAwesomeIcon icon={faInfoCircle} /> 8 to 24 characters.
-                  <br />
-                  Must include uppercase and lowercase letters, a number and a
-                  special character.
-                  <br />
-                  Allowed special characters:{" "}
-                  <span aria-label='exclamation mark'>!</span>{" "}
-                  <span aria-label='at symbol'>@</span>{" "}
-                  <span aria-label='hashtag'>#</span>{" "}
-                  <span aria-label='dollar sign'>$</span>{" "}
-                  <span aria-label='percent'>%</span>
-                </p>
               </div>
 
               <div className='flex gap-2'>
