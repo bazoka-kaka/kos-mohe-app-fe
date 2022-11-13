@@ -5,9 +5,9 @@ const Nav = () => {
     <nav className='fixed z-10 flex justify-between w-full px-48 py-4 bg-white border-b-2'>
       {/* first part */}
       <div className='flex gap-12'>
-        <div>
+        <a href='/'>
           <img src='/logo.png' className='w-12' alt='' />
-        </div>
+        </a>
         <div className='flex items-center'>
           <input
             className='h-full w-5/6 px-4 rounded-xl bg-[#EDEEF2]'
