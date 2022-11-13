@@ -97,7 +97,7 @@ const Login = () => {
                 Login Success!
               </h1>
               <p className='mt-3 text-lg text-blue-500 transition duration-150 hover:text-red-500'>
-                <a href='/login'>Sign In</a>
+                <a href='/'>Home</a>
               </p>
             </header>
           </div>
