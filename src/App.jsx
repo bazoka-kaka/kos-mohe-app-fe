@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout";
+// import Layout from "./components/Layout";
 import NotFound from "./pages/404";
 import Home from "./pages/Home";
 import Register from "./pages/Auth/Register";
@@ -108,6 +108,7 @@ const App = () => {
       features: ["WIFI", "CCTV", "Menjual Galon dan LPG"],
     },
   ]);
+  // eslint-disable-next-line
   const [details, setDetails] = useState({
     doubleDeluxe: {
       title: "Kamar Double Deluxe",
