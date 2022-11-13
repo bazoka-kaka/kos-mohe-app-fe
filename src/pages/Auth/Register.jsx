@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 
 const NAME_REGEX = /^[a-zA-Z ]{3,23}$/;
-const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = "/register";
 
@@ -275,25 +275,25 @@ const Register = () => {
                       />
                     )}
                   </div>
-                  <p
-                    id='uidnote'
-                    className={`${
-                      pwdFocus && pwd && !validPwd ? "block" : "hidden"
-                    } bg-black text-white p-2 rounded-md`}
-                  >
-                    <FontAwesomeIcon icon={faInfoCircle} /> 8 to 24 characters.
-                    <br />
-                    Must include uppercase and lowercase letters, a number and a
-                    special character.
-                    <br />
-                    Allowed special characters:{" "}
-                    <span aria-label='exclamation mark'>!</span>{" "}
-                    <span aria-label='at symbol'>@</span>{" "}
-                    <span aria-label='hashtag'>#</span>{" "}
-                    <span aria-label='dollar sign'>$</span>{" "}
-                    <span aria-label='percent'>%</span>
-                  </p>
                 </div>
+                <p
+                  id='uidnote'
+                  className={`${
+                    pwdFocus && pwd && !validPwd ? "block" : "hidden"
+                  } bg-black text-white p-2 rounded-md`}
+                >
+                  <FontAwesomeIcon icon={faInfoCircle} /> 8 to 24 characters.
+                  <br />
+                  Must include uppercase and lowercase letters, a number and a
+                  special character.
+                  <br />
+                  Allowed special characters:{" "}
+                  <span aria-label='exclamation mark'>!</span>{" "}
+                  <span aria-label='at symbol'>@</span>{" "}
+                  <span aria-label='hashtag'>#</span>{" "}
+                  <span aria-label='dollar sign'>$</span>{" "}
+                  <span aria-label='percent'>%</span>
+                </p>
               </div>
               <div className='flex flex-col gap-2'>
                 <label htmlFor='#retype-password'>
@@ -341,26 +341,17 @@ const Register = () => {
                       />
                     )}
                   </div>
-                  <p
-                    id='uidnote'
-                    className={`${
-                      matchFocus && matchPwd && !validMatch ? "block" : "hidden"
-                    } bg-black text-white p-2 rounded-md`}
-                  >
-                    <FontAwesomeIcon icon={faInfoCircle} /> Password must match.
-                  </p>
                 </div>
+                <p
+                  id='uidnote'
+                  className={`${
+                    matchFocus && matchPwd && !validMatch ? "block" : "hidden"
+                  } bg-black text-white p-2 rounded-md`}
+                >
+                  <FontAwesomeIcon icon={faInfoCircle} /> Password must match.
+                </p>
               </div>
 
-              {/* <div className='flex gap-2'>
-                <input
-                  className='w-5 border-4 border-gray-200'
-                  type='checkbox'
-                  name='remember-acc'
-                  id='#remember-acc'
-                />
-                <label htmlFor='#remember-acc'>Ingat akun</label>
-              </div> */}
               {/* button */}
               <button
                 disabled={
