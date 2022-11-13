@@ -24,7 +24,7 @@ const Register = () => {
   const nameRef = useRef();
   const errRef = useRef();
 
-  const [name, setName] = useState("");
+  const [fullname, setName] = useState("");
   const [validName, setValidName] = useState(false);
   const [nameFocus, setNameFocus] = useState(false);
 
@@ -48,8 +48,8 @@ const Register = () => {
   }, []);
 
   useEffect(() => {
-    setValidName(NAME_REGEX.test(name));
-  }, [name]);
+    setValidName(NAME_REGEX.test(fullname));
+  }, [fullname]);
 
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
@@ -62,12 +62,12 @@ const Register = () => {
 
   useEffect(() => {
     setErrMsg("");
-  }, [name, email, pwd, matchPwd]);
+  }, [fullname, email, pwd, matchPwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // if button enabled with JS hack
-    const v1 = NAME_REGEX.test(name);
+    const v1 = NAME_REGEX.test(fullname);
     const v2 = PWD_REGEX.test(pwd);
     const v3 = EMAIL_REGEX.test(email);
     if (!v1 || !v2 || !v3) {
@@ -77,7 +77,7 @@ const Register = () => {
     try {
       const response = await axios.post(
         REGISTER_URL,
-        JSON.stringify({ name, pwd, email }),
+        JSON.stringify({ fullname, pwd, email }),
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -152,11 +152,11 @@ const Register = () => {
               <div className='flex flex-col gap-2'>
                 <label htmlFor='fullname'>
                   Nama Lengkap{" "}
-                  {validName || !name ? (
+                  {validName || !fullname ? (
                     <FontAwesomeIcon
                       icon={faCircleCheck}
                       className={`text-green-400 ${
-                        !name ? "hidden" : "inline"
+                        !fullname ? "hidden" : "inline"
                       }`}
                     />
                   ) : (
@@ -174,7 +174,7 @@ const Register = () => {
                   ref={nameRef}
                   autoComplete='off'
                   onChange={(e) => setName(e.target.value)}
-                  value={name}
+                  value={fullname}
                   required
                   aria-invalid={validName ? "false" : "true"}
                   aria-describedby='uidnote'
@@ -184,7 +184,7 @@ const Register = () => {
                 <p
                   id='uidnote'
                   className={`${
-                    nameFocus && name && !validName ? "block" : "hidden"
+                    nameFocus && fullname && !validName ? "block" : "hidden"
                   } bg-black text-white p-2 rounded-md`}
                 >
                   <FontAwesomeIcon icon={faInfoCircle} /> 4 to 24 characters.
