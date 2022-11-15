@@ -5,7 +5,7 @@ import { BsShield } from "react-icons/bs";
 
 const Sidebar = () => {
   return (
-    <nav className='w-1/4'>
+    <nav className='w-1/3'>
       {/* title */}
       <div>
         <h1 className='text-xl'>Settings</h1>
