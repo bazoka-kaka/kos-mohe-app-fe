@@ -10,6 +10,7 @@ import Kamar from "./pages/Client/Kamar";
 import KamarDetail from "./pages/Client/KamarDetail";
 import Login from "./pages/Auth/Login";
 import Account from "./pages/Client/Dashboard/Account";
+import Payment from "./pages/Client/Dashboard/Payment";
 
 const App = () => {
   // eslint-disable-next-line
@@ -226,6 +227,7 @@ const App = () => {
         />
         <Route path='/fitur' element={<Fitur fasilitas={fasilitas} />} />
         <Route path='/dashboard' element={<Account />} />
+        <Route path='/payment' element={<Payment />} />
         <Route path='/*' element={<NotFound />} />
         {/* </Route> */}
       </Routes>
