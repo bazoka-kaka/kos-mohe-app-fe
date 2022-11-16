@@ -83,7 +83,7 @@ const ProtectedNav = () => {
               <img
                 className='w-10 h-10 rounded-lg'
                 src='/imgs/profile.jpeg'
-                alt='Profile Image'
+                alt=''
               />
             </a>
           </li>
