@@ -15,7 +15,7 @@ const NotFound = () => {
               onClick={goBack}
               className='inline px-12 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
             >
-              Home
+              Go Back
             </button>
           </div>
         </div>
