@@ -1,8 +1,9 @@
 import React from "react";
 import { BiBox } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const ProtectedNav = () => {
+  const location = useLocation();
   return (
     <nav className='fixed z-10 flex justify-between w-full px-48 py-4 bg-white border-b-2'>
       {/* first part */}
@@ -25,7 +26,7 @@ const ProtectedNav = () => {
           <li>
             <Link
               className={`hover:text-slate-700 ${
-                window.location.pathname === "/" && "font-semibold"
+                location.pathname === "/" && "font-semibold"
               }`}
               to='/'
             >
@@ -35,11 +36,11 @@ const ProtectedNav = () => {
           <li>
             <Link
               className={`hover:text-slate-700 ${
-                (window.location.pathname === "/kamar" ||
-                  window.location.pathname === "/kamar/double-deluxe" ||
-                  window.location.pathname === "/kamar/double-reguler" ||
-                  window.location.pathname === "/kamar/reguler" ||
-                  window.location.pathname === "/kamar/deluxe") &&
+                (location.pathname === "/kamar" ||
+                  location.pathname === "/kamar/double-deluxe" ||
+                  location.pathname === "/kamar/double-reguler" ||
+                  location.pathname === "/kamar/reguler" ||
+                  location.pathname === "/kamar/deluxe") &&
                 "font-semibold"
               }`}
               to='/kamar'
@@ -50,7 +51,7 @@ const ProtectedNav = () => {
           <li>
             <Link
               className={`hover:text-slate-700 ${
-                window.location.pathname === "/fitur" && "font-semibold"
+                location.pathname === "/fitur" && "font-semibold"
               }`}
               to='/fitur'
             >
@@ -64,7 +65,7 @@ const ProtectedNav = () => {
           <li>
             <Link
               className={`hover:text-slate-700 ${
-                window.location.pathname === "/login" && "font-semibold"
+                location.pathname === "/login" && "font-semibold"
               }`}
               to='/login'
             >
