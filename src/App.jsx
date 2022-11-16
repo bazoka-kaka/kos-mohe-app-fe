@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 // import Layout from "./components/Layout";
 import NotFound from "./pages/404";
 import Home from "./pages/Home";
 import Register from "./pages/Auth/Register";
+import PersistLogin from "./components/PersistLogin";
 
 import Fitur from "./pages/Client/Fitur";
 import Kamar from "./pages/Client/Kamar";
@@ -12,6 +13,15 @@ import Login from "./pages/Auth/Login";
 import Account from "./pages/Client/Dashboard/Account";
 import Payment from "./pages/Client/Dashboard/Payment";
 import Security from "./pages/Client/Dashboard/Security";
+import RequireAuth from "./components/RequireAuth";
+import Layout from "./components/Layout";
+import Unauthorized from "./pages/401";
+
+const ROLES = {
+  User: 2001,
+  Editor: 1984,
+  Admin: 5150,
+};
 
 const App = () => {
   // eslint-disable-next-line
@@ -171,15 +181,18 @@ const App = () => {
     },
   });
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* <Route path='/' element={<Layout />}> */}
-        <Route index element={<Home kamar={kamar} fasilitas={fasilitas} />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/kamar' element={<Kamar kamar={kamar} />} />
+    <Routes>
+      <Route element={<Layout />} path='/'>
+        {/* public */}
         <Route
-          path='/kamar/double-deluxe'
+          path='/'
+          element={<Home kamar={kamar} fasilitas={fasilitas} />}
+        />
+        <Route path='register' element={<Register />} />
+        <Route path='login' element={<Login />} />
+        <Route path='kamar' element={<Kamar kamar={kamar} />} />
+        <Route
+          path='kamar/double-deluxe'
           element={
             <KamarDetail
               title={details.doubleDeluxe.title}
@@ -191,7 +204,7 @@ const App = () => {
           }
         />
         <Route
-          path='/kamar/double-reguler'
+          path='kamar/double-reguler'
           element={
             <KamarDetail
               title={details.doubleReguler.title}
@@ -203,7 +216,7 @@ const App = () => {
           }
         />
         <Route
-          path='/kamar/deluxe'
+          path='kamar/deluxe'
           element={
             <KamarDetail
               title={details.deluxe.title}
@@ -215,7 +228,7 @@ const App = () => {
           }
         />
         <Route
-          path='/kamar/reguler'
+          path='kamar/reguler'
           element={
             <KamarDetail
               title={details.reguler.title}
@@ -226,14 +239,24 @@ const App = () => {
             />
           }
         />
-        <Route path='/fitur' element={<Fitur fasilitas={fasilitas} />} />
-        <Route path='/dashboard' element={<Account />} />
-        <Route path='/payment' element={<Payment />} />
-        <Route path='/security' element={<Security />} />
-        <Route path='/*' element={<NotFound />} />
-        {/* </Route> */}
-      </Routes>
-    </BrowserRouter>
+        <Route path='fitur' element={<Fitur fasilitas={fasilitas} />} />
+
+        {/* protected */}
+        <Route element={<PersistLogin />}>
+          {/* user */}
+          <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+            <Route path='dashboard' element={<Account />} />
+            <Route path='payment' element={<Payment />} />
+            <Route path='security' element={<Security />} />
+          </Route>
+          {/* admin */}
+        </Route>
+
+        {/* errors */}
+        <Route path='*' element={<NotFound />} />
+        <Route path='unauthorized' element={<Unauthorized />} />
+      </Route>
+    </Routes>
   );
 };
 
