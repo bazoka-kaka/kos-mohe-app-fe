@@ -16,6 +16,7 @@ import Security from "./pages/Client/Dashboard/Security";
 import RequireAuth from "./components/RequireAuth";
 import Layout from "./components/Layout";
 import Unauthorized from "./pages/401";
+import Contact from "./pages/Client/Contact";
 
 const ROLES = {
   User: 2001,
@@ -248,6 +249,7 @@ const App = () => {
             <Route path='dashboard' element={<Account />} />
             <Route path='payment' element={<Payment />} />
             <Route path='security' element={<Security />} />
+            <Route path='contact' element={<Contact />} />
           </Route>
           {/* admin */}
         </Route>

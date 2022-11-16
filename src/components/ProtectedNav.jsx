@@ -65,9 +65,9 @@ const ProtectedNav = () => {
           <li>
             <Link
               className={`hover:text-slate-700 ${
-                location.pathname === "/login" && "font-semibold"
+                location.pathname === "/contact" && "font-semibold"
               }`}
-              to='/login'
+              to='/contact'
             >
               Kontak
             </Link>
