@@ -1,13 +1,10 @@
 import React from "react";
 import { CiUser } from "react-icons/ci";
 import { BsDot } from "react-icons/bs";
-import Footer from "../components/Footer";
-import Nav from "../components/Nav";
 
 const Home = ({ kamar, fasilitas }) => {
   return (
     <>
-      <Nav />
       <div className='min-h-[100vh] pt-[85.0667px] px-48'>
         {/* header */}
         <header className='py-6'>
@@ -128,7 +125,6 @@ const Home = ({ kamar, fasilitas }) => {
           </a>
         </section>
       </div>
-      <Footer />
     </>
   );
 };

@@ -1,6 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import Nav from "../../components/Nav";
-import Footer from "../../components/Footer";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import {
   faInfoCircle,
@@ -107,7 +105,6 @@ const Register = () => {
 
   return (
     <>
-      <Nav />
       <section className='min-h-[100vh] pt-[69.53px] flex'>
         {/* left */}
         {success ? (
@@ -420,7 +417,6 @@ const Register = () => {
           </div>
         </div>
       </section>
-      <Footer />
     </>
   );
 };

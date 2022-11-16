@@ -1,11 +1,8 @@
 import React from "react";
-import Footer from "../../components/Footer";
-import Nav from "../../components/Nav";
 
 const Fitur = ({ fasilitas }) => {
   return (
     <>
-      <Nav />
       <div className='min-h-[100vh] pt-[85.0667px] flex flex-col items-center'>
         {/* header */}
         <header className='pt-6'>
@@ -44,7 +41,6 @@ const Fitur = ({ fasilitas }) => {
           </div>
         </section>
       </div>
-      <Footer />
     </>
   );
 };

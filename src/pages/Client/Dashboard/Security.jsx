@@ -1,12 +1,9 @@
 import React from "react";
-import Footer from "../../../components/Footer";
-import ProtectedNav from "../../../components/ProtectedNav";
 import Sidebar from "../../../components/Sidebar";
 
 const Security = () => {
   return (
     <>
-      <ProtectedNav />
       <div className='min-h-[100vh] pt-[85.0667px] flex px-48'>
         <Sidebar />
         <section className='w-2/3 pl-6'>
@@ -73,7 +70,6 @@ const Security = () => {
           </div>
         </section>
       </div>
-      <Footer />
     </>
   );
 };

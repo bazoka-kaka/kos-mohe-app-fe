@@ -1,6 +1,4 @@
 import React from "react";
-import Footer from "../../components/Footer";
-import Nav from "../../components/Nav";
 import { FaUserAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +6,6 @@ const KamarDetail = ({ detail, price, people, img, title }) => {
   const navigate = useNavigate();
   return (
     <>
-      <Nav />
       <div className='min-h-[100vh] pt-[85.0667px] px-48 bg-[#EDEEF2]'>
         {/* title */}
         <header className='pt-6'>
@@ -65,7 +62,6 @@ const KamarDetail = ({ detail, price, people, img, title }) => {
           </div>
         </section>
       </div>
-      <Footer />
     </>
   );
 };

@@ -1,13 +1,10 @@
 import React from "react";
-import Footer from "../../components/Footer";
-import Nav from "../../components/Nav";
 import { CiUser } from "react-icons/ci";
 import { BsDot } from "react-icons/bs";
 
 const Kamar = ({ kamar }) => {
   return (
     <>
-      <Nav />
       <div className='min-h-[100vh] pt-[85.0667px] px-48'>
         {/* header */}
         <header className='pt-6'>
@@ -53,7 +50,6 @@ const Kamar = ({ kamar }) => {
           </div>
         </section>
       </div>
-      <Footer />
     </>
   );
 };
