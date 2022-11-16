@@ -1,14 +1,22 @@
 import React from "react";
 import Nav from "./Nav";
+import ProtectedNav from "./ProtectedNav";
 import Footer from "./Footer";
 
-const Layout = ({ children }) => {
+import { Outlet } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+
+const Layout = () => {
+  const { auth } = useAuth();
   return (
-    <div>
-      {/* <Nav /> */}
-      <main>{children}</main>
-      {/* <Footer /> */}
-    </div>
+    <>
+      {auth?.accessToken ? <ProtectedNav /> : <Nav />}
+
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
+    </>
   );
 };
 
