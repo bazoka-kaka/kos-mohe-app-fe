@@ -6,6 +6,7 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import axios from "../../api/axios";
 
 const NAME_REGEX = /^[a-zA-Z ]{3,23}$/;
@@ -115,7 +116,7 @@ const Register = () => {
                 Register Success!
               </h1>
               <p className='mt-3 text-lg text-blue-500 transition duration-150 hover:text-red-500'>
-                <a href='/login'>Sign In</a>
+                <Link to='/login'>Sign In</Link>
               </p>
             </header>
           </div>
@@ -368,12 +369,12 @@ const Register = () => {
             </form>
             <p className='mt-4 text-center'>
               Sudah punya akun?{" "}
-              <a
+              <Link
                 className='transition duration-200 text-primary hover:text-primary-light'
-                href='login'
+                to='login'
               >
                 Login
-              </a>
+              </Link>
             </p>
           </div>
         )}
@@ -381,8 +382,8 @@ const Register = () => {
         <div className='flex items-center justify-center w-3/5 bg-primary-light'>
           <div className='flex flex-col items-center'>
             {/* image card */}
-            <a
-              href='/kamar/deluxe'
+            <Link
+              to='/kamar/deluxe'
               className='p-4 transition duration-200 bg-white rounded-lg shadow-2xl hover:-translate-y-1 w-80'
             >
               {/* image */}
@@ -403,7 +404,7 @@ const Register = () => {
                 {/* price */}
                 <p className='mt-2 text-xl font-bold'>Rp 850.000</p>
               </div>
-            </a>
+            </Link>
             {/* text explanation */}
             <div className='w-2/3 mt-12 text-center'>
               <h1 className='text-3xl font-semibold text-white'>

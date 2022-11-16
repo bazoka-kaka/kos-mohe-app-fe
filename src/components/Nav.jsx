@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   return (
     <nav className='fixed z-10 flex justify-between w-full px-48 py-4 bg-white border-b-2'>
       {/* first part */}
       <div className='flex gap-12'>
-        <a href='/'>
+        <Link to='/'>
           <img src='/logo.png' className='w-12' alt='' />
-        </a>
+        </Link>
         <div className='flex items-center'>
           <input
             className='h-full w-5/6 px-4 rounded-xl bg-[#EDEEF2]'
@@ -21,17 +22,17 @@ const Nav = () => {
         {/* first ul */}
         <div className='flex gap-8'>
           <li>
-            <a
+            <Link
               className={`hover:text-slate-700 ${
                 window.location.pathname === "/" && "font-semibold"
               }`}
-              href='/'
+              to='/'
             >
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               className={`hover:text-slate-700 ${
                 (window.location.pathname === "/kamar" ||
                   window.location.pathname === "/kamar/double-deluxe" ||
@@ -40,44 +41,44 @@ const Nav = () => {
                   window.location.pathname === "/kamar/deluxe") &&
                 "font-semibold"
               }`}
-              href='/kamar'
+              to='/kamar'
             >
               Kamar
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               className={`hover:text-slate-700 ${
                 window.location.pathname === "/fitur" && "font-semibold"
               }`}
-              href='/fitur'
+              to='/fitur'
             >
               Fitur
-            </a>
+            </Link>
           </li>
         </div>
         <hr className='w-0.5 h-full bg-slate-200' />
         {/* second ul */}
         <div className='flex gap-8'>
           <li>
-            <a
+            <Link
               className={`hover:text-slate-700 ${
                 window.location.pathname === "/login" && "font-semibold"
               }`}
-              href='/login'
+              to='/login'
             >
               Login
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               className={`hover:text-slate-700 ${
                 window.location.pathname === "/register" && "font-semibold"
               }`}
-              href='/register'
+              to='/register'
             >
               Register
-            </a>
+            </Link>
           </li>
         </div>
       </ul>

@@ -2,7 +2,7 @@ import React from "react";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { FiCreditCard } from "react-icons/fi";
 import { BsShield } from "react-icons/bs";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -39,8 +39,8 @@ const Sidebar = () => {
             if (link.path === location.pathname) {
               return (
                 <li key={i}>
-                  <a
-                    href={link.path}
+                  <Link
+                    to={link.path}
                     className='flex items-center gap-2 p-2 border-2 bg-primary bg-opacity-5 rounded-xl border-primary'
                   >
                     {/* icon */}
@@ -53,14 +53,14 @@ const Sidebar = () => {
                         {link.description}
                       </p>
                     </div>
-                  </a>
+                  </Link>
                 </li>
               );
             } else {
               return (
                 <li key={i}>
-                  <a
-                    href={link.path}
+                  <Link
+                    to={link.path}
                     className='flex items-center gap-2 p-2 border-[1px] rounded-xl border-slate-200'
                   >
                     {/* icon */}
@@ -73,7 +73,7 @@ const Sidebar = () => {
                         {link.description}
                       </p>
                     </div>
-                  </a>
+                  </Link>
                 </li>
               );
             }

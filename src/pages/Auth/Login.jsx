@@ -232,20 +232,20 @@ const Login = () => {
                 Login
               </button>
             </form>
-            <a
+            <Link
               className='mt-4 font-semibold text-center transition duration-200 text-primary hover:text-primary-light'
-              href='login'
+              to='login'
             >
               Lupa password
-            </a>
+            </Link>
             <p className='mt-8 text-center'>
               Tidak punya akun?{" "}
-              <a
+              <Link
                 className='font-semibold transition duration-200 text-primary hover:text-primary-light'
-                href='login'
+                to='login'
               >
                 Sign Up
-              </a>
+              </Link>
             </p>
           </div>
         )}
@@ -254,8 +254,8 @@ const Login = () => {
         <div className='flex items-center justify-center w-3/5 bg-primary-light'>
           <div className='flex flex-col items-center'>
             {/* image card */}
-            <a
-              href='/kamar/deluxe'
+            <Link
+              to='/kamar/deluxe'
               className='p-4 transition duration-200 bg-white rounded-lg shadow-2xl hover:-translate-y-1 w-80'
             >
               {/* image */}
@@ -276,7 +276,7 @@ const Login = () => {
                 {/* price */}
                 <p className='mt-2 text-xl font-bold'>Rp 850.000</p>
               </div>
-            </a>
+            </Link>
             {/* text explanation */}
             <div className='w-2/3 mt-12 text-center'>
               <h1 className='text-3xl font-semibold text-white'>

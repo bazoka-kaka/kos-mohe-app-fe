@@ -1,14 +1,15 @@
 import React from "react";
 import { BiBox } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const ProtectedNav = () => {
   return (
     <nav className='fixed z-10 flex justify-between w-full px-48 py-4 bg-white border-b-2'>
       {/* first part */}
       <div className='flex gap-12'>
-        <a href='/'>
+        <Link to='/'>
           <img src='/logo.png' className='w-12' alt='' />
-        </a>
+        </Link>
         <div className='flex items-center'>
           <input
             className='h-full w-5/6 px-4 rounded-xl bg-[#EDEEF2]'
@@ -22,17 +23,17 @@ const ProtectedNav = () => {
         {/* first ul */}
         <div className='flex gap-8'>
           <li>
-            <a
+            <Link
               className={`hover:text-slate-700 ${
                 window.location.pathname === "/" && "font-semibold"
               }`}
-              href='/'
+              to='/'
             >
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               className={`hover:text-slate-700 ${
                 (window.location.pathname === "/kamar" ||
                   window.location.pathname === "/kamar/double-deluxe" ||
@@ -41,51 +42,51 @@ const ProtectedNav = () => {
                   window.location.pathname === "/kamar/deluxe") &&
                 "font-semibold"
               }`}
-              href='/kamar'
+              to='/kamar'
             >
               Kamar
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               className={`hover:text-slate-700 ${
                 window.location.pathname === "/fitur" && "font-semibold"
               }`}
-              href='/fitur'
+              to='/fitur'
             >
               Fitur
-            </a>
+            </Link>
           </li>
         </div>
         <hr className='w-0.5 h-full bg-slate-200' />
         {/* second ul */}
         <div className='flex items-center gap-8'>
           <li>
-            <a
+            <Link
               className={`hover:text-slate-700 ${
                 window.location.pathname === "/login" && "font-semibold"
               }`}
-              href='/login'
+              to='/login'
             >
               Kontak
-            </a>
+            </Link>
           </li>
           <li>
-            <a href='/' className='relative block p-2 rounded-lg bg-slate-100'>
+            <Link to='/' className='relative block p-2 rounded-lg bg-slate-100'>
               <BiBox className='text-xl font-semibold text-primary' />
               <div className='absolute top-0 right-0 px-1 text-xs text-white translate-x-1/2 -translate-y-1/2 rounded-md bg-primary'>
                 4
               </div>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href='/dashboard' className='block w-10 h-10 rounded-lg'>
+            <Link to='/dashboard' className='block w-10 h-10 rounded-lg'>
               <img
                 className='w-10 h-10 rounded-lg'
                 src='/imgs/profile.jpeg'
                 alt=''
               />
-            </a>
+            </Link>
           </li>
         </div>
       </ul>

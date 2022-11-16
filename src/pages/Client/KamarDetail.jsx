@@ -1,6 +1,6 @@
 import React from "react";
 import { FaUserAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const KamarDetail = ({ detail, price, people, img, title }) => {
   const navigate = useNavigate();
@@ -28,12 +28,12 @@ const KamarDetail = ({ detail, price, people, img, title }) => {
             </div>
             {/* buttons */}
             <div className='flex gap-5'>
-              <a
-                href='/'
+              <Link
+                to='/'
                 className='inline-block px-12 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
               >
                 Pesan
-              </a>
+              </Link>
               <button
                 onClick={() => navigate(-1)}
                 className='inline-block px-12 py-2 text-sm font-semibold text-white transition-colors duration-150 bg-black hover:bg-slate-800 rounded-2xl'
@@ -53,12 +53,12 @@ const KamarDetail = ({ detail, price, people, img, title }) => {
               </p>
             </div>
             {/* kontak */}
-            <a
+            <Link
               className='block mt-2 py-1 text-center bg-white rounded-sm border-[1.5px] border-slate-700'
-              href='/kontak'
+              to='/kontak'
             >
               Kontak Penjual
-            </a>
+            </Link>
           </div>
         </section>
       </div>

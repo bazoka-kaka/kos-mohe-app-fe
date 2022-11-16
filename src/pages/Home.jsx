@@ -1,6 +1,7 @@
 import React from "react";
 import { CiUser } from "react-icons/ci";
 import { BsDot } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Home = ({ kamar, fasilitas }) => {
   return (
@@ -37,8 +38,8 @@ const Home = ({ kamar, fasilitas }) => {
             {kamar.map((item, i) => {
               if (i < 3) {
                 return (
-                  <a
-                    href={item.url}
+                  <Link
+                    to={item.url}
                     className='duration-75 border-[1px] transform rounded-2xl hover:scale-[101%]'
                   >
                     <div className='relative'>
@@ -70,18 +71,18 @@ const Home = ({ kamar, fasilitas }) => {
                         ))}
                       </ul>
                     </div>
-                  </a>
+                  </Link>
                 );
               }
             })}
           </div>
           {/* learn more button */}
-          <a
-            href='/kamar'
+          <Link
+            to='/kamar'
             className='inline-block px-8 py-2 mt-8 font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
           >
             Learn More
-          </a>
+          </Link>
         </section>
         <section id='fasilitas' className='pt-8 pb-16'>
           {/* title */}
@@ -120,12 +121,12 @@ const Home = ({ kamar, fasilitas }) => {
             })}
           </div>
           {/* learn more button */}
-          <a
-            href='/fitur'
+          <Link
+            to='/fitur'
             className='inline-block px-8 py-2 mt-8 font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
           >
             Learn More
-          </a>
+          </Link>
         </section>
       </div>
     </>

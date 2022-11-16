@@ -1,6 +1,7 @@
 import React from "react";
 import { CiUser } from "react-icons/ci";
 import { BsDot } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Kamar = ({ kamar }) => {
   return (
@@ -15,9 +16,9 @@ const Kamar = ({ kamar }) => {
           {/* content */}
           <div className='grid grid-cols-3 pb-6 gap-x-4 gap-y-6'>
             {kamar.map((item, i) => (
-              <a
+              <Link
                 key={i}
-                href={item.url}
+                to={item.url}
                 className='duration-75 border-[1px] transform rounded-2xl hover:scale-[101%]'
               >
                 <div className='relative'>
@@ -46,7 +47,7 @@ const Kamar = ({ kamar }) => {
                     ))}
                   </ul>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </section>
