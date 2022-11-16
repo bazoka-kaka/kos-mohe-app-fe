@@ -12,8 +12,8 @@ const Fitur = ({ fasilitas }) => {
         <section id='konten' className='py-6 mt-4'>
           {/* content */}
           <div className='flex flex-col pb-6 gap-y-6'>
-            {fasilitas.map((item) => (
-              <div className='flex gap-4'>
+            {fasilitas.map((item, i) => (
+              <div key={i} className='flex gap-4'>
                 <img
                   className='w-64 rounded-2xl'
                   src={`${item.img}`}
@@ -24,14 +24,14 @@ const Fitur = ({ fasilitas }) => {
                   <p className='text-sm'>{item.description}</p>
                   {item.title === "Kamar Tidur" ? (
                     <ul className='grid grid-cols-2 grid-rows-4 ml-5 text-sm list-disc'>
-                      {item.features.map((feature) => (
-                        <li>{feature}</li>
+                      {item.features.map((feature, i) => (
+                        <li key={i}>{feature}</li>
                       ))}
                     </ul>
                   ) : (
                     <ul className='ml-5 text-sm list-disc'>
-                      {item.features.map((feature) => (
-                        <li>{feature}</li>
+                      {item.features.map((feature, i) => (
+                        <li key={i}>{feature}</li>
                       ))}
                     </ul>
                   )}

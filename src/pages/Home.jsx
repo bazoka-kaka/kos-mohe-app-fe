@@ -60,8 +60,11 @@ const Home = ({ kamar, fasilitas }) => {
                         <BsDot className='inline' /> Rp {item.price}
                       </p>
                       <ul className='flex flex-wrap gap-2 mt-5 text-sm'>
-                        {item.features.map((feature) => (
-                          <li className='px-3 py-1 bg-[#EDEEF2] rounded-xl'>
+                        {item.features.map((feature, i) => (
+                          <li
+                            key={i}
+                            className='px-3 py-1 bg-[#EDEEF2] rounded-xl'
+                          >
                             {feature}
                           </li>
                         ))}
@@ -88,7 +91,7 @@ const Home = ({ kamar, fasilitas }) => {
             {fasilitas.map((item, i) => {
               if (i < 2) {
                 return (
-                  <div className='flex gap-4'>
+                  <div key={i} className='flex gap-4'>
                     <img
                       className='w-64 rounded-2xl'
                       src={`${item.img}`}
@@ -99,14 +102,14 @@ const Home = ({ kamar, fasilitas }) => {
                       <p className='text-sm'>{item.description}</p>
                       {item.title === "Kamar Tidur" ? (
                         <ul className='grid grid-cols-2 grid-rows-4 ml-5 text-sm list-disc'>
-                          {item.features.map((feature) => (
-                            <li>{feature}</li>
+                          {item.features.map((feature, i) => (
+                            <li key={i}>{feature}</li>
                           ))}
                         </ul>
                       ) : (
                         <ul className='ml-5 text-sm list-disc'>
-                          {item.features.map((feature) => (
-                            <li>{feature}</li>
+                          {item.features.map((feature, i) => (
+                            <li key={i}>{feature}</li>
                           ))}
                         </ul>
                       )}

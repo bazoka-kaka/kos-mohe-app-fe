@@ -14,8 +14,9 @@ const Kamar = ({ kamar }) => {
         <section id='kamar' className='py-6'>
           {/* content */}
           <div className='grid grid-cols-3 pb-6 gap-x-4 gap-y-6'>
-            {kamar.map((item) => (
+            {kamar.map((item, i) => (
               <a
+                key={i}
                 href={item.url}
                 className='duration-75 border-[1px] transform rounded-2xl hover:scale-[101%]'
               >
@@ -38,8 +39,8 @@ const Kamar = ({ kamar }) => {
                     <BsDot className='inline' /> Rp {item.price}
                   </p>
                   <ul className='flex flex-wrap gap-2 mt-5 text-sm'>
-                    {item.features.map((feature) => (
-                      <li className='px-3 py-1 bg-[#EDEEF2] rounded-xl'>
+                    {item.features.map((feature, i) => (
+                      <li key={i} className='px-3 py-1 bg-[#EDEEF2] rounded-xl'>
                         {feature}
                       </li>
                     ))}

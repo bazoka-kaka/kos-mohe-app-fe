@@ -21,8 +21,8 @@ const KamarDetail = ({ detail, price, people, img, title }) => {
             <div className='p-4 bg-white border-[1.5px] rounded-md'>
               <h2 className='font-semibold'>Detail</h2>
               <ul className='ml-5 text-sm list-disc'>
-                {detail.map((item) => (
-                  <li>{item}</li>
+                {detail.map((item, i) => (
+                  <li key={i}>{item}</li>
                 ))}
               </ul>
             </div>
