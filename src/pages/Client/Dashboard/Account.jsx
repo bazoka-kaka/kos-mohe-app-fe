@@ -1,12 +1,18 @@
 import React from "react";
-import Footer from "../../../components/Footer";
-import ProtectedNav from "../../../components/ProtectedNav";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "../../../components/Sidebar";
+import useLogout from "../../../hooks/useLogout";
 
 const Account = () => {
+  const navigate = useNavigate();
+  const logout = useLogout();
+
+  const signOut = async () => {
+    await logout();
+    navigate("/");
+  };
   return (
     <>
-      <ProtectedNav />
       <div className='min-h-[100vh] pt-[85.0667px] flex px-48'>
         <Sidebar />
         <section className='w-2/3 pl-6'>
@@ -22,7 +28,7 @@ const Account = () => {
                 <img
                   className='w-24 rounded-lg'
                   src='/imgs/profile.jpeg'
-                  alt='Profile Picture'
+                  alt=''
                 />
                 <button className='px-3 py-2 text-sm font-semibold border-2 rounded-md border-primary text-primary'>
                   Ubah
@@ -103,7 +109,10 @@ const Account = () => {
             <div className='flex justify-between mt-8'>
               {/* first part */}
               <div>
-                <button className='p-2 text-sm font-semibold text-red-400 border-2 border-red-400 rounded-md'>
+                <button
+                  onClick={signOut}
+                  className='p-2 text-sm font-semibold text-red-400 border-2 border-red-400 rounded-md'
+                >
                   Log out
                 </button>
               </div>
@@ -120,7 +129,6 @@ const Account = () => {
           </div>
         </section>
       </div>
-      <Footer />
     </>
   );
 };
