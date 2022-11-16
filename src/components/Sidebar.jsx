@@ -35,10 +35,10 @@ const Sidebar = () => {
       {/* links */}
       <div className='mt-4'>
         <ul className='flex flex-col gap-4'>
-          {links.map((link) => {
+          {links.map((link, i) => {
             if (link.path === location.pathname) {
               return (
-                <li>
+                <li key={i}>
                   <a
                     href={link.path}
                     className='flex items-center gap-2 p-2 border-2 bg-primary bg-opacity-5 rounded-xl border-primary'
@@ -58,7 +58,7 @@ const Sidebar = () => {
               );
             } else {
               return (
-                <li>
+                <li key={i}>
                   <a
                     href={link.path}
                     className='flex items-center gap-2 p-2 border-[1px] rounded-xl border-slate-200'
