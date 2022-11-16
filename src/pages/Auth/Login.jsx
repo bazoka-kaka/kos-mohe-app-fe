@@ -1,8 +1,5 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
-import AuthContext from "../../context/AuthProvider";
+import React, { useState, useRef, useEffect } from "react";
 
-import Nav from "../../components/Nav";
-import Footer from "../../components/Footer";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import {
   faInfoCircle,
@@ -11,12 +8,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../../api/axios";
+import useAuth from "../../hooks/useAuth";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
 const LOGIN_URL = "/auth";
 
 const Login = () => {
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth, persist, setPersist } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   // hide password
   const [showPwd, setShowPwd] = useState(false);
 
@@ -61,12 +64,12 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      console.log(response?.data);
       //console.log(JSON.stringify(response));
-      const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
       const fullname = response?.data?.fullname;
-      setAuth({ email, fullname, pwd, roles, accessToken });
+      const accessToken = response?.data?.accessToken;
+      setAuth({ roles, fullname, accessToken });
+      console.log(response?.data);
       setSuccess(true);
       setEmail("");
       setPwd("");
@@ -83,9 +86,17 @@ const Login = () => {
       errRef.current.focus();
     }
   };
+
+  const togglePersist = () => {
+    setPersist((prev) => !prev);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("persist", persist);
+  }, [persist]);
+
   return (
     <>
-      <Nav />
       <div className='min-h-[100vh] pt-[69.53px] flex'>
         {/* left */}
         {success ? (
@@ -95,9 +106,12 @@ const Login = () => {
               <h1 className='text-4xl font-semibold text-slate-700'>
                 Login Success!
               </h1>
-              <p className='mt-3 text-lg text-blue-500 transition duration-150 hover:text-red-500'>
-                <a href='/'>Home</a>
-              </p>
+              <button
+                className='mt-3 text-lg text-blue-500 transition duration-150 hover:text-red-500'
+                onClick={() => navigate(from, { replace: true })}
+              >
+                Go Back
+              </button>
             </header>
           </div>
         ) : (
@@ -203,10 +217,12 @@ const Login = () => {
                 <input
                   className='w-5 border-4 border-gray-200'
                   type='checkbox'
-                  name='remember-acc'
-                  id='#remember-acc'
+                  name='persist'
+                  id='persist'
+                  onChange={togglePersist}
+                  checked={persist}
                 />
-                <label htmlFor='#remember-acc'>Ingat akun</label>
+                <label htmlFor='persist'>Ingat akun</label>
               </div>
               {/* button */}
               <button
@@ -274,7 +290,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
