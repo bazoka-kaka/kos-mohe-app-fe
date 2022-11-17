@@ -54,9 +54,11 @@ const Kamar = ({ kamar }) => {
                   />
                 </div>
                 <div className='flex flex-col gap-2'>
-                  <label htmlFor='nama' className='font-semibold'>
-                    Fitur Kamar
-                  </label>
+                  <label htmlFor='gambar'>Gambar Kamar</label>
+                  <input type='file' id='gambar' />
+                </div>
+                <div className='flex flex-col gap-2'>
+                  <p className='font-semibold'>Fitur Kamar</p>
                   <div className='grid grid-cols-2 grid-row-3'>
                     <div className='flex gap-4'>
                       <p>Ber-AC?</p>
