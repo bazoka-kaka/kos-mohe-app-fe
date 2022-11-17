@@ -17,12 +17,9 @@ const Kamar = ({ kamar }) => {
       {showPopup && (
         <>
           <div className='absolute top-0 z-10 left-0 w-full min-h-[calc(100vh+85.0667px)] bg-black opacity-30'></div>
-          <div
-            onClick={handleCancel}
-            className='absolute z-20 w-full flex items-center justify-center min-h-[calc(100vh+85.0667px)]'
-          >
-            <div className='w-1/2 p-4 bg-white rounded-md'>
-              <h1 className='text-3xl'>Tambahkan Kamar</h1>
+          <div className='absolute z-20 w-full flex items-center justify-center min-h-[calc(100vh+85.0667px)]'>
+            <div className='w-1/2 px-8 py-6 bg-white border-2 rounded-md border-slate-700'>
+              <h1 className='text-3xl font-semibold'>Tambahkan Kamar</h1>
               <form className='flex flex-col gap-2 mt-4'>
                 <div className='flex flex-col gap-[1.5px]'>
                   <label htmlFor='nama'>Nama Kamar</label>
@@ -65,18 +62,18 @@ const Kamar = ({ kamar }) => {
                       <p>Ber-AC?</p>
                       <div className='flex gap-2'>
                         <div>
-                          <input type='radio' id='ya' name='ac' value='ya' />{" "}
-                          <label htmlFor='ya'>Ya</label>
+                          <input type='radio' id='ac-ya' name='ac' value='ya' />{" "}
+                          <label htmlFor='ac-ya'>Ya</label>
                         </div>
                         <div>
                           <input
                             type='radio'
-                            id='tidak'
+                            id='ac-tidak'
                             name='ac'
                             value='tidak'
                             checked
                           />{" "}
-                          <label htmlFor='tidak'>Tidak</label>
+                          <label htmlFor='ac-tidak'>Tidak</label>
                         </div>
                       </div>
                     </div>
@@ -125,6 +122,30 @@ const Kamar = ({ kamar }) => {
                             value='dua'
                           />{" "}
                           <label htmlFor='dua'>2 orang</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='flex gap-4'>
+                      <p>Featured?</p>
+                      <div className='flex gap-2'>
+                        <div>
+                          <input
+                            type='radio'
+                            id='featured-ya'
+                            name='featured'
+                            value='ya'
+                          />{" "}
+                          <label htmlFor='featured-ya'>Ya</label>
+                        </div>
+                        <div>
+                          <input
+                            type='radio'
+                            id='featured-no'
+                            name='featured'
+                            value='tidak'
+                            checked
+                          />{" "}
+                          <label htmlFor='featured-no'>Tidak</label>
                         </div>
                       </div>
                     </div>
