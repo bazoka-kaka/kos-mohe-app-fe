@@ -55,7 +55,7 @@ const KamarDetail = ({ detail, price, people, img, title }) => {
             {/* kontak */}
             <Link
               className='block mt-2 py-1 text-center bg-white rounded-sm border-[1.5px] border-slate-700'
-              to='/kontak'
+              to='/contact'
             >
               Kontak Penjual
             </Link>
