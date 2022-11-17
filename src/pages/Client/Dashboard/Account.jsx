@@ -43,8 +43,8 @@ const Account = () => {
               {/* first part */}
               <div className='flex gap-2'>
                 <div className='flex flex-col w-1/2 gap-1'>
-                  <label className='text-sm' htmlFor='firstname'>
-                    Nama Depan
+                  <label className='text-sm' htmlFor='fullname'>
+                    Nama Lengkap
                   </label>
                   <input
                     className='text-sm border-[1px] border-slate-400 p-2 rounded-md'
@@ -52,19 +52,6 @@ const Account = () => {
                     placeholder='Min. 3 karakter'
                   />
                 </div>
-                <div className='flex flex-col w-1/2 gap-1'>
-                  <label className='text-sm' htmlFor='firstname'>
-                    Nama Belakang
-                  </label>
-                  <input
-                    className='text-sm border-[1px] border-slate-400 p-2 rounded-md'
-                    type='text'
-                    placeholder='Min. 3 karakter'
-                  />
-                </div>
-              </div>
-              {/* second part */}
-              <div className='flex gap-2'>
                 <div className='flex flex-col w-1/2 gap-1'>
                   <label className='text-sm' htmlFor='firstname'>
                     Email
@@ -75,6 +62,9 @@ const Account = () => {
                     placeholder='example@gmail.com'
                   />
                 </div>
+              </div>
+              {/* second part */}
+              <div className='flex gap-2'>
                 <div className='flex flex-col w-1/2 gap-1'>
                   <label className='text-sm' htmlFor='firstname'>
                     Nomor Telepon
@@ -82,7 +72,7 @@ const Account = () => {
                   <input
                     className='text-sm border-[1px] border-slate-400 p-2 rounded-md'
                     type='text'
-                    placeholder='(08xx)xxxxxxxx'
+                    placeholder='08xxxxxxxxxx'
                   />
                 </div>
               </div>
