@@ -1,9 +1,11 @@
 import React from "react";
 import { BiBox } from "react-icons/bi";
 import { Link, useLocation } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const ProtectedNav = () => {
   const location = useLocation();
+  const { auth } = useAuth();
   return (
     <nav className='fixed z-10 flex justify-between w-full px-48 py-4 bg-white border-b-2'>
       {/* first part */}
@@ -62,16 +64,18 @@ const ProtectedNav = () => {
         <hr className='w-0.5 h-full bg-slate-200' />
         {/* second ul */}
         <div className='flex items-center gap-8'>
-          <li>
-            <Link
-              className={`hover:text-slate-700 ${
-                location.pathname === "/contact" && "font-semibold"
-              }`}
-              to='/contact'
-            >
-              Kontak
-            </Link>
-          </li>
+          {!auth.roles.includes(5150) && (
+            <li>
+              <Link
+                className={`hover:text-slate-700 ${
+                  location.pathname === "/contact" && "font-semibold"
+                }`}
+                to='/contact'
+              >
+                Kontak
+              </Link>
+            </li>
+          )}
           <li>
             <Link to='/' className='relative block p-2 rounded-lg bg-slate-100'>
               <BiBox className='text-xl font-semibold text-primary' />
