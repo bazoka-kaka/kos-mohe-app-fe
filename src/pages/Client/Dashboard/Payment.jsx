@@ -1,7 +1,16 @@
 import React from "react";
 import Sidebar from "../../../components/Sidebar";
+import { useNavigate } from "react-router-dom";
+import useLogout from "../../../hooks/useLogout";
 
 const Payment = () => {
+  const navigate = useNavigate();
+  const logout = useLogout();
+
+  const signOut = async () => {
+    await logout();
+    navigate("/");
+  };
   return (
     <>
       <div className='min-h-[100vh] pt-[85.0667px] flex px-48'>
@@ -37,7 +46,10 @@ const Payment = () => {
             <div className='flex justify-between mt-8'>
               {/* first part */}
               <div>
-                <button className='p-2 text-sm font-semibold text-red-400 border-2 border-red-400 rounded-md'>
+                <button
+                  onClick={signOut}
+                  className='p-2 text-sm font-semibold text-red-400 border-2 border-red-400 rounded-md'
+                >
                   Log out
                 </button>
               </div>
