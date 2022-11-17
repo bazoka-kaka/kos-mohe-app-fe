@@ -17,7 +17,10 @@ const Kamar = ({ kamar }) => {
       {showPopup && (
         <>
           <div className='absolute top-0 z-10 left-0 w-full min-h-[calc(100vh+85.0667px)] bg-black opacity-30'></div>
-          <div className='absolute z-20 w-full flex items-center justify-center min-h-[calc(100vh+85.0667px)]'>
+          <div
+            onClick={handleCancel}
+            className='absolute z-20 w-full flex items-center justify-center min-h-[calc(100vh+85.0667px)]'
+          >
             <div className='w-1/2 p-4 bg-white rounded-md'>
               <h1 className='text-3xl'>Tambahkan Kamar</h1>
               <form className='flex flex-col gap-2 mt-4'>
