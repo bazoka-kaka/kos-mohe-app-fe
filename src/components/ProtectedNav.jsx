@@ -7,7 +7,7 @@ const ProtectedNav = () => {
   const location = useLocation();
   const { auth } = useAuth();
   return (
-    <nav className='fixed z-10 flex justify-between w-full px-48 py-4 bg-white border-b-2'>
+    <nav className='fixed z-50 flex justify-between w-full px-48 py-4 bg-white border-b-2'>
       {/* first part */}
       <div className='flex gap-12'>
         <Link to='/'>
