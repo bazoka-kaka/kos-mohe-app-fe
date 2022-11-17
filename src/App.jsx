@@ -6,9 +6,9 @@ import Home from "./pages/Home";
 import Register from "./pages/Auth/Register";
 import PersistLogin from "./components/PersistLogin";
 
-import Fitur from "./pages/Client/Fitur";
-import Kamar from "./pages/Client/Kamar";
-import KamarDetail from "./pages/Client/KamarDetail";
+import Fitur from "./pages/Fitur";
+import Kamar from "./pages/Kamar";
+import KamarDetail from "./pages/KamarDetail";
 import Login from "./pages/Auth/Login";
 import Account from "./pages/Client/Dashboard/Account";
 import Payment from "./pages/Client/Dashboard/Payment";
