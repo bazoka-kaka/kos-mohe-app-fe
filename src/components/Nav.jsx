@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 const Nav = () => {
   const location = useLocation();
   return (
-    <nav className='fixed z-50 flex justify-between w-full px-48 py-4 bg-white border-b-2'>
+    <nav className='fixed z-50 flex justify-between w-full px-48 py-4 bg-white border-b-2 shadow-md'>
       {/* first part */}
       <div className='flex gap-12'>
         <Link to='/'>
