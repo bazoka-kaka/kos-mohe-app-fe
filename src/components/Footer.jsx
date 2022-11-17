@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className='flex justify-between px-48 py-12 bg-primary'>
+    <footer className='relative z-50 flex justify-between px-48 py-12 bg-primary'>
       <div className='flex items-center'>
         <img src='/logo-footer.png' className='w-28' alt='' />
       </div>
