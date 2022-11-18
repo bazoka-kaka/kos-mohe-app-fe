@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import axios from "../../api/axios";
 
 const NAME_REGEX = /^[a-zA-Z ]{3,23}$/;
+const PHONE_REGEX = /^\d{9,13}$/;
 const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = "/register";
@@ -30,6 +31,10 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
+
+  const [phone, setPhone] = useState("");
+  const [validPhone, setValidPhone] = useState(false);
+  const [phoneFocus, setPhoneFocus] = useState(false);
 
   const [pwd, setPwd] = useState("");
   const [validPwd, setValidPwd] = useState(false);
@@ -55,13 +60,17 @@ const Register = () => {
   }, [email]);
 
   useEffect(() => {
+    setValidPhone(PHONE_REGEX.test(phone));
+  }, [phone]);
+
+  useEffect(() => {
     setValidPwd(PWD_REGEX.test(pwd));
     setValidMatch(pwd === matchPwd);
   }, [pwd, matchPwd]);
 
   useEffect(() => {
     setErrMsg("");
-  }, [fullname, email, pwd, matchPwd]);
+  }, [fullname, phone, email, pwd, matchPwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,14 +78,15 @@ const Register = () => {
     const v1 = NAME_REGEX.test(fullname);
     const v2 = PWD_REGEX.test(pwd);
     const v3 = EMAIL_REGEX.test(email);
-    if (!v1 || !v2 || !v3) {
+    const v4 = PHONE_REGEX.test(phone);
+    if (!v1 || !v2 || !v3 || !v4) {
       setErrMsg("Invalid Entry");
       return;
     }
     try {
       const response = await axios.post(
         REGISTER_URL,
-        JSON.stringify({ fullname, pwd, email }),
+        JSON.stringify({ fullname, pwd, email, phone }),
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -91,12 +101,13 @@ const Register = () => {
       setName("");
       setEmail("");
       setPwd("");
+      setPhone("");
       setMatchPwd("");
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
       } else if (err.response?.status === 409) {
-        setErrMsg("Email Taken");
+        setErrMsg("Email or phone number is Taken");
       } else {
         setErrMsg("Registration Failed");
       }
@@ -228,6 +239,47 @@ const Register = () => {
                   } bg-black text-white p-2 rounded-md`}
                 >
                   <FontAwesomeIcon icon={faInfoCircle} /> Email must be valid.
+                </p>
+              </div>
+              <div className='flex flex-col gap-2'>
+                <label htmlFor='#phone'>
+                  Phone{" "}
+                  {validPhone || !phone ? (
+                    <FontAwesomeIcon
+                      icon={faCircleCheck}
+                      className={`text-green-400 ${
+                        !phone ? "hidden" : "inline"
+                      }`}
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={faCircleXmark}
+                      className='text-red-400 '
+                    />
+                  )}
+                </label>
+                <input
+                  className='p-2 border-2 border-gray-200 rounded-md'
+                  id='phone'
+                  placeholder='08xxxxxxxxxx atau 628xxxxxxxxxx'
+                  type='text'
+                  autoComplete='off'
+                  onChange={(e) => setPhone(e.target.value)}
+                  value={phone}
+                  required
+                  aria-invalid={validPhone ? "false" : "true"}
+                  aria-describedby='uidnote'
+                  onFocus={() => setPhoneFocus(true)}
+                  onBlur={() => setPhoneFocus(false)}
+                />
+                <p
+                  id='uidnote'
+                  className={`${
+                    phoneFocus && phone && !validPhone ? "block" : "hidden"
+                  } bg-black text-white p-2 rounded-md`}
+                >
+                  <FontAwesomeIcon icon={faInfoCircle} /> Phone should only
+                  contain number. It must be of mini 10 and max 12 digits.
                 </p>
               </div>
               <div className='flex flex-col gap-2'>
