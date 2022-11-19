@@ -81,7 +81,6 @@ const Account = () => {
           withCredentials: true,
         }
       );
-      console.log(JSON.stringify(response?.data));
       setName(response?.data?.fullname);
       setEmail(response?.data?.email);
       setPhone(response?.data?.phone);
@@ -95,7 +94,7 @@ const Account = () => {
       } else if (err.response?.status === 401) {
         setErrMsg("Unauthorized");
       } else {
-        setErrMsg("Profile Update Failed");
+        setErrMsg("User Fetch Failed!");
         console.log(err);
       }
     }
