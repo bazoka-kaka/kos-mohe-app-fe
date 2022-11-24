@@ -119,9 +119,9 @@ const AddRoom = ({ setShowPopup, auth }) => {
   return (
     <>
       {/* transparent layer */}
-      <div className='absolute top-0 z-10 left-0 w-full min-h-[calc(100vh+85.0667px)] bg-black opacity-30'></div>
+      <div className='fixed top-0 z-10 left-0 w-full min-h-[calc(100vh+85.0667px)] bg-black opacity-30'></div>
       {/* create new room form */}
-      <div className='absolute z-20 w-full flex items-center justify-center min-h-[calc(100vh+85.0667px)]'>
+      <div className='fixed z-20 w-full flex items-center justify-center min-h-[calc(100vh+85.0667px)]'>
         <div className='w-1/2 px-8 py-6 bg-white border-2 rounded-md border-slate-700'>
           {/* error message */}
           <p
