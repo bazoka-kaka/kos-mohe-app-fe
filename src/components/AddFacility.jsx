@@ -6,7 +6,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../api/axios";
 
-const NAME_REGEX = /^[a-zA-Z ]{3,23}$/;
 const FACILITY_URL = "/facilities";
 
 const AddFacility = ({ setShowPopup, auth }) => {
@@ -32,7 +31,7 @@ const AddFacility = ({ setShowPopup, auth }) => {
   const [features, setFeatures] = useState([]);
 
   useEffect(() => {
-    setValidName(NAME_REGEX.test(name));
+    setValidName(name.length >= 3);
   }, [name]);
 
   useEffect(() => {
@@ -50,7 +49,7 @@ const AddFacility = ({ setShowPopup, auth }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // if button enabled with JS hack
-    const v1 = NAME_REGEX.test(name);
+    const v1 = name.length >= 3;
     const v2 = image !== "";
     const v3 = description.length >= 3 || description === "";
     if (!v1 || !v2 || !v3) {
