@@ -3,7 +3,7 @@ import { CiUser } from "react-icons/ci";
 import { BsDot } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-const Home = ({ kamar, fasilitas }) => {
+const Home = ({ kamar, facilities }) => {
   return (
     <>
       <div className='min-h-[100vh] pt-[85.0667px] px-48'>
@@ -96,38 +96,49 @@ const Home = ({ kamar, fasilitas }) => {
           {/* title */}
           <h2 className='text-xl'>Fasilitas Kos Mohe</h2>
           {/* content */}
-          <div className='flex flex-wrap gap-8 mt-6'>
-            {fasilitas.map((item, i) => {
-              if (i < 2) {
-                return (
-                  <div key={i} className='flex gap-4'>
-                    <img
-                      className='w-64 rounded-2xl'
-                      src={`${item.img}`}
-                      alt={`${item.title}`}
-                    />
-                    <div>
-                      <h3 className='text-lg font-semibold'>{item.title}</h3>
-                      <p className='text-sm'>{item.description}</p>
-                      {item.title === "Kamar Tidur" ? (
-                        <ul className='grid grid-cols-2 grid-rows-4 ml-5 text-sm list-disc'>
-                          {item.features.map((feature, i) => (
-                            <li key={i}>{feature}</li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <ul className='ml-5 text-sm list-disc'>
-                          {item.features.map((feature, i) => (
-                            <li key={i}>{feature}</li>
-                          ))}
-                        </ul>
-                      )}
+          {facilities.length === 0 ? (
+            <p className='mt-6'>Loading Data...</p>
+          ) : (
+            <div className='flex flex-wrap gap-8 mt-6'>
+              {facilities.map((facility, i) => {
+                if (i < 2) {
+                  return (
+                    <div key={i} className='flex gap-4'>
+                      <img
+                        className='w-64 rounded-2xl'
+                        src={`http://localhost:3500/facilities/images/${facility._id}`}
+                        alt={`${facility.name}`}
+                      />
+                      <div>
+                        <h3 className='text-lg font-semibold'>
+                          {facility.name}
+                        </h3>
+                        <p className='text-sm'>{facility.description}</p>
+                        {facility.features[0].split(",").length > 3 ? (
+                          <ul className='grid grid-cols-2 grid-rows-4 ml-5 text-sm list-disc'>
+                            {facility.features[0]
+                              .split(",")
+                              .map((feature, i) => (
+                                <li key={i}>{feature}</li>
+                              ))}
+                          </ul>
+                        ) : facility.features[0] !== "" ? (
+                          <ul className='ml-5 text-sm list-disc'>
+                            {facility.features[0]
+                              .split(",")
+                              .map((feature, i) => (
+                                <li key={i}>{feature}</li>
+                              ))}
+                          </ul>
+                        ) : null}
+                      </div>
                     </div>
-                  </div>
-                );
-              }
-            })}
-          </div>
+                  );
+                }
+              })}
+            </div>
+          )}
+
           {/* learn more button */}
           <Link
             to='/fitur'
