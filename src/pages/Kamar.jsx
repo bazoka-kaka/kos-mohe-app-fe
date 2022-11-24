@@ -21,7 +21,7 @@ const Kamar = ({ kamar }) => {
           {auth?.roles?.includes(5150) && (
             <button
               onClick={() => setShowPopup(true)}
-              className='flex items-center px-4 py-1 font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
+              className='flex items-center px-4 py-1 font-semibold text-white transition-colors duration-150 rounded-md hover:bg-primary-light bg-primary'
             >
               Tambah Kamar
             </button>
