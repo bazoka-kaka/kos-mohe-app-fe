@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BiBox } from "react-icons/bi";
 import { Link, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
@@ -6,8 +6,22 @@ import useAuth from "../hooks/useAuth";
 const ProtectedNav = () => {
   const location = useLocation();
   const { auth } = useAuth();
+
+  const [src, setSrc] = useState("");
+
+  useEffect(() => {
+    setSrc(`http://localhost:3500/users/images/${auth.id}?${Date.now()}`);
+  }, []);
+
+  const changeSrc = () => {
+    setSrc(`http://localhost:3500/users/images/${auth.id}?${Date.now()}`);
+  };
+
   return (
-    <nav className='fixed z-50 flex justify-between w-full px-48 py-4 bg-white border-b-2 shadow-md'>
+    <nav
+      onClick={changeSrc}
+      className='fixed z-50 flex justify-between w-full px-48 py-4 bg-white border-b-2 shadow-md'
+    >
       {/* first part */}
       <div className='flex gap-12'>
         <Link to='/'>
@@ -87,8 +101,8 @@ const ProtectedNav = () => {
           <li>
             <Link to='/dashboard' className='block w-10 h-10 rounded-lg'>
               <img
-                className='w-10 h-10 rounded-lg'
-                src='/imgs/profile.jpeg'
+                className='object-cover w-10 h-10 rounded-lg'
+                src={src}
                 alt=''
               />
             </Link>
