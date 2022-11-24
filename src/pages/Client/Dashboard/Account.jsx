@@ -198,7 +198,28 @@ const Account = () => {
     }
   };
 
-  const handleDelete = async (e) => {};
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(USERS_URL + "/images/" + auth?.id, {
+        headers: {
+          Authorization: `Bearer ${auth.accessToken}`,
+        },
+        withCredentials: true,
+      });
+      console.log(response?.data);
+      reloadImage();
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Profile Update Failed");
+        console.log(err);
+      }
+      errRef.current.focus();
+    }
+  };
 
   return (
     <>
