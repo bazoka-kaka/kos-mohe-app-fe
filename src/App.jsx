@@ -21,6 +21,7 @@ import useAuth from "./hooks/useAuth";
 import axios from "./api/axios";
 
 const KAMAR_URL = "/rooms";
+const FACILITIES_URL = "/facilities";
 
 const ROLES = {
   User: 2001,
@@ -32,6 +33,7 @@ const App = () => {
   const { auth } = useAuth();
 
   const [kamar, setKamar] = useState([]);
+  const [facilities, setFacilities] = useState([]);
 
   const getKamar = async () => {
     try {
@@ -43,68 +45,80 @@ const App = () => {
     }
   };
 
+  const getFacilities = async () => {
+    try {
+      const response = await axios.get(FACILITIES_URL);
+      console.log(response?.data);
+      setFacilities(response?.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getKamar();
+    getFacilities();
   }, []);
 
   // eslint-disable-next-line
-  const [fasilitas, setFasilitas] = useState([
-    {
-      title: "Kamar Tidur",
-      img: "/imgs/fasilitas/kamar.png",
-      description: "Ukuran kamar 3x3 meter Termasuk listrik",
-      features: [
-        "Kasur",
-        "Bantal",
-        "Ventilasi",
-        "Jendela",
-        "Lemari Baju",
-        "Kursi",
-        "Meja",
-        "Cleaning Service",
-      ],
-    },
-    {
-      title: "Kamar Mandi",
-      img: "/imgs/fasilitas/shower.png",
-      description: "",
-      features: [
-        "K. Mandi Dalam",
-        "K. Mandi Luar",
-        "Kloset Duduk",
-        "Kloset Jongkok",
-        "Ember dan Gayung",
-        "Shower",
-      ],
-    },
-    {
-      title: "Dapur",
-      img: "/imgs/fasilitas/dapur.png",
-      description:
-        "Tersedia dapur bersama yang dapat digunakan para penyewa kos untuk memasak",
-      features: [],
-    },
-    {
-      title: "Ruang Jemur",
-      img: "/imgs/fasilitas/jemuran.png",
-      description:
-        "Jemuran dapat digunakan untuk menjemur pakaian penyewa kos.",
-      features: [],
-    },
-    {
-      title: "Ruang Santai, Ruang Tamu & Parkir",
-      img: "/imgs/fasilitas/luar.png",
-      description:
-        "Ruang santai dan ruang tamu yang nyaman. Tersedia juga tempat parkir sepeda dan mobil",
-      features: [],
-    },
-    {
-      title: "Fasilitas Umum Lainnya",
-      img: "/imgs/fasilitas/lain.png",
-      description: "",
-      features: ["WIFI", "CCTV", "Menjual Galon dan LPG"],
-    },
-  ]);
+  // const [fasilitas, setFasilitas] = useState([
+  //   {
+  //     title: "Kamar Tidur",
+  //     img: "/imgs/fasilitas/kamar.png",
+  //     description: "Ukuran kamar 3x3 meter Termasuk listrik",
+  //     features: [
+  //       "Kasur",
+  //       "Bantal",
+  //       "Ventilasi",
+  //       "Jendela",
+  //       "Lemari Baju",
+  //       "Kursi",
+  //       "Meja",
+  //       "Cleaning Service",
+  //     ],
+  //   },
+  //   {
+  //     title: "Kamar Mandi",
+  //     img: "/imgs/fasilitas/shower.png",
+  //     description: "",
+  //     features: [
+  //       "K. Mandi Dalam",
+  //       "K. Mandi Luar",
+  //       "Kloset Duduk",
+  //       "Kloset Jongkok",
+  //       "Ember dan Gayung",
+  //       "Shower",
+  //     ],
+  //   },
+  //   {
+  //     title: "Dapur",
+  //     img: "/imgs/fasilitas/dapur.png",
+  //     description:
+  //       "Tersedia dapur bersama yang dapat digunakan para penyewa kos untuk memasak",
+  //     features: [],
+  //   },
+  //   {
+  //     title: "Ruang Jemur",
+  //     img: "/imgs/fasilitas/jemuran.png",
+  //     description:
+  //       "Jemuran dapat digunakan untuk menjemur pakaian penyewa kos.",
+  //     features: [],
+  //   },
+  //   {
+  //     title: "Ruang Santai, Ruang Tamu & Parkir",
+  //     img: "/imgs/fasilitas/luar.png",
+  //     description:
+  //       "Ruang santai dan ruang tamu yang nyaman. Tersedia juga tempat parkir sepeda dan mobil",
+  //     features: [],
+  //   },
+  //   {
+  //     title: "Fasilitas Umum Lainnya",
+  //     img: "/imgs/fasilitas/lain.png",
+  //     description: "",
+  //     features: ["WIFI", "CCTV", "Menjual Galon dan LPG"],
+  //   },
+  // ]);
+
   // eslint-disable-next-line
   const [details, setDetails] = useState({
     doubleDeluxe: {
@@ -170,7 +184,7 @@ const App = () => {
         {/* public */}
         <Route
           path='/'
-          element={<Home kamar={kamar} fasilitas={fasilitas} />}
+          element={<Home kamar={kamar} facilities={facilities} />}
         />
         <Route path='register' element={<Register />} />
         <Route path='login' element={<Login />} />
@@ -227,7 +241,7 @@ const App = () => {
               />
             }
           />
-          <Route path='fitur' element={<Fitur fasilitas={fasilitas} />} />
+          <Route path='fitur' element={<Fitur facilities={facilities} />} />
 
           {/* user */}
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
