@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import useAuth from "../hooks/useAuth";
+import AddFacility from "../components/AddFacility";
 
 const Fitur = ({ fasilitas }) => {
+  const { auth } = useAuth();
+  const [showPopup, setShowPopup] = useState(false);
+
   return (
     <>
+      {/* pop up form */}
+      {showPopup && <AddFacility setShowPopup={setShowPopup} auth={auth} />}
       <div className='min-h-[100vh] pt-[85.0667px] flex flex-col items-center'>
         {/* header */}
-        <header className='pt-6'>
+        <header className='flex flex-col items-center gap-2 pt-6'>
           {/* title */}
           <h1 className='text-3xl'>Fitur Kos Mohe</h1>
+          {auth?.roles?.includes(5150) && (
+            <button
+              onClick={() => setShowPopup(true)}
+              className='flex items-center px-4 py-1 font-semibold text-white transition-colors duration-150 rounded-md hover:bg-primary-light bg-primary'
+            >
+              Tambah Fitur
+            </button>
+          )}
         </header>
         <section id='konten' className='py-6 mt-4'>
           {/* content */}
