@@ -1,32 +1,13 @@
 import { CiUser } from "react-icons/ci";
 import { BsDot } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import AddRoom from "../components/AddRoom";
-import axios from "../api/axios";
+import useAuth from "../hooks/useAuth";
 
-const KAMAR_URL = "/rooms";
-
-const Kamar = () => {
+const Kamar = ({ kamar }) => {
   const { auth } = useAuth();
   const [showPopup, setShowPopup] = useState(false);
-
-  const [kamar, setKamar] = useState([]);
-
-  const getKamar = async () => {
-    try {
-      const response = await axios.get(KAMAR_URL);
-      console.log(response?.data);
-      setKamar(response?.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    getKamar();
-  }, []);
 
   return (
     <>

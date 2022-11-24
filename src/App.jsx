@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 // import Layout from "./components/Layout";
 import NotFound from "./pages/404";
@@ -17,6 +17,10 @@ import RequireAuth from "./components/RequireAuth";
 import Layout from "./components/Layout";
 import Unauthorized from "./pages/401";
 import Contact from "./pages/Client/Contact";
+import useAuth from "./hooks/useAuth";
+import axios from "./api/axios";
+
+const KAMAR_URL = "/rooms";
 
 const ROLES = {
   User: 2001,
@@ -25,45 +29,24 @@ const ROLES = {
 };
 
 const App = () => {
-  // eslint-disable-next-line
-  const [kamar, setKamar] = useState([
-    {
-      title: "Kamar Double Deluxe",
-      img: "/imgs/kamar/double.png",
-      url: "/kamar/double-deluxe",
-      featured: true,
-      people: 2,
-      price: 1200000,
-      features: ["2 Orang", "AC", "Kamar mandi dalam"],
-    },
-    {
-      title: "Kamar Deluxe",
-      img: "/imgs/kamar/deluxe.png",
-      url: "/kamar/deluxe",
-      featured: true,
-      people: 1,
-      price: 900000,
-      features: ["1 Orang", "AC", "Kamar mandi dalam"],
-    },
-    {
-      title: "Kamar Double Reguler",
-      img: "/imgs/kamar/double.png",
-      url: "/kamar/double-reguler",
-      featured: false,
-      people: 2,
-      price: 1000000,
-      features: ["2 Orang", "Kamar mandi dalam"],
-    },
-    {
-      title: "Kamar Reguler",
-      img: "/imgs/kamar/reguler.png",
-      url: "/kamar/reguler",
-      featured: false,
-      people: 1,
-      price: 700000,
-      features: ["1 Orang", "Kamar mandi dalam"],
-    },
-  ]);
+  const { auth } = useAuth();
+
+  const [kamar, setKamar] = useState([]);
+
+  const getKamar = async () => {
+    try {
+      const response = await axios.get(KAMAR_URL);
+      console.log(response?.data);
+      setKamar(response?.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getKamar();
+  }, []);
+
   // eslint-disable-next-line
   const [fasilitas, setFasilitas] = useState([
     {
