@@ -35,6 +35,8 @@ const Account = () => {
   const nameRef = useRef();
 
   const [editing, setEditing] = useState(false);
+  const [changeImage, setChangeImage] = useState(false);
+  const [src, setSrc] = useState("");
 
   // errors and success
   const [errMsg, setErrMsg] = useState("");
@@ -53,6 +55,8 @@ const Account = () => {
   const [offers, setOffers] = useState(false);
   const [orderStatus, setOrderStatus] = useState(false);
   const [updates, setUpdates] = useState(false);
+
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     setValidName(NAME_REGEX.test(fullname));
@@ -102,6 +106,7 @@ const Account = () => {
 
   useEffect(() => {
     getUserData();
+    setSrc(`http://localhost:3500/users/images/${auth.id}?${Date.now()}`);
   }, []);
 
   const handleSubmit = async (e) => {
@@ -155,6 +160,46 @@ const Account = () => {
     }
   };
 
+  const reloadImage = () => {
+    setSrc(`http://localhost:3500/users/images/${auth.id}?${Date.now()}`);
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("roles", auth.roles);
+    formData.append("image", image);
+
+    try {
+      const response = await axios.put(
+        USERS_URL + "/images/" + auth?.id,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${auth.accessToken}`,
+          },
+          withCredentials: true,
+        }
+      );
+      console.log(response?.data);
+      setChangeImage(false);
+      reloadImage();
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Profile Update Failed");
+        console.log(err);
+      }
+      errRef.current.focus();
+    }
+  };
+
+  const handleDelete = async (e) => {};
+
   return (
     <>
       <div className='min-h-[100vh] pt-[85.0667px] flex px-48'>
@@ -182,19 +227,50 @@ const Account = () => {
             {/* change profile picture */}
             <div className='mt-4'>
               <h3 className='text-sm'>Avatar</h3>
-              <div className='flex items-center gap-6 mt-2'>
-                <img
-                  className='w-24 rounded-lg'
-                  src='/imgs/profile.jpeg'
-                  alt=''
-                />
-                <button className='px-3 py-2 text-sm font-semibold border-2 rounded-md border-primary text-primary'>
-                  Ubah
-                </button>
-                <button className='px-3 py-2 text-sm font-semibold text-slate-500'>
-                  Hapus
-                </button>
-              </div>
+              <form
+                onSubmit={handleUpdate}
+                className='flex items-center gap-6 mt-2'
+              >
+                <img className='w-24 rounded-lg' src={src} alt='' />
+                {!changeImage && (
+                  <>
+                    <button
+                      type='button'
+                      onClick={() => setChangeImage(true)}
+                      className='px-3 py-2 text-sm font-semibold border-2 rounded-md border-primary text-primary'
+                    >
+                      Ubah
+                    </button>
+                    <button
+                      type='button'
+                      onClick={handleDelete}
+                      className='px-3 py-2 text-sm font-semibold text-slate-500'
+                    >
+                      Hapus
+                    </button>
+                  </>
+                )}
+                {changeImage && (
+                  <>
+                    <input
+                      type='file'
+                      name='image'
+                      onChange={(e) => setImage(e.target.files[0])}
+                      required
+                    />
+                    <button className='inline-block px-2 py-1 text-sm font-semibold text-white transition-colors duration-150 rounded-md hover:bg-primary-light bg-primary'>
+                      Update
+                    </button>
+                    <button
+                      className='text-sm'
+                      type='button'
+                      onClick={() => setChangeImage(false)}
+                    >
+                      Cancel
+                    </button>
+                  </>
+                )}
+              </form>
             </div>
             {/* change profile information */}
             <form className='flex flex-col gap-8 mt-4'>
