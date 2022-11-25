@@ -16,8 +16,16 @@ const Kamar = ({ kamar }) => {
       <div className='min-h-[100vh] pt-[85.0667px] px-48'>
         {/* header */}
         <header className='flex items-center gap-4 pt-6'>
-          {/* title */}
-          <h1 className='text-3xl'>Kamar Kos Mohe</h1>
+          <div className='flex flex-col gap-2'>
+            {/* title */}
+            <h1 className='text-3xl'>Kamar Kos Mohe</h1>
+            <p className='text-justify'>
+              Kos Mohe menyediakan berbagai pilihan kamar sesuai kebutuhan
+              penyewa. Secara garis besar, terdapat dua tipe kamar, yakni
+              berdasarkan kapasitas kamar (Double dan Single) serta berdasarkan
+              fasilitas kamar (Reguler dan Deluxe).
+            </p>
+          </div>
           {auth?.roles?.includes(5150) && (
             <button
               onClick={() => setShowPopup(true)}
