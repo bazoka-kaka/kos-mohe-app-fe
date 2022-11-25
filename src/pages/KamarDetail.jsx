@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import AddOrder from "../components/AddOrder";
 
 const KamarDetail = ({ room }) => {
   const navigate = useNavigate();
+  const { auth } = useAuth();
+  const [showPopup, setShowPopup] = useState(false);
+
   return (
     <>
+      {/* pop up form */}
+      {showPopup && (
+        <AddOrder room={room} setShowPopup={setShowPopup} auth={auth} />
+      )}
       <div className='min-h-[100vh] pt-[85.0667px] px-48 bg-[#EDEEF2]'>
         {/* title */}
         <header className='pt-6'>
@@ -32,12 +41,13 @@ const KamarDetail = ({ room }) => {
             </div>
             {/* buttons */}
             <div className='flex gap-5'>
-              <Link
-                to={`/kamar/${room.name}`}
+              <button
+                type='button'
+                onClick={() => setShowPopup(true)}
                 className='inline-block px-12 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
               >
                 Pesan
-              </Link>
+              </button>
               <button
                 onClick={() => navigate(-1)}
                 className='inline-block px-12 py-2 text-sm font-semibold text-white transition-colors duration-150 bg-black hover:bg-slate-800 rounded-2xl'
