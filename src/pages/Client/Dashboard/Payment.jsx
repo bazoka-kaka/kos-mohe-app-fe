@@ -46,34 +46,35 @@ const Payment = () => {
             <h2 className='font-semibold text-slate-700'>
               Pembayaran Belum Lunas
             </h2>
-            {/* cards */}
-            {orders.map((order) => (
-              <div className='flex flex-col mt-6'>
-                <div className='flex px-12 py-2 rounded-xl justify-between border-[1px] border-slate-200'>
-                  <div className='flex flex-col gap-2'>
-                    <h3 className='font-semibold text-slate-700'>
-                      {order.name}
-                    </h3>
-                    <p className='text-sm text-slate-500'>
-                      {order.duration} Bulan
-                    </p>
-                    <p className='text-sm text-slate-500'>
-                      {order.begin_date.substring(0, 10)} s.d{" "}
-                      {order.end_date.substring(0, 10)}
-                    </p>
-                  </div>
-                  <div className='flex flex-col items-end justify-center'>
-                    <button className='px-4 py-1 text-white bg-black rounded-md'>
-                      Bayar
-                    </button>
-                    <p className='mt-2 text-sm'>
-                      Total: Rp {order.total_price}
-                    </p>
+            <div className='mt-4'>
+              {/* cards */}
+              {orders.map((order) => (
+                <div className='flex flex-col mt-2'>
+                  <div className='flex px-12 py-2 rounded-xl justify-between border-[1px] border-slate-200'>
+                    <div className='flex flex-col gap-2'>
+                      <h3 className='font-semibold text-slate-700'>
+                        {order.name}
+                      </h3>
+                      <p className='text-sm text-slate-500'>
+                        {order.duration} Bulan
+                      </p>
+                      <p className='text-sm text-slate-500'>
+                        {order.begin_date.substring(0, 10)} s.d{" "}
+                        {order.end_date.substring(0, 10)}
+                      </p>
+                    </div>
+                    <div className='flex flex-col items-end justify-center'>
+                      <button className='px-4 py-1 text-white transition duration-200 bg-black rounded-md hover:bg-slate-700'>
+                        Bayar
+                      </button>
+                      <p className='mt-2 text-sm'>
+                        Total: Rp {order.total_price}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-
+              ))}
+            </div>
             {/* cta */}
             <div className='flex justify-between mt-8'>
               {/* first part */}
