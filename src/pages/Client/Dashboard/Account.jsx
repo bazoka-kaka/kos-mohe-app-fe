@@ -223,7 +223,7 @@ const Account = () => {
 
   return (
     <>
-      <div className='min-h-[100vh] pt-[85.0667px] flex px-48'>
+      <div className='min-h-[100vh] pt-[85.0667px] pb-8 flex px-48'>
         <Sidebar />
         <section className='w-2/3 pl-6'>
           {/* title */}
@@ -252,7 +252,11 @@ const Account = () => {
                 onSubmit={handleUpdate}
                 className='flex items-center gap-6 mt-2'
               >
-                <img className='w-24 rounded-lg' src={src} alt='' />
+                <img
+                  className='object-cover object-center w-24 h-24 rounded-lg'
+                  src={src}
+                  alt=''
+                />
                 {!changeImage && (
                   <>
                     <button
