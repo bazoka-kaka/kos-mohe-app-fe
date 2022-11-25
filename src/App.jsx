@@ -19,6 +19,7 @@ import Unauthorized from "./pages/401";
 import Contact from "./pages/Client/Contact";
 import useAuth from "./hooks/useAuth";
 import axios from "./api/axios";
+import Notifications from "./pages/Notifications";
 
 const KAMAR_URL = "/rooms";
 const FACILITIES_URL = "/facilities";
@@ -149,6 +150,7 @@ const App = () => {
             <Route path='payment' element={<Payment />} />
             <Route path='security' element={<Security />} />
             <Route path='contact' element={<Contact />} />
+            <Route path='notifications' element={<Notifications />} />
           </Route>
           {/* admin */}
         </Route>

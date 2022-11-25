@@ -91,7 +91,10 @@ const ProtectedNav = () => {
             </li>
           )}
           <li>
-            <Link to='/' className='relative block p-2 rounded-lg bg-slate-100'>
+            <Link
+              to='/notifications'
+              className='relative block p-2 rounded-lg bg-slate-100'
+            >
               <BiBox className='text-xl font-semibold text-primary' />
               <div className='absolute top-0 right-0 px-1 text-xs text-white translate-x-1/2 -translate-y-1/2 rounded-md bg-primary'>
                 4
