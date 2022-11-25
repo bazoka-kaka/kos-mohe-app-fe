@@ -36,7 +36,7 @@ const Kamar = ({ kamar }) => {
               kamar.map((item, i) => (
                 <Link
                   key={i}
-                  to='/'
+                  to={`/kamar/${item.name}`}
                   className='duration-75 border-[1px] transform rounded-2xl hover:scale-[101%]'
                 >
                   <div className='relative'>

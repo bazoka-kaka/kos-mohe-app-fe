@@ -134,54 +134,13 @@ const App = () => {
         <Route element={<PersistLogin />}>
           {/* general */}
           <Route path='kamar' element={<Kamar kamar={kamar} />} />
-          <Route
-            path='kamar/double-deluxe'
-            element={
-              <KamarDetail
-                title={details.doubleDeluxe.title}
-                detail={details.doubleDeluxe.detail}
-                price={details.doubleDeluxe.price}
-                people={details.doubleDeluxe.people}
-                img={details.doubleDeluxe.img}
-              />
-            }
-          />
-          <Route
-            path='kamar/double-reguler'
-            element={
-              <KamarDetail
-                title={details.doubleReguler.title}
-                detail={details.doubleReguler.detail}
-                price={details.doubleReguler.price}
-                people={details.doubleReguler.people}
-                img={details.doubleReguler.img}
-              />
-            }
-          />
-          <Route
-            path='kamar/deluxe'
-            element={
-              <KamarDetail
-                title={details.deluxe.title}
-                detail={details.deluxe.detail}
-                price={details.deluxe.price}
-                people={details.deluxe.people}
-                img={details.deluxe.img}
-              />
-            }
-          />
-          <Route
-            path='kamar/reguler'
-            element={
-              <KamarDetail
-                title={details.reguler.title}
-                detail={details.reguler.detail}
-                price={details.reguler.price}
-                people={details.reguler.people}
-                img={details.reguler.img}
-              />
-            }
-          />
+          {kamar.map((item) => (
+            <Route
+              path={`kamar/${item.name}`}
+              element={<KamarDetail room={item} />}
+            />
+          ))}
+
           <Route path='fitur' element={<Fitur facilities={facilities} />} />
 
           {/* user */}
