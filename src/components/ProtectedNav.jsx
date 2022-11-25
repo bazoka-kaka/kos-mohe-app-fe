@@ -27,13 +27,13 @@ const ProtectedNav = () => {
         <Link to='/'>
           <img src='/logo.png' className='w-12' alt='' />
         </Link>
-        <div className='flex items-center'>
+        {/* <div className='flex items-center'>
           <input
             className='h-full w-5/6 px-4 rounded-xl bg-[#EDEEF2]'
             type='text'
             placeholder='Search'
           />
-        </div>
+        </div> */}
       </div>
       {/* second part */}
       <ul className='flex items-center gap-12 text-sm'>
