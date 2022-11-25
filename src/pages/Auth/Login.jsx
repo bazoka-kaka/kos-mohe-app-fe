@@ -262,7 +262,7 @@ const Login = () => {
               {/* image */}
               <img
                 className='rounded-lg'
-                src='/imgs/kamar/deluxe.png'
+                src='/imgs/deluxe.png'
                 alt='Kamar Deluxe'
               />
               {/* text */}
