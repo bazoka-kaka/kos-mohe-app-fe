@@ -43,7 +43,13 @@ const KamarDetail = ({ room }) => {
             <div className='flex gap-5'>
               <button
                 type='button'
-                onClick={() => setShowPopup(true)}
+                onClick={() => {
+                  if (auth.id) {
+                    setShowPopup(true);
+                  } else {
+                    navigate("/login");
+                  }
+                }}
                 className='inline-block px-12 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
               >
                 Pesan
