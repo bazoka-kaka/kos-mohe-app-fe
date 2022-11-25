@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../api/axios";
 
 const ORDER_URL = "/orders";
+const NOTIFICATIONS_URL = "/notifications";
 
 const AddOrder = ({ setShowPopup, auth, room }) => {
   const errRef = useRef();
@@ -44,6 +45,40 @@ const AddOrder = ({ setShowPopup, auth, room }) => {
     setTotalPrice(duration * room.price);
   }, [duration]);
 
+  const handleNotification = async (e) => {
+    try {
+      const result = await axios.post(
+        NOTIFICATIONS_URL,
+        JSON.stringify({
+          user_id: auth.id,
+          title: "Pesanan Baru Telah Dibuat",
+          description: `Anda melakukan penyewaan kamar ${name} selama ${duration} bulan. Lakukan pembayaran sebelum ${beginDate}`,
+          link: "/payment",
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.accessToken}`,
+          },
+          withCredentials: true,
+        }
+      );
+      console.log(result?.data);
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg(err.response?.message);
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Order creation Failed");
+        console.log(err);
+      }
+      errRef.current.focus();
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // if button enabled with JS hack
@@ -79,7 +114,11 @@ const AddOrder = ({ setShowPopup, auth, room }) => {
         }
       );
       console.log(response?.data);
+      if (response?.data) {
+        handleNotification();
+      }
       console.log(response?.accessToken);
+
       setSuccess(true);
       //clear state and controlled inputs
       //need value attrib on inputs for this
@@ -94,9 +133,7 @@ const AddOrder = ({ setShowPopup, auth, room }) => {
       if (!err?.response) {
         setErrMsg("No Server Response");
       } else if (err.response?.status === 400) {
-        setErrMsg(
-          "Name, user_id, room_id, duration, total_price, begin_date, and end_date are required"
-        );
+        setErrMsg(err.response?.message);
       } else if (err.response?.status === 401) {
         setErrMsg("Unauthorized");
       } else {
