@@ -29,6 +29,20 @@ const Home = ({ kamar, facilities }) => {
             </div>
           </div>
         </header>
+        {/* about */}
+        <section id='about' className='py-6'>
+          <h2 className='text-xl'>About Kos Mohe</h2>
+          <p className='mt-4 text-justify'>
+            Kos mohe menawarkan penginapan kos bagi wanita yang nyaman dan aman
+            harganya pun pas sesuai dengan kebutuhan. Kos ini sangat strategis
+            karena lokasinya dekat dengan berbagai instansi pendidikan, rumah
+            sakit, pasar, warung, serta berbagai landmark lainnya. Kos ini juga
+            sangat sejuk dan rindang karena dipenuhi dengan berbagai tanaman
+            serta letaknya yang ada di tengah perkampungan yang asri dengan
+            pencapaian sebagai salah satu perkampungan paling hijau di Kota
+            Malang.
+          </p>
+        </section>
         {/* kamar kos */}
         <section id='kamar' className='py-6'>
           {/* title */}
@@ -87,7 +101,7 @@ const Home = ({ kamar, facilities }) => {
           {/* learn more button */}
           <Link
             to='/kamar'
-            className='inline-block px-8 py-2 mt-8 font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
+            className='inline-block px-8 py-2 mt-4 font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
           >
             Learn More
           </Link>
@@ -99,17 +113,20 @@ const Home = ({ kamar, facilities }) => {
           {facilities.length === 0 ? (
             <p className='mt-6'>Loading Data...</p>
           ) : (
-            <div className='flex flex-wrap gap-8 mt-6'>
+            <div className='flex flex-wrap gap-4 mt-6'>
               {facilities.map((facility, i) => {
                 if (i < 2) {
                   return (
-                    <div key={i} className='flex gap-4'>
+                    <div
+                      key={i}
+                      className='flex w-[calc(50%-8px)] border-[1px] border-slate-200 rounded-xl'
+                    >
                       <img
-                        className='w-64 rounded-2xl'
+                        className='w-64 rounded-l-2xl'
                         src={`http://localhost:3500/facilities/images/${facility._id}`}
                         alt={`${facility.name}`}
                       />
-                      <div>
+                      <div className='flex flex-col p-4'>
                         <h3 className='text-lg font-semibold'>
                           {facility.name}
                         </h3>
@@ -142,7 +159,7 @@ const Home = ({ kamar, facilities }) => {
           {/* learn more button */}
           <Link
             to='/fitur'
-            className='inline-block px-8 py-2 mt-8 font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
+            className='inline-block px-8 py-2 mt-4 font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
           >
             Learn More
           </Link>
