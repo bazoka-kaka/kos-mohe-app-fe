@@ -15,10 +15,20 @@ const Kamar = ({ kamar }) => {
       {showPopup && <AddRoom setShowPopup={setShowPopup} auth={auth} />}
       <div className='min-h-[100vh] pt-[85.0667px] px-48'>
         {/* header */}
-        <header className='flex items-center gap-4 pt-6'>
+        <header className='pt-6'>
           <div className='flex flex-col gap-2'>
             {/* title */}
-            <h1 className='text-3xl'>Kamar Kos Mohe</h1>
+            <div className='flex items-center gap-4'>
+              <h1 className='text-3xl'>Kamar Kos Mohe</h1>
+              {auth?.roles?.includes(5150) && (
+                <button
+                  onClick={() => setShowPopup(true)}
+                  className='flex items-center px-4 py-1 font-semibold text-white transition-colors duration-150 rounded-md hover:bg-primary-light bg-primary'
+                >
+                  Tambah Kamar
+                </button>
+              )}
+            </div>
             <p className='text-justify'>
               Kos Mohe menyediakan berbagai pilihan kamar sesuai kebutuhan
               penyewa. Secara garis besar, terdapat dua tipe kamar, yakni
@@ -26,14 +36,6 @@ const Kamar = ({ kamar }) => {
               fasilitas kamar (Reguler dan Deluxe).
             </p>
           </div>
-          {auth?.roles?.includes(5150) && (
-            <button
-              onClick={() => setShowPopup(true)}
-              className='flex items-center px-4 py-1 font-semibold text-white transition-colors duration-150 rounded-md hover:bg-primary-light bg-primary'
-            >
-              Tambah Kamar
-            </button>
-          )}
         </header>
         <section id='kamar' className='py-6'>
           {/* content */}
