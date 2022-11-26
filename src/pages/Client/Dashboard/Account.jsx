@@ -37,6 +37,7 @@ const Account = () => {
   const [editing, setEditing] = useState(false);
   const [changeImage, setChangeImage] = useState(false);
   const [src, setSrc] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   // errors and success
   const [errMsg, setErrMsg] = useState("");
@@ -69,6 +70,10 @@ const Account = () => {
   useEffect(() => {
     setValidPhone(PHONE_REGEX.test(phone));
   }, [phone]);
+
+  useEffect(() => {
+    setIsAdmin(auth.roles.includes(5150));
+  }, []);
 
   const getUserData = async () => {
     try {
@@ -227,7 +232,10 @@ const Account = () => {
         <Sidebar />
         <section className='w-2/3 pl-6'>
           {/* title */}
-          <h1 className='text-xl'>Account</h1>
+          <h1 className='text-xl'>
+            Account{" "}
+            <span className='font-semibold'>{isAdmin && "(Admin)"}</span>
+          </h1>
           {/* content */}
           <div className='p-4 mt-4 border-[1.5px] rounded-lg border-slate-200'>
             <h2 className='font-semibold text-slate-700'>Informasi Personal</h2>
