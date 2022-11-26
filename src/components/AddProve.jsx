@@ -36,6 +36,7 @@ const AddProve = ({
   const [beginDate, setBeginDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [paid, setPaid] = useState(false);
+  const [verified, setVerified] = useState(false);
   const [image, setImage] = useState("");
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const AddProve = ({
     setBeginDate(order.begin_date);
     setEndDate(order.end_date);
     setPaid(order.paid);
+    setVerified(order.verified);
     setSrc(`http://localhost:3500/orders/images/${order._id}`);
   }, []);
 
@@ -146,15 +148,26 @@ const AddProve = ({
           </p>
           <div className='flex justify-between'>
             <h1 className='text-3xl font-semibold'>Upload Bukti Bayar</h1>
-            {paid ? (
-              <div className='flex items-center px-2 py-1 text-sm bg-green-200 border-2 rounded-lg border-slate-700'>
-                <p>Paid</p>
-              </div>
-            ) : (
-              <div className='flex items-center px-2 text-sm bg-red-200 border-2 rounded-lg border-slate-700'>
-                <p>Not Paid</p>
-              </div>
-            )}
+            <div className='flex gap-2'>
+              {paid ? (
+                <div className='flex items-center px-2 py-1 text-sm bg-green-200 border-2 rounded-lg border-slate-700'>
+                  <p>Paid</p>
+                </div>
+              ) : (
+                <div className='flex items-center px-2 text-sm bg-red-200 border-2 rounded-lg border-slate-700'>
+                  <p>Not Paid</p>
+                </div>
+              )}
+              {verified ? (
+                <div className='flex items-center px-2 py-1 text-sm bg-green-200 border-2 rounded-lg border-slate-700'>
+                  <p>Verified</p>
+                </div>
+              ) : (
+                <div className='flex items-center px-2 text-sm bg-red-200 border-2 rounded-lg border-slate-700'>
+                  <p>Not Verified</p>
+                </div>
+              )}
+            </div>
           </div>
           <div className='mt-2'>
             <p>
