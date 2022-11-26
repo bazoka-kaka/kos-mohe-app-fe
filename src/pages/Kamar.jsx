@@ -19,7 +19,7 @@ const Kamar = ({ kamar }) => {
           <div className='flex flex-col gap-2'>
             {/* title */}
             <div className='flex items-center gap-4'>
-              <h1 className='text-3xl'>Kamar Kos Mohe</h1>
+              <h1 className='text-3xl font-semibold'>Kamar Kos Mohe</h1>
               {auth?.roles?.includes(5150) && (
                 <button
                   onClick={() => setShowPopup(true)}

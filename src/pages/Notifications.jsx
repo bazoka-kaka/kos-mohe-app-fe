@@ -29,7 +29,7 @@ const Notifications = ({ notifications, setNotifications }) => {
 
   return (
     <div className='min-h-[100vh] flex flex-col pt-[85.0667px] pb-6 px-48'>
-      <div className='flex justify-between'>
+      <div className='flex justify-between mt-6'>
         <h1 className='text-3xl font-semibold'>Notifikasi</h1>
         {notifications.length > 0 && (
           <button
@@ -40,7 +40,7 @@ const Notifications = ({ notifications, setNotifications }) => {
           </button>
         )}
       </div>
-      <div className='flex flex-col mt-4 gap-[1px]'>
+      <div className='flex flex-col mt-6 gap-[1px]'>
         {notifications.length === 0 ? (
           <p>No notifications found!</p>
         ) : (
