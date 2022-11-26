@@ -22,6 +22,7 @@ import Notifications from "./pages/Notifications";
 
 const KAMAR_URL = "/rooms";
 const FACILITIES_URL = "/facilities";
+const NOTIFICATIONS_URL = "/notifications";
 
 const ROLES = {
   User: 2001,
@@ -34,6 +35,7 @@ const App = () => {
 
   const [kamar, setKamar] = useState([]);
   const [facilities, setFacilities] = useState([]);
+  const [notifications, setNotifications] = useState([]);
 
   const getKamar = async () => {
     try {
@@ -55,9 +57,20 @@ const App = () => {
     }
   };
 
+  const getUserNotifications = async () => {
+    try {
+      const response = await axios.get(NOTIFICATIONS_URL + "/" + auth.id);
+      console.log(response?.data);
+      setNotifications(response?.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getKamar();
     getFacilities();
+    getUserNotifications();
   }, []);
 
   // eslint-disable-next-line
@@ -121,7 +134,10 @@ const App = () => {
   });
   return (
     <Routes>
-      <Route element={<Layout />} path='/'>
+      <Route
+        element={<Layout totNotifications={notifications.length} />}
+        path='/'
+      >
         {/* public */}
         <Route
           path='/'
@@ -137,7 +153,12 @@ const App = () => {
           {kamar.map((item) => (
             <Route
               path={`kamar/${item.name}`}
-              element={<KamarDetail room={item} />}
+              element={
+                <KamarDetail
+                  getUserNotifications={getUserNotifications}
+                  room={item}
+                />
+              }
             />
           ))}
 
@@ -146,10 +167,21 @@ const App = () => {
           {/* user */}
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
             <Route path='dashboard' element={<Account />} />
-            <Route path='payment' element={<Payment />} />
+            <Route
+              path='payment'
+              element={<Payment getUserNotifications={getUserNotifications} />}
+            />
             <Route path='security' element={<Security />} />
             <Route path='contact' element={<Contact />} />
-            <Route path='notifications' element={<Notifications />} />
+            <Route
+              path='notifications'
+              element={
+                <Notifications
+                  notifications={notifications}
+                  setNotifications={setNotifications}
+                />
+              }
+            />
           </Route>
           {/* admin */}
         </Route>
