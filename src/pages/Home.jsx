@@ -12,7 +12,7 @@ const Home = ({ kamar, facilities }) => {
         {/* header */}
         <header className='py-6'>
           {/* title */}
-          <h1 className='text-3xl'>Selamat Datang di Kos Mohe</h1>
+          <h1 className='text-3xl font-semibold'>Selamat Datang di Kos Mohe</h1>
           {/* diskon */}
           <div className='flex gap-8 mt-6'>
             <div className='w-1/2 p-5 bg-[#F3F4FF] rounded-2xl'>
@@ -32,23 +32,24 @@ const Home = ({ kamar, facilities }) => {
           </div>
         </header>
         {/* about */}
-        <section id='about' className='py-6'>
-          <h2 className='text-xl'>About Kos Mohe</h2>
-          <p className='mt-4 text-justify'>
-            Kos mohe menawarkan penginapan kos bagi wanita yang nyaman dan aman
-            harganya pun pas sesuai dengan kebutuhan. Kos ini sangat strategis
-            karena lokasinya dekat dengan berbagai instansi pendidikan, rumah
-            sakit, pasar, warung, serta berbagai landmark lainnya. Kos ini juga
-            sangat sejuk dan rindang karena dipenuhi dengan berbagai tanaman
-            serta letaknya yang ada di tengah perkampungan yang asri dengan
-            pencapaian sebagai salah satu perkampungan paling hijau di Kota
-            Malang.
+        <section id='about' className='py-6 mt-2'>
+          <h2 className='text-xl font-semibold'>About Kos Mohe</h2>
+          <p className='mt-2 text-justify'>
+            Kos mohe menawarkan penginapan kos wanita yang nyaman dan aman untuk
+            ditinggali. Harganya pun pas sesuai dengan kebutuhan pelanggan. Kos
+            ini sangat strategis karena lokasinya yang terletak dekat dengan
+            berbagai instansi pendidikan, rumah sakit, pasar, warung, serta
+            berbagai tempat krusial lainnya. Kos ini juga sangat sejuk dan
+            rindang, dipenuhi dengan berbagai tanaman serta terletak di
+            perkampungan yang asri yang merupakan salah satu perkampungan paling
+            hijau di Kota Malang.
           </p>
         </section>
         {/* kamar kos */}
         <section id='kamar' className='py-6'>
           {/* title */}
-          <h2 className='text-xl'>Kamar Kos Mohe</h2>
+          <h2 className='text-xl font-semibold'>Kamar Kos Mohe</h2>
+          <p>Berbagai jenis kamar yang terdapat di Kos Mohe</p>
           {/* content */}
           <div className='grid grid-cols-3 mt-4 gap-x-4 gap-y-6'>
             {kamar.length === 0 ? (
@@ -108,9 +109,11 @@ const Home = ({ kamar, facilities }) => {
             Learn More
           </Link>
         </section>
-        <section id='fasilitas' className='pt-8'>
+        {/* fasilitas kos */}
+        <section id='fasilitas' className='pt-6'>
           {/* title */}
-          <h2 className='text-xl'>Fasilitas Kos Mohe</h2>
+          <h2 className='text-xl font-semibold'>Fasilitas Kos Mohe</h2>
+          <p>Berbagai fasilitas yang terdapat di Kos Mohe</p>
           {/* content */}
           {facilities.length === 0 ? (
             <p className='mt-6'>Loading Data...</p>
@@ -166,7 +169,7 @@ const Home = ({ kamar, facilities }) => {
             Learn More
           </Link>
         </section>
-        <div className='mt-10 mb-16'>
+        <div className='mt-16 mb-16'>
           <Carousel
             showArrows={false}
             showThumbs={false}
