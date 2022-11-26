@@ -8,30 +8,6 @@ const NOTIFICATIONS_URL = "/notifications";
 
 const Notifications = ({ notifications, setNotifications }) => {
   const { auth } = useAuth();
-  // const [notifications, setNotifications] = useState([
-  //   {
-  //     title: "Penyewaan Telah Diverifikasi",
-  //     description: `Pemilik telah melakukan verifikasi pembayaran terhadap penyewaan
-  //             kamar Double Deluxe anda.
-  //             Anda sudah dapat melakukan
-  //             check-in.`,
-  //     link: "/",
-  //   },
-  //   {
-  //     title: "Pembayaran Sukses",
-  //     description: `Anda melakukan pembayaran terhadap pesanan kamar
-  //           Double Deluxe selama 2 bulan. Tunggu verifikasi dari
-  //           pemilik.`,
-  //     link: "/",
-  //   },
-  //   {
-  //     title: "Pesanan Baru Telah Dibuat",
-  //     description: `Anda melakukan penyewaan kamar Double Deluxe selama 2 bulan.
-  //           Lakukan pembayaran sebelum
-  //           10 Desember 2022`,
-  //     link: "/",
-  //   },
-  // ]);
 
   const [maxi, setMaxi] = useState(4);
 
