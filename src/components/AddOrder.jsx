@@ -9,7 +9,7 @@ import axios from "../api/axios";
 const ORDER_URL = "/orders";
 const NOTIFICATIONS_URL = "/notifications";
 
-const AddOrder = ({ setShowPopup, auth, room }) => {
+const AddOrder = ({ setShowPopup, auth, room, getUserNotifications }) => {
   const errRef = useRef();
 
   const handleCancel = () => {
@@ -64,6 +64,7 @@ const AddOrder = ({ setShowPopup, auth, room }) => {
         }
       );
       console.log(result?.data);
+      getUserNotifications();
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");

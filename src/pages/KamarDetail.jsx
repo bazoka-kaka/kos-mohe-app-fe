@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import AddOrder from "../components/AddOrder";
 
-const KamarDetail = ({ room }) => {
+const KamarDetail = ({ room, getUserNotifications }) => {
   const navigate = useNavigate();
   const { auth } = useAuth();
   const [showPopup, setShowPopup] = useState(false);
@@ -13,7 +13,12 @@ const KamarDetail = ({ room }) => {
     <>
       {/* pop up form */}
       {showPopup && (
-        <AddOrder room={room} setShowPopup={setShowPopup} auth={auth} />
+        <AddOrder
+          getUserNotifications={getUserNotifications}
+          room={room}
+          setShowPopup={setShowPopup}
+          auth={auth}
+        />
       )}
       <div className='min-h-[100vh] pt-[85.0667px] px-48 bg-[#EDEEF2]'>
         {/* title */}

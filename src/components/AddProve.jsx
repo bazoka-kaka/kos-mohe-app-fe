@@ -9,7 +9,13 @@ import axios from "../api/axios";
 const ORDER_URL = "/orders";
 const NOTIFICATIONS_URL = "/notifications";
 
-const AddProve = ({ setShowPopup, auth, order, getOrders }) => {
+const AddProve = ({
+  setShowPopup,
+  auth,
+  order,
+  getOrders,
+  getUserNotifications,
+}) => {
   const errRef = useRef();
 
   const handleCancel = () => {
@@ -48,8 +54,10 @@ const AddProve = ({ setShowPopup, auth, order, getOrders }) => {
         NOTIFICATIONS_URL,
         JSON.stringify({
           user_id: auth.id,
-          title: "Pesanan Baru Telah Dibuat",
-          description: `Anda melakukan penyewaan kamar ${name} selama ${duration} bulan. Lakukan pembayaran sebelum ${beginDate}`,
+          title: "Pembayaran Sukses",
+          description: `Anda telah melakukan pembayaran terhadap pesanan kamar
+             ${name} selama ${duration} bulan. Tunggu verifikasi dari
+             pemilik.`,
           link: "/payment",
         }),
         {
@@ -61,6 +69,7 @@ const AddProve = ({ setShowPopup, auth, order, getOrders }) => {
         }
       );
       console.log(result?.data);
+      getUserNotifications();
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");

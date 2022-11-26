@@ -8,7 +8,7 @@ import AddProve from "../../../components/AddProve";
 
 const ORDERS_URL = "/orders";
 
-const Payment = () => {
+const Payment = ({ getUserNotifications }) => {
   const { auth } = useAuth();
 
   const navigate = useNavigate();
@@ -58,6 +58,7 @@ const Payment = () => {
           auth={auth}
           order={currOrder}
           getOrders={getOrders}
+          getUserNotifications={getUserNotifications}
         />
       )}
       <div className='min-h-[100vh] pt-[85.0667px] pb-8 flex px-48'>

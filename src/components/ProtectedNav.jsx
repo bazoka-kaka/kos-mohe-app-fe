@@ -3,7 +3,7 @@ import { BiBox } from "react-icons/bi";
 import { Link, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
-const ProtectedNav = () => {
+const ProtectedNav = ({ totNotifications }) => {
   const location = useLocation();
   const { auth } = useAuth();
 
@@ -95,10 +95,16 @@ const ProtectedNav = () => {
               to='/notifications'
               className='relative block p-2 rounded-lg bg-slate-100'
             >
-              <BiBox className='text-xl font-semibold text-primary' />
-              <div className='absolute top-0 right-0 px-1 text-xs text-white translate-x-1/2 -translate-y-1/2 rounded-md bg-primary'>
-                4
-              </div>
+              <BiBox
+                className={`text-xl font-semibold ${
+                  totNotifications === 0 ? "text-slate-600" : "text-primary"
+                }`}
+              />
+              {totNotifications !== 0 && (
+                <div className='absolute top-0 right-0 px-1 text-xs text-white translate-x-1/2 -translate-y-1/2 rounded-md bg-primary'>
+                  {totNotifications}
+                </div>
+              )}
             </Link>
           </li>
           <li>
