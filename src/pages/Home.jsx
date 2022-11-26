@@ -2,6 +2,8 @@ import React from "react";
 import { CiUser } from "react-icons/ci";
 import { BsDot } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 
 const Home = ({ kamar, facilities }) => {
   return (
@@ -106,7 +108,7 @@ const Home = ({ kamar, facilities }) => {
             Learn More
           </Link>
         </section>
-        <section id='fasilitas' className='pt-8 pb-16'>
+        <section id='fasilitas' className='pt-8'>
           {/* title */}
           <h2 className='text-xl'>Fasilitas Kos Mohe</h2>
           {/* content */}
@@ -164,6 +166,44 @@ const Home = ({ kamar, facilities }) => {
             Learn More
           </Link>
         </section>
+        <div className='mt-10 mb-16'>
+          <Carousel
+            showArrows={false}
+            showThumbs={false}
+            showStatus={false}
+            autoPlay={true}
+            infiniteLoop={true}
+          >
+            <div>
+              <img
+                className='h-[300px] object-cover object-top'
+                src='/imgs/jemuran.png'
+                alt='jemuran'
+              />
+            </div>
+            <div>
+              <img
+                className='h-[300px] object-cover object-center'
+                src='/imgs/dapur.png'
+                alt='Dapur'
+              />
+            </div>
+            <div>
+              <img
+                className='h-[300px] object-cover object-center'
+                src='/imgs/reguler.png'
+                alt='reguler'
+              />
+            </div>
+            <div>
+              <img
+                className='h-[300px] object-cover object-center'
+                src='/imgs/santai.png'
+                alt='santai'
+              />
+            </div>
+          </Carousel>
+        </div>
       </div>
     </>
   );
