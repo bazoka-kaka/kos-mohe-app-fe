@@ -91,6 +91,7 @@ const AddRoom = ({ setShowPopup, auth }) => {
       console.log(response?.accessToken);
       console.log(JSON.stringify(response));
       setSuccess(true);
+      handleCancel();
       //clear state and controlled inputs
       //need value attrib on inputs for this
       setName("");

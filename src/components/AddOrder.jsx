@@ -119,6 +119,7 @@ const AddOrder = ({ setShowPopup, auth, room, getUserNotifications }) => {
         handleNotification();
       }
       console.log(response?.accessToken);
+      handleCancel();
 
       setSuccess(true);
       //clear state and controlled inputs
