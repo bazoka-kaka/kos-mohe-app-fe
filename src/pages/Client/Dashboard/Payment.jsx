@@ -24,6 +24,8 @@ const Payment = ({ getUserNotifications }) => {
   const [tot, setTot] = useState({
     paid: 0,
     unpaid: 0,
+    verified: 0,
+    unverified: 0,
   });
   const [currOrder, setCurrOrder] = useState({});
   const [maxi, setMaxi] = useState(4);
@@ -44,20 +46,33 @@ const Payment = ({ getUserNotifications }) => {
   };
 
   const handleTot = (items) => {
-    items.map((order) => {
-      if (order.paid) setTot({ ...tot, paid: tot.paid + 1 });
-      else setTot({ ...tot, unpaid: tot.unpaid + 1 });
+    items.forEach((item) => {
+      if (item.paid) {
+        setTot((prev) => ({ ...prev, paid: prev.paid + 1 }));
+      }
+      if (!item.paid) {
+        setTot((prev) => ({ ...prev, unpaid: prev.unpaid + 1 }));
+      }
+      if (item.verified) {
+        setTot((prev) => ({ ...prev, verified: prev.verified + 1 }));
+      }
+      if (!item.verified) {
+        setTot((prev) => ({ ...prev, unverified: prev.unverified + 1 }));
+      }
     });
   };
 
   const getOrders = async () => {
     try {
-      const response = auth.roles.includes(5150)
-        ? await axios.get(ORDERS_URL)
-        : await axios.get(ORDERS_URL + "/" + auth.id);
-      console.log(response?.data);
-      setOrders(response?.data);
-      handleTot(response?.data);
+      auth.roles.includes(5150)
+        ? await axios.get(ORDERS_URL).then((response) => {
+            setOrders(response?.data);
+            handleTot(response?.data);
+          })
+        : await axios.get(ORDERS_URL + "/" + auth.id).then((response) => {
+            setOrders(response?.data);
+            handleTot(response?.data);
+          });
     } catch (err) {
       console.log(err);
     }
@@ -101,11 +116,12 @@ const Payment = ({ getUserNotifications }) => {
             {(auth.roles.includes(5150) ? showVerified : showPaid) ? (
               <button
                 className='text-blue-600 transition duration-200 hover:text-red-600'
-                onClick={() =>
+                onClick={() => {
+                  setMaxi(4);
                   auth.roles.includes(5150)
                     ? setShowVerified(false)
-                    : setShowPaid(false)
-                }
+                    : setShowPaid(false);
+                }}
               >
                 Tampilkan Belum
                 {auth.roles.includes(5150) ? "  Terverifikasi" : " Lunas"}
@@ -113,11 +129,12 @@ const Payment = ({ getUserNotifications }) => {
             ) : (
               <button
                 className='text-blue-600 transition duration-200 hover:text-red-600'
-                onClick={() =>
+                onClick={() => {
+                  setMaxi(4);
                   auth.roles.includes(5150)
                     ? setShowVerified(true)
-                    : setShowPaid(true)
-                }
+                    : setShowPaid(true);
+                }}
               >
                 Tampilkan
                 {auth.roles.includes(5150) ? "  Terverifikasi" : " Lunas"}
@@ -148,151 +165,58 @@ const Payment = ({ getUserNotifications }) => {
                 <p>No Data Found</p>
               ) : (
                 orders.map((order, i) => {
-                  if (i < maxi) {
-                    if (!auth.roles.includes(5150)) {
-                      if (showPaid) {
-                        return (
-                          order.paid && (
-                            <div key={i} className='flex flex-col mt-2'>
-                              <div className='flex px-12 py-2 rounded-xl justify-between border-[1px] border-slate-200'>
-                                <div className='flex flex-col gap-2'>
-                                  <h3 className='font-semibold text-slate-700'>
-                                    {order.name}
-                                  </h3>
-                                  <p className='text-sm text-slate-500'>
-                                    {order.duration} Bulan
-                                  </p>
-                                  <p className='text-sm text-slate-500'>
-                                    {order.begin_date.substring(0, 10)} s.d{" "}
-                                    {order.end_date.substring(0, 10)}
-                                  </p>
-                                </div>
-                                <div className='flex flex-col items-end justify-center'>
-                                  <button
-                                    onClick={() => handleShowPopup(order)}
-                                    className='px-4 py-1 text-white transition duration-200 rounded-md bg-primary hover:bg-primary-light'
-                                  >
-                                    Detail
-                                  </button>
-                                  <p className='mt-2 text-sm'>
-                                    Total: Rp {order.total_price}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          )
-                        );
-                      } else {
-                        return (
-                          !order.paid && (
-                            <div key={i} className='flex flex-col mt-2'>
-                              <div className='flex px-12 py-2 rounded-xl justify-between border-[1px] border-slate-200'>
-                                <div className='flex flex-col gap-2'>
-                                  <h3 className='font-semibold text-slate-700'>
-                                    {order.name}
-                                  </h3>
-                                  <p className='text-sm text-slate-500'>
-                                    {order.duration} Bulan
-                                  </p>
-                                  <p className='text-sm text-slate-500'>
-                                    {order.begin_date.substring(0, 10)} s.d{" "}
-                                    {order.end_date.substring(0, 10)}
-                                  </p>
-                                </div>
-                                <div className='flex flex-col items-end justify-center'>
-                                  <button
-                                    onClick={() => handleShowPopup(order)}
-                                    className='px-4 py-1 text-white transition duration-200 rounded-md bg-primary hover:bg-primary-light'
-                                  >
-                                    {isAdmin ? "Verifikasi" : "Bayar"}
-                                  </button>
-                                  <p className='mt-2 text-sm'>
-                                    Total: Rp {order.total_price}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          )
-                        );
-                      }
+                  if (!auth.roles.includes(5150)) {
+                    if (showPaid) {
+                      return (
+                        order.paid && (
+                          <Card
+                            handleShowPopup={handleShowPopup}
+                            order={order}
+                          />
+                        )
+                      );
                     } else {
-                      if (showVerified) {
-                        return (
-                          order.verified && (
-                            <div key={i} className='flex flex-col mt-2'>
-                              <div className='flex px-12 py-2 rounded-xl justify-between border-[1px] border-slate-200'>
-                                <div className='flex flex-col gap-2'>
-                                  <h3 className='font-semibold text-slate-700'>
-                                    {order.name}
-                                  </h3>
-                                  <p className='text-sm text-slate-500'>
-                                    {order.duration} Bulan
-                                  </p>
-                                  <p className='text-sm text-slate-500'>
-                                    {order.begin_date.substring(0, 10)} s.d{" "}
-                                    {order.end_date.substring(0, 10)}
-                                  </p>
-                                </div>
-                                <div className='flex flex-col items-end justify-center'>
-                                  <button
-                                    onClick={() => handleShowPopup(order)}
-                                    className='px-4 py-1 text-white transition duration-200 rounded-md bg-primary hover:bg-primary-light'
-                                  >
-                                    Detail
-                                  </button>
-                                  <p className='mt-2 text-sm'>
-                                    Total: Rp {order.total_price}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          )
-                        );
-                      } else {
-                        return (
-                          !order.verified && (
-                            <div key={i} className='flex flex-col mt-2'>
-                              <div className='flex px-12 py-2 rounded-xl justify-between border-[1px] border-slate-200'>
-                                <div className='flex flex-col gap-2'>
-                                  <h3 className='font-semibold text-slate-700'>
-                                    {order.name}
-                                  </h3>
-                                  <p className='text-sm text-slate-500'>
-                                    {order.duration} Bulan
-                                  </p>
-                                  <p className='text-sm text-slate-500'>
-                                    {order.begin_date.substring(0, 10)} s.d{" "}
-                                    {order.end_date.substring(0, 10)}
-                                  </p>
-                                </div>
-                                <div className='flex flex-col items-end justify-center'>
-                                  <button
-                                    onClick={() => handleShowPopup(order)}
-                                    className='px-4 py-1 text-white transition duration-200 rounded-md bg-primary hover:bg-primary-light'
-                                  >
-                                    {isAdmin ? "Verifikasi" : "Bayar"}
-                                  </button>
-                                  <p className='mt-2 text-sm'>
-                                    Total: Rp {order.total_price}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          )
-                        );
-                      }
+                      return (
+                        !order.paid && (
+                          <Card
+                            handleShowPopup={handleShowPopup}
+                            order={order}
+                          />
+                        )
+                      );
+                    }
+                  } else {
+                    if (showVerified) {
+                      return (
+                        order.verified && (
+                          <Card
+                            handleShowPopup={handleShowPopup}
+                            order={order}
+                          />
+                        )
+                      );
+                    } else {
+                      return (
+                        !order.verified && (
+                          <Card
+                            handleShowPopup={handleShowPopup}
+                            order={order}
+                          />
+                        )
+                      );
                     }
                   }
                 })
               )}
-              {maxi < orders.length && (
+              {/* {((showPaid && maxi < tot.paid) ||
+                (!showPaid && maxi < tot.unpaid)) && (
                 <button
                   onClick={handleAdd}
                   className='px-2 py-1 mt-4 text-white transition duration-200 bg-black rounded-md hover:bg-slate-700'
                 >
                   Show More
                 </button>
-              )}
+              )} */}
             </div>
             {/* cta */}
             <div className='flex justify-between mt-8'>
@@ -310,6 +234,32 @@ const Payment = ({ getUserNotifications }) => {
         </section>
       </div>
     </>
+  );
+};
+
+const Card = ({ order, handleShowPopup }) => {
+  return (
+    <div className='flex flex-col mt-2'>
+      <div className='flex px-12 py-2 rounded-xl justify-between border-[1px] border-slate-200'>
+        <div className='flex flex-col gap-2'>
+          <h3 className='font-semibold text-slate-700'>{order.name}</h3>
+          <p className='text-sm text-slate-500'>{order.duration} Bulan</p>
+          <p className='text-sm text-slate-500'>
+            {order.begin_date.substring(0, 10)} s.d{" "}
+            {order.end_date.substring(0, 10)}
+          </p>
+        </div>
+        <div className='flex flex-col items-end justify-center'>
+          <button
+            onClick={() => handleShowPopup(order)}
+            className='px-4 py-1 text-white transition duration-200 rounded-md bg-primary hover:bg-primary-light'
+          >
+            Detail
+          </button>
+          <p className='mt-2 text-sm'>Total: Rp {order.total_price}</p>
+        </div>
+      </div>
+    </div>
   );
 };
 
