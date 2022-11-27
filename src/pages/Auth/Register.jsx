@@ -423,7 +423,7 @@ const Register = () => {
               Sudah punya akun?{" "}
               <Link
                 className='transition duration-200 text-primary hover:text-primary-light'
-                to='login'
+                to='/login'
               >
                 Login
               </Link>

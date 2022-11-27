@@ -237,7 +237,7 @@ const Login = ({ getUserNotifications, setSrc }) => {
             </form>
             <Link
               className='mt-4 font-semibold text-center transition duration-200 text-primary hover:text-primary-light'
-              to='login'
+              to='/login'
             >
               Lupa password
             </Link>
@@ -245,7 +245,7 @@ const Login = ({ getUserNotifications, setSrc }) => {
               Tidak punya akun?{" "}
               <Link
                 className='font-semibold transition duration-200 text-primary hover:text-primary-light'
-                to='login'
+                to='/register'
               >
                 Sign Up
               </Link>
