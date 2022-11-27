@@ -64,7 +64,7 @@ const AddOrder = ({ setShowPopup, auth, room, getUserNotifications }) => {
         }
       );
       console.log(result?.data);
-      getUserNotifications();
+      getUserNotifications(auth.id);
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");

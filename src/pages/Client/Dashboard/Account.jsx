@@ -16,7 +16,7 @@ const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
 const PHONE_REGEX = /^\d{9,13}$/;
 const USERS_URL = "/users";
 
-const Account = () => {
+const Account = ({ src, setSrc }) => {
   const navigate = useNavigate();
   const logout = useLogout();
 
@@ -36,7 +36,6 @@ const Account = () => {
 
   const [editing, setEditing] = useState(false);
   const [changeImage, setChangeImage] = useState(false);
-  const [src, setSrc] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
   // errors and success
@@ -111,7 +110,6 @@ const Account = () => {
 
   useEffect(() => {
     getUserData();
-    setSrc(`http://localhost:3500/users/images/${auth.id}?${Date.now()}`);
   }, []);
 
   const handleSubmit = async (e) => {

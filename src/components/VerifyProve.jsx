@@ -69,7 +69,7 @@ const VerifyProve = ({
         }
       );
       console.log(result?.data);
-      getUserNotifications();
+      getUserNotifications(auth.id);
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");

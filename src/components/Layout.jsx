@@ -6,12 +6,12 @@ import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
-const Layout = ({ totNotifications }) => {
+const Layout = ({ totNotifications, src }) => {
   const { auth } = useAuth();
   return (
     <>
       {auth?.accessToken ? (
-        <ProtectedNav totNotifications={totNotifications} />
+        <ProtectedNav src={src} totNotifications={totNotifications} />
       ) : (
         <Nav />
       )}

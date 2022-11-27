@@ -31,11 +31,10 @@ const ROLES = {
 };
 
 const App = () => {
-  const { auth } = useAuth();
-
   const [kamar, setKamar] = useState([]);
   const [facilities, setFacilities] = useState([]);
   const [notifications, setNotifications] = useState([]);
+  const [src, setSrc] = useState("");
 
   const getKamar = async () => {
     try {
@@ -57,9 +56,9 @@ const App = () => {
     }
   };
 
-  const getUserNotifications = async () => {
+  const getUserNotifications = async (user_id) => {
     try {
-      const response = await axios.get(NOTIFICATIONS_URL + "/" + auth.id);
+      const response = await axios.get(NOTIFICATIONS_URL + "/" + user_id);
       console.log(response?.data);
       setNotifications(response?.data);
     } catch (err) {
@@ -70,7 +69,6 @@ const App = () => {
   useEffect(() => {
     getKamar();
     getFacilities();
-    getUserNotifications();
   }, []);
 
   // eslint-disable-next-line
@@ -135,7 +133,7 @@ const App = () => {
   return (
     <Routes>
       <Route
-        element={<Layout totNotifications={notifications.length} />}
+        element={<Layout src={src} totNotifications={notifications.length} />}
         path='/'
       >
         {/* public */}
@@ -144,7 +142,15 @@ const App = () => {
           element={<Home kamar={kamar} facilities={facilities} />}
         />
         <Route path='register' element={<Register />} />
-        <Route path='login' element={<Login />} />
+        <Route
+          path='login'
+          element={
+            <Login
+              setSrc={setSrc}
+              getUserNotifications={getUserNotifications}
+            />
+          }
+        />
 
         {/* protected */}
         <Route element={<PersistLogin />}>
@@ -166,7 +172,10 @@ const App = () => {
 
           {/* user */}
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
-            <Route path='dashboard' element={<Account />} />
+            <Route
+              path='dashboard'
+              element={<Account src={src} setSrc={setSrc} />}
+            />
             <Route
               path='payment'
               element={<Payment getUserNotifications={getUserNotifications} />}

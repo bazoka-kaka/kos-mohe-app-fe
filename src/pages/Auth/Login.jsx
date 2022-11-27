@@ -14,7 +14,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
 const LOGIN_URL = "/auth";
 
-const Login = () => {
+const Login = ({ getUserNotifications, setSrc }) => {
   const { setAuth, persist, setPersist } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -70,6 +70,8 @@ const Login = () => {
       const accessToken = response?.data?.accessToken;
       const id = response?.data?.id;
       setAuth({ id, roles, fullname, accessToken });
+      getUserNotifications(id);
+      setSrc(`http://localhost:3500/users/images/${id}`);
       console.log(response?.data);
       setSuccess(true);
       setEmail("");
