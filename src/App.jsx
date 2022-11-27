@@ -71,65 +71,6 @@ const App = () => {
     getFacilities();
   }, []);
 
-  // eslint-disable-next-line
-  const [details, setDetails] = useState({
-    doubleDeluxe: {
-      title: "Kamar Double Deluxe",
-      img: "/imgs/kamar/double.png",
-      detail: [
-        "Rp 1.200.000/bulan",
-        "Maksimal 2 orang per kamar",
-        "Kamar mandi dalam",
-        "Tidak untuk pasutri",
-        "Tidak boleh bawa anak",
-        "AC",
-      ],
-      price: 1200000,
-      people: 2,
-    },
-    doubleReguler: {
-      title: "Kamar Double Reguler",
-      img: "/imgs/kamar/double.png",
-      detail: [
-        "Rp 1.000.000/bulan",
-        "Maksimal 2 orang per kamar",
-        "Kamar mandi luar",
-        "Tidak untuk pasutri",
-        "Tidak boleh bawa anak",
-        "Non-AC",
-      ],
-      price: 1000000,
-      people: 2,
-    },
-    deluxe: {
-      title: "Kamar Deluxe",
-      img: "/imgs/kamar/deluxe.png",
-      detail: [
-        "Rp 900.000/bulan",
-        "Maksimal 1 orang per kamar",
-        "Kamar mandi dalam",
-        "Tidak untuk pasutri",
-        "Tidak boleh bawa anak",
-        "AC",
-      ],
-      price: 900000,
-      people: 1,
-    },
-    reguler: {
-      title: "Kamar Reguler",
-      img: "/imgs/kamar/reguler.png",
-      detail: [
-        "Rp 700.000/bulan",
-        "Maksimal 1 orang per kamar",
-        "Kamar mandi luar",
-        "Tidak untuk pasutri",
-        "Tidak boleh bawa anak",
-        "Non-AC",
-      ],
-      price: 700000,
-      people: 1,
-    },
-  });
   return (
     <Routes>
       <Route
