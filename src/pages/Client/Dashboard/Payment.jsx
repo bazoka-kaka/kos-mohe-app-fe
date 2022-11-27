@@ -21,10 +21,15 @@ const Payment = ({ getUserNotifications }) => {
   };
 
   const [orders, setOrders] = useState([]);
+  const [tot, setTot] = useState({
+    paid: 0,
+    unpaid: 0,
+  });
   const [currOrder, setCurrOrder] = useState({});
   const [maxi, setMaxi] = useState(4);
   const [showPopup, setShowPopup] = useState(false);
   const [showPaid, setShowPaid] = useState(false);
+  const [showVerified, setShowVerified] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
   const handleAdd = () => {
@@ -38,6 +43,13 @@ const Payment = ({ getUserNotifications }) => {
     setCurrOrder(order);
   };
 
+  const handleTot = (items) => {
+    items.map((order) => {
+      if (order.paid) setTot({ ...tot, paid: tot.paid + 1 });
+      else setTot({ ...tot, unpaid: tot.unpaid + 1 });
+    });
+  };
+
   const getOrders = async () => {
     try {
       const response = auth.roles.includes(5150)
@@ -45,6 +57,7 @@ const Payment = ({ getUserNotifications }) => {
         : await axios.get(ORDERS_URL + "/" + auth.id);
       console.log(response?.data);
       setOrders(response?.data);
+      handleTot(response?.data);
     } catch (err) {
       console.log(err);
     }
@@ -85,98 +98,189 @@ const Payment = ({ getUserNotifications }) => {
             <h1 className='text-xl'>
               {auth.roles.includes(5150) && "Verifikasi "}Pembayaran
             </h1>
-            {showPaid ? (
+            {(auth.roles.includes(5150) ? showVerified : showPaid) ? (
               <button
                 className='text-blue-600 transition duration-200 hover:text-red-600'
-                onClick={() => setShowPaid(false)}
+                onClick={() =>
+                  auth.roles.includes(5150)
+                    ? setShowVerified(false)
+                    : setShowPaid(false)
+                }
               >
-                Tampilkan Belum Lunas
+                Tampilkan Belum
+                {auth.roles.includes(5150) ? "  Terverifikasi" : " Lunas"}
               </button>
             ) : (
               <button
                 className='text-blue-600 transition duration-200 hover:text-red-600'
-                onClick={() => setShowPaid(true)}
+                onClick={() =>
+                  auth.roles.includes(5150)
+                    ? setShowVerified(true)
+                    : setShowPaid(true)
+                }
               >
-                Tampilkan Lunas
+                Tampilkan
+                {auth.roles.includes(5150) ? "  Terverifikasi" : " Lunas"}
               </button>
             )}
           </div>
           {/* content */}
           <div className='p-4 mt-4 border-[1.5px] rounded-lg border-slate-200'>
             <h2 className='font-semibold text-slate-700'>
-              Pembayaran {showPaid ? "Lunas" : "Belum Lunas"}
+              Pembayaran{" "}
+              {auth.roles.includes(5150)
+                ? showVerified
+                  ? "Terverifikasi"
+                  : "Belum Terverifikasi"
+                : showPaid
+                ? "Lunas"
+                : "Belum Lunas"}
             </h2>
             <div className='mt-4'>
               {/* cards */}
-              {orders.length === 0 ? (
+              {(
+                auth.roles.includes(5150)
+                  ? (showVerified && tot.verified === 0) ||
+                    (!showVerified && tot.unverified === 0)
+                  : (showPaid && tot.paid === 0) ||
+                    (!showPaid && tot.unpaid === 0)
+              ) ? (
                 <p>No Data Found</p>
               ) : (
                 orders.map((order, i) => {
                   if (i < maxi) {
-                    if (showPaid)
-                      return (
-                        order.paid && (
-                          <div key={i} className='flex flex-col mt-2'>
-                            <div className='flex px-12 py-2 rounded-xl justify-between border-[1px] border-slate-200'>
-                              <div className='flex flex-col gap-2'>
-                                <h3 className='font-semibold text-slate-700'>
-                                  {order.name}
-                                </h3>
-                                <p className='text-sm text-slate-500'>
-                                  {order.duration} Bulan
-                                </p>
-                                <p className='text-sm text-slate-500'>
-                                  {order.begin_date.substring(0, 10)} s.d{" "}
-                                  {order.end_date.substring(0, 10)}
-                                </p>
-                              </div>
-                              <div className='flex flex-col items-end justify-center'>
-                                <button
-                                  onClick={() => handleShowPopup(order)}
-                                  className='px-4 py-1 text-white transition duration-200 rounded-md bg-primary hover:bg-primary-light'
-                                >
-                                  Detail
-                                </button>
-                                <p className='mt-2 text-sm'>
-                                  Total: Rp {order.total_price}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        )
-                      );
-                    else {
-                      return (
-                        !order.paid && (
-                          <div key={i} className='flex flex-col mt-2'>
-                            <div className='flex px-12 py-2 rounded-xl justify-between border-[1px] border-slate-200'>
-                              <div className='flex flex-col gap-2'>
-                                <h3 className='font-semibold text-slate-700'>
-                                  {order.name}
-                                </h3>
-                                <p className='text-sm text-slate-500'>
-                                  {order.duration} Bulan
-                                </p>
-                                <p className='text-sm text-slate-500'>
-                                  {order.begin_date.substring(0, 10)} s.d{" "}
-                                  {order.end_date.substring(0, 10)}
-                                </p>
-                              </div>
-                              <div className='flex flex-col items-end justify-center'>
-                                <button
-                                  onClick={() => handleShowPopup(order)}
-                                  className='px-4 py-1 text-white transition duration-200 rounded-md bg-primary hover:bg-primary-light'
-                                >
-                                  {isAdmin ? "Verifikasi" : "Bayar"}
-                                </button>
-                                <p className='mt-2 text-sm'>
-                                  Total: Rp {order.total_price}
-                                </p>
+                    if (!auth.roles.includes(5150)) {
+                      if (showPaid) {
+                        return (
+                          order.paid && (
+                            <div key={i} className='flex flex-col mt-2'>
+                              <div className='flex px-12 py-2 rounded-xl justify-between border-[1px] border-slate-200'>
+                                <div className='flex flex-col gap-2'>
+                                  <h3 className='font-semibold text-slate-700'>
+                                    {order.name}
+                                  </h3>
+                                  <p className='text-sm text-slate-500'>
+                                    {order.duration} Bulan
+                                  </p>
+                                  <p className='text-sm text-slate-500'>
+                                    {order.begin_date.substring(0, 10)} s.d{" "}
+                                    {order.end_date.substring(0, 10)}
+                                  </p>
+                                </div>
+                                <div className='flex flex-col items-end justify-center'>
+                                  <button
+                                    onClick={() => handleShowPopup(order)}
+                                    className='px-4 py-1 text-white transition duration-200 rounded-md bg-primary hover:bg-primary-light'
+                                  >
+                                    Detail
+                                  </button>
+                                  <p className='mt-2 text-sm'>
+                                    Total: Rp {order.total_price}
+                                  </p>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        )
-                      );
+                          )
+                        );
+                      } else {
+                        return (
+                          !order.paid && (
+                            <div key={i} className='flex flex-col mt-2'>
+                              <div className='flex px-12 py-2 rounded-xl justify-between border-[1px] border-slate-200'>
+                                <div className='flex flex-col gap-2'>
+                                  <h3 className='font-semibold text-slate-700'>
+                                    {order.name}
+                                  </h3>
+                                  <p className='text-sm text-slate-500'>
+                                    {order.duration} Bulan
+                                  </p>
+                                  <p className='text-sm text-slate-500'>
+                                    {order.begin_date.substring(0, 10)} s.d{" "}
+                                    {order.end_date.substring(0, 10)}
+                                  </p>
+                                </div>
+                                <div className='flex flex-col items-end justify-center'>
+                                  <button
+                                    onClick={() => handleShowPopup(order)}
+                                    className='px-4 py-1 text-white transition duration-200 rounded-md bg-primary hover:bg-primary-light'
+                                  >
+                                    {isAdmin ? "Verifikasi" : "Bayar"}
+                                  </button>
+                                  <p className='mt-2 text-sm'>
+                                    Total: Rp {order.total_price}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          )
+                        );
+                      }
+                    } else {
+                      if (showVerified) {
+                        return (
+                          order.verified && (
+                            <div key={i} className='flex flex-col mt-2'>
+                              <div className='flex px-12 py-2 rounded-xl justify-between border-[1px] border-slate-200'>
+                                <div className='flex flex-col gap-2'>
+                                  <h3 className='font-semibold text-slate-700'>
+                                    {order.name}
+                                  </h3>
+                                  <p className='text-sm text-slate-500'>
+                                    {order.duration} Bulan
+                                  </p>
+                                  <p className='text-sm text-slate-500'>
+                                    {order.begin_date.substring(0, 10)} s.d{" "}
+                                    {order.end_date.substring(0, 10)}
+                                  </p>
+                                </div>
+                                <div className='flex flex-col items-end justify-center'>
+                                  <button
+                                    onClick={() => handleShowPopup(order)}
+                                    className='px-4 py-1 text-white transition duration-200 rounded-md bg-primary hover:bg-primary-light'
+                                  >
+                                    Detail
+                                  </button>
+                                  <p className='mt-2 text-sm'>
+                                    Total: Rp {order.total_price}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          )
+                        );
+                      } else {
+                        return (
+                          !order.verified && (
+                            <div key={i} className='flex flex-col mt-2'>
+                              <div className='flex px-12 py-2 rounded-xl justify-between border-[1px] border-slate-200'>
+                                <div className='flex flex-col gap-2'>
+                                  <h3 className='font-semibold text-slate-700'>
+                                    {order.name}
+                                  </h3>
+                                  <p className='text-sm text-slate-500'>
+                                    {order.duration} Bulan
+                                  </p>
+                                  <p className='text-sm text-slate-500'>
+                                    {order.begin_date.substring(0, 10)} s.d{" "}
+                                    {order.end_date.substring(0, 10)}
+                                  </p>
+                                </div>
+                                <div className='flex flex-col items-end justify-center'>
+                                  <button
+                                    onClick={() => handleShowPopup(order)}
+                                    className='px-4 py-1 text-white transition duration-200 rounded-md bg-primary hover:bg-primary-light'
+                                  >
+                                    {isAdmin ? "Verifikasi" : "Bayar"}
+                                  </button>
+                                  <p className='mt-2 text-sm'>
+                                    Total: Rp {order.total_price}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          )
+                        );
+                      }
                     }
                   }
                 })
