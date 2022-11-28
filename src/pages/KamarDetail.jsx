@@ -3,11 +3,23 @@ import { FaUserAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import AddOrder from "../components/AddOrder";
+import axios from "../api/axios";
 
-const KamarDetail = ({ room, getUserNotifications }) => {
+const KAMAR_URL = "/rooms";
+
+const KamarDetail = ({ room, getUserNotifications, getKamar }) => {
   const navigate = useNavigate();
   const { auth } = useAuth();
   const [showPopup, setShowPopup] = useState(false);
+
+  const handleDelete = async () => {
+    try {
+      const result = await axios.delete(KAMAR_URL + "/" + room._id);
+      console.log(result?.data);
+      getKamar();
+      navigate(-1);
+    } catch (err) {}
+  };
 
   return (
     <>
@@ -22,8 +34,16 @@ const KamarDetail = ({ room, getUserNotifications }) => {
       )}
       <div className='min-h-[100vh] pt-[85.0667px] px-48 bg-[#EDEEF2]'>
         {/* title */}
-        <header className='pt-6'>
+        <header className='flex items-center justify-between pt-6'>
           <h1 className='text-4xl'>{room.name}</h1>
+          {auth?.roles?.includes(5150) && (
+            <button
+              onClick={handleDelete}
+              className='px-2 py-1 text-white transition duration-200 bg-red-600 rounded-md hover:bg-red-700'
+            >
+              Hapus Kamar
+            </button>
+          )}
         </header>
         {/* detail section */}
         <section id='detail' className='flex gap-5 py-6'>
@@ -57,7 +77,7 @@ const KamarDetail = ({ room, getUserNotifications }) => {
                 }}
                 className='inline-block px-12 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-primary-light rounded-2xl bg-primary'
               >
-                Pesan
+                {auth?.roles?.includes(5150) ? "Edit" : "Pesan"}
               </button>
               <button
                 onClick={() => navigate(-1)}

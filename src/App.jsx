@@ -107,6 +107,7 @@ const App = () => {
                 <KamarDetail
                   getUserNotifications={getUserNotifications}
                   room={item}
+                  getKamar={getKamar}
                 />
               }
             />
