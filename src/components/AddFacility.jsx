@@ -75,6 +75,7 @@ const AddFacility = ({ getFacilities, setShowPopup, auth }) => {
       console.log(JSON.stringify(response));
       setSuccess(true);
       getFacilities();
+      handleCancel();
       //clear state and controlled inputs
       //need value attrib on inputs for this
       setName("");

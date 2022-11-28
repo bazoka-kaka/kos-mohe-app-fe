@@ -1,15 +1,40 @@
 import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import AddFacility from "../components/AddFacility";
+import { AiOutlineEdit } from "react-icons/ai";
+import { BsTrashFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import axios from "../api/axios";
 
-const Fitur = ({ facilities }) => {
+const FACILITIES_URL = "/facilities";
+
+const Fitur = ({ facilities, getFacilities }) => {
   const { auth } = useAuth();
+  const { navigate } = useNavigate();
+
   const [showPopup, setShowPopup] = useState(false);
+
+  const handleDelete = async (id) => {
+    try {
+      const result = await axios.delete(FACILITIES_URL + "/" + id);
+      console.log(result?.data);
+      getFacilities();
+      navigate(-1);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
       {/* pop up form */}
-      {showPopup && <AddFacility setShowPopup={setShowPopup} auth={auth} />}
+      {showPopup && (
+        <AddFacility
+          getFacilities={getFacilities}
+          setShowPopup={setShowPopup}
+          auth={auth}
+        />
+      )}
       <div className='min-h-[100vh] pt-[85.0667px] pb-6 flex flex-col items-center'>
         {/* header */}
         <header className='flex flex-col items-center gap-2 pt-6'>
@@ -41,7 +66,18 @@ const Fitur = ({ facilities }) => {
                     alt={`${facility.name}`}
                   />
                   <div className='px-4'>
-                    <h3 className='text-xl font-semibold'>{facility.name}</h3>
+                    <h3 className='flex items-center gap-2 text-xl font-semibold'>
+                      {facility.name}{" "}
+                      <button className='text-black transition duration-200 hover:text-slate-700'>
+                        <AiOutlineEdit />
+                      </button>{" "}
+                      <button
+                        onClick={() => handleDelete(facility._id)}
+                        className='text-red-600 transition duration-200 hover:text-red-500'
+                      >
+                        <BsTrashFill />
+                      </button>
+                    </h3>
                     <p>{facility.description}</p>
                     {facility.features[0].split(",").length > 3 ? (
                       <ul className='grid grid-cols-2 grid-rows-4 mt-1 ml-5 text-sm list-disc'>
