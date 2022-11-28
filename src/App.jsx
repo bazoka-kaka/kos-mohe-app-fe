@@ -109,7 +109,12 @@ const App = () => {
             />
           ))}
 
-          <Route path='fitur' element={<Fitur facilities={facilities} />} />
+          <Route
+            path='fitur'
+            element={
+              <Fitur getFacilities={getFacilities} facilities={facilities} />
+            }
+          />
 
           {/* user */}
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>

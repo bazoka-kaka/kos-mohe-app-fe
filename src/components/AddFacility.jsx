@@ -8,7 +8,7 @@ import axios from "../api/axios";
 
 const FACILITY_URL = "/facilities";
 
-const AddFacility = ({ setShowPopup, auth }) => {
+const AddFacility = ({ getFacilities, setShowPopup, auth }) => {
   const errRef = useRef();
 
   const handleCancel = () => {
@@ -74,6 +74,7 @@ const AddFacility = ({ setShowPopup, auth }) => {
       console.log(response?.accessToken);
       console.log(JSON.stringify(response));
       setSuccess(true);
+      getFacilities();
       //clear state and controlled inputs
       //need value attrib on inputs for this
       setName("");
