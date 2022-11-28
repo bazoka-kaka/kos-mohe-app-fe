@@ -57,7 +57,7 @@ const VerifyProve = ({
           user_id: auth.id,
           title: "Verifikasi Sukses",
           description: `Anda telah melakukan verifikasi terhadap pesanan kamar
-             ${name} dengan pesanan atas nama user.`,
+             ${name} dengan pesanan atas nama ${order.user_name}.`,
           link: "/payment",
         }),
         {

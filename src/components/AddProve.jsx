@@ -52,7 +52,7 @@ const AddProve = ({
 
   const handleNotification = async (e) => {
     try {
-      const result = await axios.post(
+      let result = await axios.post(
         NOTIFICATIONS_URL,
         JSON.stringify({
           user_id: auth.id,
@@ -60,6 +60,23 @@ const AddProve = ({
           description: `Anda telah melakukan pembayaran terhadap pesanan kamar
              ${name} selama ${duration} bulan. Tunggu verifikasi dari
              pemilik.`,
+          link: "/payment",
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.accessToken}`,
+          },
+          withCredentials: true,
+        }
+      );
+      console.log(result?.data);
+      result = await axios.post(
+        NOTIFICATIONS_URL,
+        JSON.stringify({
+          user_id: "6381dde3315a8cd51e08ad4a",
+          title: "Verifikasi Pembayaran",
+          description: `Pengguna atas nama ${auth.fullname} telah melakukan pembayaran.`,
           link: "/payment",
         }),
         {

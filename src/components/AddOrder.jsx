@@ -100,6 +100,7 @@ const AddOrder = ({ setShowPopup, auth, room, getUserNotifications }) => {
         JSON.stringify({
           name,
           user_id: userId,
+          user_name: auth.fullname,
           room_id: roomId,
           duration,
           total_price: totalPrice,
