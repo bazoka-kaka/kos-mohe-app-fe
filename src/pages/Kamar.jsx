@@ -5,14 +5,16 @@ import { useState } from "react";
 import AddRoom from "../components/AddRoom";
 import useAuth from "../hooks/useAuth";
 
-const Kamar = ({ kamar }) => {
+const Kamar = ({ kamar, getKamar }) => {
   const { auth } = useAuth();
   const [showPopup, setShowPopup] = useState(false);
 
   return (
     <>
       {/* pop up form */}
-      {showPopup && <AddRoom setShowPopup={setShowPopup} auth={auth} />}
+      {showPopup && (
+        <AddRoom getKamar={getKamar} setShowPopup={setShowPopup} auth={auth} />
+      )}
       <div className='min-h-[100vh] pt-[85.0667px] px-48'>
         {/* header */}
         <header className='pt-6'>
@@ -53,7 +55,7 @@ const Kamar = ({ kamar }) => {
                     <img
                       src={`http://localhost:3500/rooms/images/${item._id}`}
                       alt={`${item.name}`}
-                      className='rounded-t-2xl'
+                      className='rounded-t-2xl h-[170px] w-full object-cover'
                     />
                     {item.features.featured && (
                       <div className='absolute top-[1px] right-[1px] px-2 py-1 text-sm text-white bg-primary rounded-bl-2xl rounded-tr-2xl'>

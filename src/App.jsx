@@ -96,7 +96,10 @@ const App = () => {
         {/* protected */}
         <Route element={<PersistLogin />}>
           {/* general */}
-          <Route path='kamar' element={<Kamar kamar={kamar} />} />
+          <Route
+            path='kamar'
+            element={<Kamar kamar={kamar} getKamar={getKamar} />}
+          />
           {kamar.map((item) => (
             <Route
               path={`kamar/${item.name}`}

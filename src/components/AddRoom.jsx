@@ -9,7 +9,7 @@ import axios from "../api/axios";
 const NAME_REGEX = /^[a-zA-Z ]{3,23}$/;
 const KAMAR_URL = "/rooms";
 
-const AddRoom = ({ setShowPopup, auth }) => {
+const AddRoom = ({ setShowPopup, auth, getKamar }) => {
   const errRef = useRef();
 
   const handleCancel = () => {
@@ -91,6 +91,7 @@ const AddRoom = ({ setShowPopup, auth }) => {
       console.log(response?.accessToken);
       console.log(JSON.stringify(response));
       setSuccess(true);
+      getKamar();
       handleCancel();
       //clear state and controlled inputs
       //need value attrib on inputs for this
