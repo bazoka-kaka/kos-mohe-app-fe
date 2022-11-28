@@ -18,7 +18,9 @@ const KamarDetail = ({ room, getUserNotifications, getKamar }) => {
       console.log(result?.data);
       getKamar();
       navigate(-1);
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
