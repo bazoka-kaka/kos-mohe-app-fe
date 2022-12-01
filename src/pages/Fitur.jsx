@@ -8,7 +8,7 @@ import axios from "../api/axios";
 
 const FACILITIES_URL = "/facilities";
 
-const Fitur = ({ facilities, getFacilities }) => {
+const Fitur = ({ facilities, getFacilities, getUserNotifications }) => {
   const { auth } = useAuth();
   const { navigate } = useNavigate();
 
@@ -32,6 +32,7 @@ const Fitur = ({ facilities, getFacilities }) => {
         <AddFacility
           getFacilities={getFacilities}
           setShowPopup={setShowPopup}
+          getUserNotifications={getUserNotifications}
           auth={auth}
         />
       )}

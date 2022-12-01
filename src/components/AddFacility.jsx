@@ -6,9 +6,16 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../api/axios";
 
+const NOTIFICATIONS_URL = "/notifications";
 const FACILITY_URL = "/facilities";
+const USERS_URL = "/users";
 
-const AddFacility = ({ getFacilities, setShowPopup, auth }) => {
+const AddFacility = ({
+  getFacilities,
+  setShowPopup,
+  auth,
+  getUserNotifications,
+}) => {
   const errRef = useRef();
 
   const handleCancel = () => {
@@ -37,6 +44,67 @@ const AddFacility = ({ getFacilities, setShowPopup, auth }) => {
   useEffect(() => {
     setValidDescription(description.length >= 3 || description === "");
   }, [description]);
+
+  const handleUsersNotification = async (e) => {
+    try {
+      const result = await axios.get(USERS_URL);
+      console.log(result?.data);
+      sendUserNotifications(result?.data);
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg(err.response?.message);
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Get users not found!");
+        console.log(err);
+      }
+      errRef.current.focus();
+    }
+  };
+
+  const sendUserNotifications = (allUsers) => {
+    for (let i = 0; i < allUsers.length; i++) {
+      handleNotification(allUsers[i]);
+    }
+  };
+
+  const handleNotification = async (user) => {
+    try {
+      const result = await axios.post(
+        NOTIFICATIONS_URL,
+        JSON.stringify({
+          user_id: user._id,
+          title: "Fasilitas Baru Telah Tersedia",
+          description: `Fasilitas baru dengan nama ${name} telah tersedia.`,
+          link: "/fitur",
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.accessToken}`,
+          },
+          withCredentials: true,
+        }
+      );
+      console.log(result?.data);
+      getUserNotifications(auth.id);
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg(err.response?.message);
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Order creation Failed");
+        console.log(err);
+      }
+      errRef.current.focus();
+    }
+  };
 
   const handleAdd = () => {
     if (features.length < 5) setFeatures([...features, ""]);
@@ -75,6 +143,7 @@ const AddFacility = ({ getFacilities, setShowPopup, auth }) => {
       console.log(JSON.stringify(response));
       setSuccess(true);
       getFacilities();
+      handleUsersNotification();
       handleCancel();
       //clear state and controlled inputs
       //need value attrib on inputs for this

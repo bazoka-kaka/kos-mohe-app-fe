@@ -122,7 +122,11 @@ const App = () => {
           <Route
             path='fitur'
             element={
-              <Fitur getFacilities={getFacilities} facilities={facilities} />
+              <Fitur
+                getUserNotifications={getUserNotifications}
+                getFacilities={getFacilities}
+                facilities={facilities}
+              />
             }
           />
 
