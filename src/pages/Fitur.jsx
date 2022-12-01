@@ -69,13 +69,13 @@ const Fitur = ({ facilities, getFacilities }) => {
                     <h3 className='flex items-center gap-2 text-xl font-semibold'>
                       {facility.name}{" "}
                       <button className='text-black transition duration-200 hover:text-slate-700'>
-                        <AiOutlineEdit />
+                        {auth?.roles?.includes(5150) && <AiOutlineEdit />}
                       </button>{" "}
                       <button
                         onClick={() => handleDelete(facility._id)}
                         className='text-red-600 transition duration-200 hover:text-red-500'
                       >
-                        <BsTrashFill />
+                        {auth?.roles?.includes(5150) && <BsTrashFill />}
                       </button>
                     </h3>
                     <p>{facility.description}</p>
