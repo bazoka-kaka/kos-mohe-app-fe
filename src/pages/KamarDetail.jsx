@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import AddOrder from "../components/AddOrder";
 import axios from "../api/axios";
+import { Toaster } from "react-hot-toast";
 
 const KAMAR_URL = "/rooms";
 
@@ -25,6 +26,7 @@ const KamarDetail = ({ room, getUserNotifications, getKamar }) => {
 
   return (
     <>
+      <Toaster />
       {/* pop up form */}
       {showPopup && (
         <AddOrder

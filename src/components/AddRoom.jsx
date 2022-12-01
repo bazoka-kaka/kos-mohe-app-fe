@@ -6,6 +6,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../api/axios";
 import handleUsersNotification from "./HandleUsersNotification";
+import toast from "react-hot-toast";
 
 const NAME_REGEX = /^[a-zA-Z ]{3,23}$/;
 const KAMAR_URL = "/rooms";
@@ -102,6 +103,7 @@ const AddRoom = ({ setShowPopup, auth, getKamar, getUserNotifications }) => {
         `Kamar baru dengan nama ${name} telah tersedia.`,
         "/kamar"
       );
+      toast.success("Kamar Baru Berhasil Dibuat!");
       handleCancel();
       //clear state and controlled inputs
       //need value attrib on inputs for this

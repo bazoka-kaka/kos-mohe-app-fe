@@ -6,6 +6,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../api/axios";
 import handleUsersNotification from "./HandleUsersNotification";
+import toast from "react-hot-toast";
 
 const FACILITY_URL = "/facilities";
 
@@ -91,6 +92,7 @@ const AddFacility = ({
         "/fitur"
       );
       handleCancel();
+      toast.success("Fitur Baru Berhasil Dibuat!");
       //clear state and controlled inputs
       //need value attrib on inputs for this
       setName("");

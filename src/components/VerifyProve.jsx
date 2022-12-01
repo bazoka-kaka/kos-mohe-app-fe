@@ -5,6 +5,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../api/axios";
+import toast from "react-hot-toast";
 
 const ORDER_URL = "/orders";
 const NOTIFICATIONS_URL = "/notifications";
@@ -124,6 +125,7 @@ const VerifyProve = ({
       }
       getOrders();
       setSuccess(true);
+      toast.success("Verifikasi Berhasil!");
       setShowPopup(false);
     } catch (err) {
       if (!err?.response) {

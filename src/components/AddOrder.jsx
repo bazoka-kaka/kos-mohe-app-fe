@@ -5,6 +5,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../api/axios";
+import toast from "react-hot-toast";
 
 const ORDER_URL = "/orders";
 const NOTIFICATIONS_URL = "/notifications";
@@ -121,7 +122,7 @@ const AddOrder = ({ setShowPopup, auth, room, getUserNotifications }) => {
       }
       console.log(response?.accessToken);
       handleCancel();
-
+      toast.success("Kamar Berhasil Dipesan!");
       setSuccess(true);
       //clear state and controlled inputs
       //need value attrib on inputs for this

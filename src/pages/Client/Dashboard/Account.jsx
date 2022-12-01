@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../../../api/axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const NAME_REGEX = /^[a-zA-Z ]{3,23}$/;
 const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
@@ -147,6 +148,7 @@ const Account = ({ src, setSrc }) => {
       );
       console.log(response?.data);
       setSuccess(true);
+      toast.success("Update Berhasil!");
       //clear state and controlled inputs
       //need value attrib on inputs for this
       setEditing(false);
@@ -187,6 +189,7 @@ const Account = ({ src, setSrc }) => {
       );
       console.log(response?.data);
       setChangeImage(false);
+      toast.success("Update Berhasil!");
       reloadImage();
     } catch (err) {
       if (!err?.response) {
@@ -226,6 +229,7 @@ const Account = ({ src, setSrc }) => {
 
   return (
     <>
+      <Toaster />
       <div className='min-h-[100vh] pt-[85.0667px] pb-8 flex px-48'>
         <Sidebar />
         <section className='w-2/3 pl-6'>

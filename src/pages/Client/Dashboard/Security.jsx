@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../../../api/axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const USERS_URL = "/users";
@@ -121,6 +122,7 @@ const Security = () => {
       );
       console.log(response?.data);
       setSuccess(true);
+      toast.success("Update Success!");
       setOldPwd("");
       setPwd("");
       setMatchPwd("");
@@ -138,6 +140,7 @@ const Security = () => {
   };
   return (
     <>
+      <Toaster />
       <div className='min-h-[100vh] pt-[85.0667px] flex px-48'>
         <Sidebar />
         <section className='w-2/3 pl-6'>

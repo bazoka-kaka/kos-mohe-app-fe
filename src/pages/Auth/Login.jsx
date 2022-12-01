@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
 const LOGIN_URL = "/auth";
@@ -74,6 +75,7 @@ const Login = ({ getUserNotifications, setSrc }) => {
       setSrc(`http://localhost:3500/users/images/${id}`);
       console.log(response?.data);
       setSuccess(true);
+      toast.success("Login Sukses!");
       setEmail("");
       setPwd("");
     } catch (err) {
@@ -100,6 +102,7 @@ const Login = ({ getUserNotifications, setSrc }) => {
 
   return (
     <>
+      <Toaster />
       <div className='min-h-[100vh] pt-[69.53px] flex'>
         {/* left */}
         {success ? (
