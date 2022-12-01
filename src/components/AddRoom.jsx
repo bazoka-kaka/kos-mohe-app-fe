@@ -7,9 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../api/axios";
 import handleUsersNotification from "./HandleUsersNotification";
 
-const NOTIFICATIONS_URL = "/notifications";
-const USERS_URL = "/users";
-
 const NAME_REGEX = /^[a-zA-Z ]{3,23}$/;
 const KAMAR_URL = "/rooms";
 

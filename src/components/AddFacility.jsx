@@ -7,9 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../api/axios";
 import handleUsersNotification from "./HandleUsersNotification";
 
-const NOTIFICATIONS_URL = "/notifications";
 const FACILITY_URL = "/facilities";
-const USERS_URL = "/users";
 
 const AddFacility = ({
   getFacilities,
