@@ -6,10 +6,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../api/axios";
 
+const NOTIFICATIONS_URL = "/notifications";
+const USERS_URL = "/users";
+
 const NAME_REGEX = /^[a-zA-Z ]{3,23}$/;
 const KAMAR_URL = "/rooms";
 
-const AddRoom = ({ setShowPopup, auth, getKamar }) => {
+const AddRoom = ({ setShowPopup, auth, getKamar, getUserNotifications }) => {
   const errRef = useRef();
 
   const handleCancel = () => {
@@ -56,6 +59,67 @@ const AddRoom = ({ setShowPopup, auth, getKamar }) => {
     setValidDescription(description.length > 3);
   }, [description]);
 
+  const handleUsersNotification = async (e) => {
+    try {
+      const result = await axios.get(USERS_URL);
+      console.log(result?.data);
+      sendUserNotifications(result?.data);
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg(err.response?.message);
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Get users not found!");
+        console.log(err);
+      }
+      errRef.current.focus();
+    }
+  };
+
+  const sendUserNotifications = (allUsers) => {
+    for (let i = 0; i < allUsers.length; i++) {
+      handleNotification(allUsers[i]);
+    }
+  };
+
+  const handleNotification = async (user) => {
+    try {
+      const result = await axios.post(
+        NOTIFICATIONS_URL,
+        JSON.stringify({
+          user_id: user._id,
+          title: "Kamar Baru Telah Tersedia",
+          description: `Kamar baru dengan nama ${name} telah tersedia.`,
+          link: "/kamar",
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.accessToken}`,
+          },
+          withCredentials: true,
+        }
+      );
+      console.log(result?.data);
+      getUserNotifications(auth.id);
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg(err.response?.message);
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Order creation Failed");
+        console.log(err);
+      }
+      errRef.current.focus();
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // if button enabled with JS hack
@@ -92,6 +156,7 @@ const AddRoom = ({ setShowPopup, auth, getKamar }) => {
       console.log(JSON.stringify(response));
       setSuccess(true);
       getKamar();
+      handleUsersNotification();
       handleCancel();
       //clear state and controlled inputs
       //need value attrib on inputs for this

@@ -5,7 +5,7 @@ import { useState } from "react";
 import AddRoom from "../components/AddRoom";
 import useAuth from "../hooks/useAuth";
 
-const Kamar = ({ kamar, getKamar }) => {
+const Kamar = ({ kamar, getKamar, getUserNotifications }) => {
   const { auth } = useAuth();
   const [showPopup, setShowPopup] = useState(false);
 
@@ -13,7 +13,12 @@ const Kamar = ({ kamar, getKamar }) => {
     <>
       {/* pop up form */}
       {showPopup && (
-        <AddRoom getKamar={getKamar} setShowPopup={setShowPopup} auth={auth} />
+        <AddRoom
+          getUserNotifications={getUserNotifications}
+          getKamar={getKamar}
+          setShowPopup={setShowPopup}
+          auth={auth}
+        />
       )}
       <div className='min-h-[100vh] pt-[85.0667px] px-48'>
         {/* header */}

@@ -98,7 +98,13 @@ const App = () => {
           {/* general */}
           <Route
             path='kamar'
-            element={<Kamar kamar={kamar} getKamar={getKamar} />}
+            element={
+              <Kamar
+                getUserNotifications={getUserNotifications}
+                kamar={kamar}
+                getKamar={getKamar}
+              />
+            }
           />
           {kamar.map((item) => (
             <Route
