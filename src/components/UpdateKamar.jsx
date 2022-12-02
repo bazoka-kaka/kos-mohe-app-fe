@@ -345,7 +345,7 @@ const UpdateKamar = ({
                   />
                 )}
               </label>
-              <input
+              <textarea
                 className={`border-[1px] border-slate-400 ${
                   !editing && "cursor-not-allowed bg-slate-200"
                 } p-2 rounded-md`}
