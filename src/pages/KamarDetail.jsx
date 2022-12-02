@@ -5,6 +5,7 @@ import useAuth from "../hooks/useAuth";
 import AddOrder from "../components/AddOrder";
 import axios from "../api/axios";
 import { Toaster } from "react-hot-toast";
+import UpdateKamar from "../components/UpdateKamar";
 
 const KAMAR_URL = "/rooms";
 
@@ -12,6 +13,12 @@ const KamarDetail = ({ room, getUserNotifications, getKamar }) => {
   const navigate = useNavigate();
   const { auth } = useAuth();
   const [showPopup, setShowPopup] = useState(false);
+
+  const [src, setSrc] = useState("");
+
+  useEffect(() => {
+    setSrc(`http://localhost:3500/rooms/images/${room._id}`);
+  }, []);
 
   const handleDelete = async () => {
     try {
@@ -28,14 +35,24 @@ const KamarDetail = ({ room, getUserNotifications, getKamar }) => {
     <>
       <Toaster />
       {/* pop up form */}
-      {showPopup && (
-        <AddOrder
-          getUserNotifications={getUserNotifications}
-          room={room}
-          setShowPopup={setShowPopup}
-          auth={auth}
-        />
-      )}
+      {showPopup &&
+        (auth?.roles?.includes(5150) ? (
+          <UpdateKamar
+            getUserNotifications={getUserNotifications}
+            room={room}
+            setShowPopup={setShowPopup}
+            auth={auth}
+            getKamar={getKamar}
+            setSrc={setSrc}
+          />
+        ) : (
+          <AddOrder
+            getUserNotifications={getUserNotifications}
+            room={room}
+            setShowPopup={setShowPopup}
+            auth={auth}
+          />
+        ))}
       <div className='min-h-[100vh] pt-[85.0667px] px-48 bg-[#EDEEF2]'>
         {/* title */}
         <header className='flex items-center justify-between pt-6'>
@@ -54,11 +71,7 @@ const KamarDetail = ({ room, getUserNotifications, getKamar }) => {
           {/* image detail and buttons */}
           <div className='flex flex-col w-2/3 gap-5 pb-6'>
             {/* image */}
-            <img
-              className='rounded-md'
-              src={`http://localhost:3500/rooms/images/${room._id}`}
-              alt={room.name}
-            />
+            <img className='rounded-md' src={src} alt={room.name} />
             {/* detail */}
             <div className='p-4 bg-white border-[1.5px] rounded-md'>
               <h2 className='font-semibold'>Detail</h2>
