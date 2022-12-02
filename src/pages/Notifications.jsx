@@ -78,7 +78,7 @@ const Notifications = ({ notifications, setNotifications }) => {
         {maxi < reversed.length && (
           <button
             onClick={addMaxi}
-            className='px-2 py-1 text-white bg-black rounded-md hover:bg-slate-700'
+            className='px-2 py-1 text-white transition duration-200 bg-black rounded-md hover:bg-slate-700'
           >
             Show More
           </button>
