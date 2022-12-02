@@ -5,7 +5,6 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { BsTrashFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
-import { Toaster } from "react-hot-toast";
 
 const FACILITIES_URL = "/facilities";
 
@@ -28,7 +27,6 @@ const Fitur = ({ facilities, getFacilities, getUserNotifications }) => {
 
   return (
     <>
-      <Toaster />
       {/* pop up form */}
       {showPopup && (
         <AddFacility

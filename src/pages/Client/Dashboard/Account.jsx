@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../../../api/axios";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const NAME_REGEX = /^[a-zA-Z ]{3,23}$/;
 const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
@@ -229,7 +229,6 @@ const Account = ({ src, setSrc }) => {
 
   return (
     <>
-      <Toaster />
       <div className='min-h-[100vh] pt-[85.0667px] pb-8 flex px-48'>
         <Sidebar />
         <section className='w-2/3 pl-6'>

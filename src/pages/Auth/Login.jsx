@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
 const LOGIN_URL = "/auth";
@@ -102,7 +102,6 @@ const Login = ({ getUserNotifications, setSrc }) => {
 
   return (
     <>
-      <Toaster />
       <div className='min-h-[100vh] pt-[69.53px] flex'>
         {/* left */}
         {success ? (

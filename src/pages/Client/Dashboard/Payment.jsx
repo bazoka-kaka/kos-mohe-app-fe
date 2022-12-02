@@ -6,7 +6,6 @@ import useAuth from "../../../hooks/useAuth";
 import axios from "../../../api/axios";
 import AddProve from "../../../components/AddProve";
 import VerifyProve from "../../../components/VerifyProve";
-import { Toaster } from "react-hot-toast";
 
 const ORDERS_URL = "/orders";
 
@@ -86,7 +85,6 @@ const Payment = ({ getUserNotifications }) => {
 
   return (
     <>
-      <Toaster />
       {/* pop up form */}
       {showPopup ? (
         isAdmin ? (

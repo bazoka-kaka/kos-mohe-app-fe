@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import AddRoom from "../components/AddRoom";
 import useAuth from "../hooks/useAuth";
-import { Toaster } from "react-hot-toast";
 
 const Kamar = ({ kamar, getKamar, getUserNotifications }) => {
   const { auth } = useAuth();
@@ -12,7 +11,6 @@ const Kamar = ({ kamar, getKamar, getUserNotifications }) => {
 
   return (
     <>
-      <Toaster />
       {/* pop up form */}
       {showPopup && (
         <AddRoom

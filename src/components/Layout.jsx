@@ -5,6 +5,7 @@ import Footer from "./Footer";
 
 import { Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { Toaster } from "react-hot-toast";
 
 const Layout = ({ totNotifications, src }) => {
   const { auth } = useAuth();
@@ -17,6 +18,7 @@ const Layout = ({ totNotifications, src }) => {
       )}
 
       <main>
+        <Toaster />
         <Outlet />
       </main>
       <Footer />
