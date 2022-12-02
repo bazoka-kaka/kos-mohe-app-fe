@@ -73,13 +73,21 @@ const KamarDetail = ({ room, getUserNotifications, getKamar }) => {
             {/* image */}
             <img className='rounded-md' src={src} alt={room.name} />
             {/* detail */}
-            <div className='p-4 bg-white border-[1.5px] rounded-md'>
-              <h2 className='font-semibold'>Detail</h2>
-              <ul className='ml-5 text-sm list-disc'>
-                <li>{room.features.ac ? "ac" : "non ac"}</li>
-                <li>kamar mandi {room.features.kmandi}</li>
-                <li>kapasitas {room.features.capacity} orang</li>
-              </ul>
+            <div className='p-4 bg-white border-[1.5px] rounded-md flex flex-col gap-2'>
+              {/* description */}
+              <div>
+                <p className='font-semibold'>Deskripsi</p>
+                <p className='text-sm text-justify'>{room.description}</p>
+              </div>
+              {/* features */}
+              <div>
+                <p className='font-semibold'>Fasilitas</p>
+                <ul className='ml-5 text-sm list-disc'>
+                  <li>{room.features.ac ? "ac" : "non ac"}</li>
+                  <li>kamar mandi {room.features.kmandi}</li>
+                  <li>kapasitas {room.features.capacity} orang</li>
+                </ul>
+              </div>
             </div>
             {/* buttons */}
             <div className='flex gap-5'>
