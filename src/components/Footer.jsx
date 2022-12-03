@@ -23,7 +23,7 @@ const Footer = () => {
             <li>
               <Link to='/fitur'>Fitur</Link>
             </li>
-            {auth.id && (
+            {auth?.id && !auth?.roles?.includes(5150) && (
               <li>
                 <Link to='/kontak'>Kontak</Link>
               </li>
