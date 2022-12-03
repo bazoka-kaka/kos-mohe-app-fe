@@ -74,7 +74,7 @@ const Notifications = ({ notifications, setNotifications }) => {
           })
         )}
       </div>
-      <div className='mt-2'>
+      <div className='mt-3'>
         {maxi < reversed.length && (
           <button
             onClick={addMaxi}
