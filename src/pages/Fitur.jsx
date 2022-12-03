@@ -7,6 +7,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import UpdateFeature from "../components/UpdateFeature";
 
+import toast from "react-hot-toast";
+
+import handleUsersNotification from "../components/HandleUsersNotification";
+import { useRef } from "react";
+
 const FACILITIES_URL = "/facilities";
 
 const Fitur = ({ facilities, getFacilities, getUserNotifications }) => {
@@ -17,11 +22,24 @@ const Fitur = ({ facilities, getFacilities, getUserNotifications }) => {
   const [showUpdate, setShowUpdate] = useState(false);
   const [facility, setFacility] = useState({});
 
-  const handleDelete = async (id) => {
+  const errRef = useRef();
+  const [errMsg, setErrMsg] = useState("");
+
+  const handleDelete = async (facility) => {
     try {
-      const result = await axios.delete(FACILITIES_URL + "/" + id);
+      const result = await axios.delete(FACILITIES_URL + "/" + facility._id);
       console.log(result?.data);
       getFacilities();
+      handleUsersNotification(
+        auth,
+        getUserNotifications,
+        errRef,
+        setErrMsg,
+        `Fasilitas Telah Dihapus`,
+        `Fasilitas ${facility.name} telah dihapus.`,
+        "/fitur"
+      );
+      toast.success("Fasilitas Berhasil Dihapus!");
       navigate(-1);
     } catch (err) {
       console.log(err);
@@ -95,7 +113,7 @@ const Fitur = ({ facilities, getFacilities, getUserNotifications }) => {
                         {auth?.roles?.includes(5150) && <AiOutlineEdit />}
                       </button>{" "}
                       <button
-                        onClick={() => handleDelete(facility._id)}
+                        onClick={() => handleDelete(facility)}
                         className='text-red-600 transition duration-200 hover:text-red-500'
                       >
                         {auth?.roles?.includes(5150) && <BsTrashFill />}

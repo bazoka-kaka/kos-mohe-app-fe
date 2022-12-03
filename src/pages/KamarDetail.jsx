@@ -5,6 +5,10 @@ import useAuth from "../hooks/useAuth";
 import AddOrder from "../components/AddOrder";
 import axios from "../api/axios";
 import UpdateKamar from "../components/UpdateKamar";
+import toast from "react-hot-toast";
+
+import handleUsersNotification from "../components/HandleUsersNotification";
+import { useRef } from "react";
 
 const KAMAR_URL = "/rooms";
 
@@ -19,11 +23,24 @@ const KamarDetail = ({ room, getUserNotifications, getKamar }) => {
     setSrc(`http://localhost:3500/rooms/images/${room._id}`);
   }, []);
 
+  const errRef = useRef();
+  const [errMsg, setErrMsg] = useState("");
+
   const handleDelete = async () => {
     try {
       const result = await axios.delete(KAMAR_URL + "/" + room._id);
       console.log(result?.data);
       getKamar();
+      handleUsersNotification(
+        auth,
+        getUserNotifications,
+        errRef,
+        setErrMsg,
+        `Kamar Telah Dihapus`,
+        `Kamar dengan nama ${room.name} telah dihapus.`,
+        "/kamar"
+      );
+      toast.success("Kamar Berhasil Dihapus!");
       navigate(-1);
     } catch (err) {
       console.log(err);
