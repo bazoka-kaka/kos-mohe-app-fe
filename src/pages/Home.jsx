@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { CiUser } from "react-icons/ci";
 import { BsDot } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
+import useAuth from "../hooks/useAuth";
+import AddDiscounts from "../components/AddDiscount";
 
-const Home = ({ kamar, facilities }) => {
+const Home = ({
+  kamar,
+  facilities,
+  getUserNotifications,
+  discounts,
+  getDiscounts,
+}) => {
+  const { auth } = useAuth();
+  const [showPopup, setShowPopup] = useState(false);
+
   return (
     <>
+      {/* pop up form */}
+      {showPopup && (
+        <AddDiscounts
+          getUserNotifications={getUserNotifications}
+          getDiscounts={getDiscounts}
+          setShowPopup={setShowPopup}
+          auth={auth}
+          rooms={kamar}
+        />
+      )}
       <div className='min-h-[100vh] pt-[85.0667px] px-48'>
         {/* header */}
         <header className='py-6'>
@@ -15,21 +36,49 @@ const Home = ({ kamar, facilities }) => {
           <h1 className='text-3xl font-semibold'>Selamat Datang di Kos Mohe</h1>
           {/* diskon */}
           <div className='flex gap-8 mt-6'>
-            <div className='w-1/2 p-5 bg-[#F3F4FF] rounded-2xl'>
-              <h2 className='text-xl'>Kamar Deluxe</h2>
-              <h3 className='mt-2 text-4xl font-semibold text-primary'>
-                20% OFF
-              </h3>
-              <p className='mt-8 text-sm text-[#83859C]'>1 - 30 Januari 2023</p>
-            </div>
-            <div className='w-1/2 p-5 bg-[#FFF3ED] rounded-2xl'>
-              <h2 className='text-xl'>Kamar Reguler</h2>
-              <h3 className='mt-2 text-4xl font-semibold text-[#FD6D22]'>
-                10% OFF
-              </h3>
-              <p className='mt-8 text-sm text-[#83859C]'>1 - 15 Januari 2023</p>
-            </div>
+            <Carousel
+              showArrows={false}
+              showThumbs={false}
+              showStatus={false}
+              autoPlay={true}
+              infiniteLoop={true}
+            >
+              {discounts.map((discount, i) =>
+                discount.kamar.name.includes("Deluxe") ? (
+                  <div className='w-[calc(50%-10px)] text-left p-5 bg-[#F3F4FF] rounded-2xl'>
+                    <h2 className='text-xl'>{discount.kamar.name}</h2>
+                    <h3 className='mt-2 text-4xl font-semibold text-primary'>
+                      {discount.cut}% OFF
+                    </h3>
+                    <p className='mt-8 text-sm text-[#83859C]'>
+                      {discount.beginDate.substring(0, 10)} s.d{" "}
+                      {discount.endDate.substring(0, 10)}
+                    </p>
+                  </div>
+                ) : (
+                  <div className='text-left w-[calc(50%-10px)] p-5 bg-[#FFF3ED] rounded-2xl'>
+                    <h2 className='text-xl'>{discount.kamar.name}</h2>
+                    <h3 className='mt-2 text-4xl font-semibold text-[#FD6D22]'>
+                      {discount.cut}% OFF
+                    </h3>
+                    <p className='mt-8 text-sm text-[#83859C]'>
+                      {discount.beginDate.substring(0, 10)} s.d{" "}
+                      {discount.endDate.substring(0, 10)}
+                    </p>
+                  </div>
+                )
+              )}
+            </Carousel>
           </div>
+          {auth?.roles?.includes(5150) && (
+            <button
+              type='button'
+              onClick={() => setShowPopup(true)}
+              className='px-2 mt-3 text-white transition duration-200 rounded-md bg-primary hover:bg-primary-light'
+            >
+              Add Discount
+            </button>
+          )}
         </header>
         {/* about */}
         <section id='about' className='py-6 mt-2'>

@@ -23,6 +23,7 @@ import Notifications from "./pages/Notifications";
 const KAMAR_URL = "/rooms";
 const FACILITIES_URL = "/facilities";
 const NOTIFICATIONS_URL = "/notifications";
+const DISCOUNTS_URL = "/discounts";
 
 const ROLES = {
   User: 2001,
@@ -33,6 +34,7 @@ const ROLES = {
 const App = () => {
   const [kamar, setKamar] = useState([]);
   const [facilities, setFacilities] = useState([]);
+  const [discounts, setDiscounts] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [src, setSrc] = useState("");
 
@@ -56,6 +58,16 @@ const App = () => {
     }
   };
 
+  const getDiscounts = async () => {
+    try {
+      const response = await axios.get(DISCOUNTS_URL);
+      console.log(response?.data);
+      setDiscounts(response?.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const getUserNotifications = async (user_id) => {
     try {
       const response = await axios.get(NOTIFICATIONS_URL + "/" + user_id);
@@ -69,6 +81,7 @@ const App = () => {
   useEffect(() => {
     getKamar();
     getFacilities();
+    getDiscounts();
   }, []);
 
   return (
@@ -80,7 +93,15 @@ const App = () => {
         {/* public */}
         <Route
           path='/'
-          element={<Home kamar={kamar} facilities={facilities} />}
+          element={
+            <Home
+              discounts={discounts}
+              getDiscounts={getDiscounts}
+              kamar={kamar}
+              facilities={facilities}
+              getUserNotifications={getUserNotifications}
+            />
+          }
         />
         <Route path='register' element={<Register />} />
         <Route
