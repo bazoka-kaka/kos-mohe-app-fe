@@ -4,6 +4,7 @@ import { BsDot } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
+import MultiCarousel from "../components/MultiCarousel";
 import useAuth from "../hooks/useAuth";
 import AddDiscounts from "../components/AddDiscount";
 
@@ -35,41 +36,33 @@ const Home = ({
           {/* title */}
           <h1 className='text-3xl font-semibold'>Selamat Datang di Kos Mohe</h1>
           {/* diskon */}
-          <div className='flex gap-8 mt-6'>
-            <Carousel
-              showArrows={false}
-              showThumbs={false}
-              showStatus={false}
-              autoPlay={true}
-              infiniteLoop={true}
-            >
-              {discounts.map((discount, i) =>
-                discount.kamar.name.includes("Deluxe") ? (
-                  <div className='w-[calc(50%-10px)] text-left p-5 bg-[#F3F4FF] rounded-2xl'>
-                    <h2 className='text-xl'>{discount.kamar.name}</h2>
-                    <h3 className='mt-2 text-4xl font-semibold text-primary'>
-                      {discount.cut}% OFF
-                    </h3>
-                    <p className='mt-8 text-sm text-[#83859C]'>
-                      {discount.beginDate.substring(0, 10)} s.d{" "}
-                      {discount.endDate.substring(0, 10)}
-                    </p>
-                  </div>
-                ) : (
-                  <div className='text-left w-[calc(50%-10px)] p-5 bg-[#FFF3ED] rounded-2xl'>
-                    <h2 className='text-xl'>{discount.kamar.name}</h2>
-                    <h3 className='mt-2 text-4xl font-semibold text-[#FD6D22]'>
-                      {discount.cut}% OFF
-                    </h3>
-                    <p className='mt-8 text-sm text-[#83859C]'>
-                      {discount.beginDate.substring(0, 10)} s.d{" "}
-                      {discount.endDate.substring(0, 10)}
-                    </p>
-                  </div>
-                )
-              )}
-            </Carousel>
-          </div>
+          <MultiCarousel total={2}>
+            {discounts.map((discount, i) =>
+              discount.kamar.name.includes("Deluxe") ? (
+                <div className='w-[calc(50%-10px)] text-left p-5 bg-[#F3F4FF] rounded-2xl'>
+                  <h2 className='text-xl'>{discount.kamar.name}</h2>
+                  <h3 className='mt-2 text-4xl font-semibold text-primary'>
+                    {discount.cut}% OFF
+                  </h3>
+                  <p className='mt-8 text-sm text-[#83859C]'>
+                    {discount.beginDate.substring(0, 10)} s.d{" "}
+                    {discount.endDate.substring(0, 10)}
+                  </p>
+                </div>
+              ) : (
+                <div className='text-left w-[calc(50%-10px)] p-5 bg-[#FFF3ED] rounded-2xl'>
+                  <h2 className='text-xl'>{discount.kamar.name}</h2>
+                  <h3 className='mt-2 text-4xl font-semibold text-[#FD6D22]'>
+                    {discount.cut}% OFF
+                  </h3>
+                  <p className='mt-8 text-sm text-[#83859C]'>
+                    {discount.beginDate.substring(0, 10)} s.d{" "}
+                    {discount.endDate.substring(0, 10)}
+                  </p>
+                </div>
+              )
+            )}
+          </MultiCarousel>
           {auth?.roles?.includes(5150) && (
             <button
               type='button'
